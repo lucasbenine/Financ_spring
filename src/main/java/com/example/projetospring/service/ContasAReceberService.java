@@ -11,18 +11,18 @@ public class ContasAReceberService {
     @Autowired
     private ContasAReceberRepository repository;
 
-    public ContasAReceber inserir (ContasAReceber contasareceber) {
+    public ContasAReceber inserir(ContasAReceber contasareceber) {
         return repository.save(contasareceber);
+    }
+
+    public void updateContas(ContasAReceber contasareceber){
+        repository.findById();
     }
 
     public void delete(Long Id) {
         repository.deleteById(Id);
     }
 
-    public void updateContas(ContasAReceber contasareceber){
-
-        repository.findById();
-    }
 
 }
 

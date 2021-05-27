@@ -1,7 +1,17 @@
 package com.example.projetospring.model;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 public class Usuario {
@@ -36,4 +46,16 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+/*
+    public String getPassword() {
+    }
+
+    public String getUsername() {
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+    }
+
+
+ */
 }
