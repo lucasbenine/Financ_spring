@@ -15,14 +15,6 @@ public class ContasAReceberService {
         return repository.save(contasareceber);
     }
 
-    public void updateContas(ContasAReceber contasareceber){
-        repository.findById();
-    }
-
-    public void delete(Long Id) {
-        repository.deleteById(Id);
-    }
-
 
 }
 

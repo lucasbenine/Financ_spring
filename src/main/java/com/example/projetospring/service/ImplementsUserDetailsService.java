@@ -1,3 +1,4 @@
+/*
 package com.example.projetospring.service;
 
 import javax.transaction.Transactional;
@@ -28,3 +29,4 @@ public class ImplementsUserDetailsService implements UserDetailsService{
     }
 
 }
+*/

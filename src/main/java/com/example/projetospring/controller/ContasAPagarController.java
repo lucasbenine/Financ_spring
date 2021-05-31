@@ -21,15 +21,29 @@ public class ContasAPagarController {
 
     @GetMapping
     public List<ContasAPagar> listaContas(){
-        return repository.findAll();
+           return repository.findAll();
     }
 
     @PostMapping
     public ResponseEntity<ContasAPagar> contasapagar (@RequestBody ContasAPagar contasapagar){
 
-        contasapagar = service.inserir(contasapagar);
-
-        return ResponseEntity.ok().body(contasapagar);
+           contasapagar = service.inserir(contasapagar);
+           return ResponseEntity.ok().body(contasapagar);
     }
 
-}
+    @PutMapping(value = "/{Id}")
+    public ResponseEntity<ContasAPagar> contasapagar (@PathVariable Long Id, @RequestBody ContasAPagar contasapagar){
+
+           contasapagar = service.editarConta(Id,contasapagar);
+           return ResponseEntity.ok().body(contasapagar);
+    }
+
+    @DeleteMapping(value = "/{Id}")
+        public ResponseEntity<Void> deletarConta(@PathVariable Long Id) {
+
+            service.deletarConta(Id);
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+

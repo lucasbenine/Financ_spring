@@ -1,3 +1,4 @@
+/*
 package com.example.projetospring.security;
 
 import com.example.projetospring.service.ImplementsUserDetailsService;
@@ -41,3 +42,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/

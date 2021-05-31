@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-    // estou ficando doido
+
     @RestController
     @RequestMapping("/contasareceber")
     public class ContasAReceberController {
@@ -34,32 +34,6 @@ import java.util.List;
             contasareceber = service.inserir(contasareceber);
             return ResponseEntity.ok().body(contasareceber);
         }
-
-        @PutMapping("/contasareceber/{Id}")
-        public ResponseEntity<ContasAReceber> updateContas(
-                @PathVariable(value = "Id") Long Id,
-                @Valid @RequestBody ContasAReceber userDetails) throws ResourceNotFoundException {
-            ContasAReceber contasareceber = ContasAReceberRepository.findById(Id)
-                    .orElseThrow(() -> new ResourceNotFoundException("User not found on :: "+ Id));
-
-            contasareceber.setId(userDetails.getId());
-            contasareceber.setNomeConta(userDetails.getNomeConta());
-            contasareceber.setValorConta(userDetails.getValorConta());
-            contasareceber.setCategoria(userDetails.getCategoria());
-            final ContasAReceber updateContas = ContasAReceberRepository.save(contasareceber);
-            return ResponseEntity.ok(updateContas);
-        }
-
-
-
-        /*
-        @DeleteMapping
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void excluir(@PathVariable Long Id){
-            ContasAReceberRepository.deleteById(Id);
-        }
-*/
-
     }
 
 
