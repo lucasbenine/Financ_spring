@@ -31,8 +31,8 @@ public class CategoriaResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Categoria> findById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
-        System.out.println(userDetails);
 
+        System.out.println(userDetails);
         Categoria obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }

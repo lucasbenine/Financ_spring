@@ -4,10 +4,7 @@ import com.financ.teste.entities.Despesa;
 import com.financ.teste.services.DespesaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,24 @@ public class DespesaResource {
     public ResponseEntity<Despesa> findById(@PathVariable Long id) {
         Despesa obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @PostMapping
+    public ResponseEntity<Despesa> insert(@RequestBody Despesa despesa) {
+        despesa = service.insert(despesa);
+        return ResponseEntity.ok().body(despesa);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Despesa> update(@PathVariable Long id, @RequestBody Despesa despesa) {
+        despesa = service.update(id, despesa);
+        return ResponseEntity.ok().body(despesa);
     }
 }
 

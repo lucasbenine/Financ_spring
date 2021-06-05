@@ -6,8 +6,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -24,11 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.inMemoryAuthentication()
-                .withUser("fernando").password(encoder.encode("financ")).roles("USER")
+                .withUser("fernando").password("{noop}financ").roles("USER")
                 .and()
-                .withUser("admin").password(encoder.encode("financ")).roles("USER","ADMIN");
+                .withUser("admin").password("{noop}financ").roles("USER", "ADMIN");
     }
 }
