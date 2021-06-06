@@ -1,4 +1,12 @@
 /*
+ * Código retirado para se basear na elaboração do esquema de validação (autenticação / autorização).
+ * 
+ * 
+ * Autor: Lucas Benine
+ */
+
+
+/*
 package com.example.projetospring.service;
 
 import javax.transaction.Transactional;

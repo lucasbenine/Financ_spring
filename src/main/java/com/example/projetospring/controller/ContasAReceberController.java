@@ -1,5 +1,6 @@
 package com.example.projetospring.controller;
 
+import com.example.projetospring.model.ContasAPagar;
 import com.example.projetospring.model.ContasAReceber;
 import com.example.projetospring.repository.ContasAReceberRepository;
 import com.example.projetospring.service.ContasAReceberService;
@@ -33,6 +34,20 @@ import java.util.List;
         public ResponseEntity<ContasAReceber> contasareceber (@RequestBody ContasAReceber contasareceber){
             contasareceber = service.inserir(contasareceber);
             return ResponseEntity.ok().body(contasareceber);
+        }
+
+        @PutMapping(value = "/{Id}")
+        public ResponseEntity<ContasAReceber> contasareceber (@PathVariable Long Id, @RequestBody ContasAReceber contasareceber){
+
+            contasareceber = service.editarConta(Id,contasareceber);
+            return ResponseEntity.ok().body(contasareceber);
+        }
+
+        @DeleteMapping(value = "/{Id}")
+        public ResponseEntity<Void> deletarConta(@PathVariable Long Id) {
+
+            service.deletarConta(Id);
+            return ResponseEntity.noContent().build();
         }
     }
 
