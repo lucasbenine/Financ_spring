@@ -1,6 +1,5 @@
 package com.example.projetospring.controller;
 
-import com.example.projetospring.model.ContasAPagar;
 import com.example.projetospring.model.ContasAReceber;
 import com.example.projetospring.repository.ContasAReceberRepository;
 import com.example.projetospring.service.ContasAReceberService;

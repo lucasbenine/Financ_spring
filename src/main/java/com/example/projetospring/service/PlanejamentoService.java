@@ -2,7 +2,6 @@ package com.example.projetospring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.projetospring.model.Planejamento;
 import com.example.projetospring.repository.PlanejamentoRepository;
 
@@ -22,14 +21,14 @@ public class PlanejamentoService {
 		return repository.save(c1);
 		
 	}
-	
-	public void deletarInvestimento(Long id_planejamento) {
+
+	private void atualizar (Planejamento c1, Planejamento planejamento) {
+		c1.setObjetivo_planejamento(planejamento.getObjetivo_planejamento());
+		c1.setData_planejamento(planejamento.getData_planejamento());
+		c1.setValor_planejamento(planejamento.getValor_planejamento());
+	}
+
+	public void deletarPlanejamento(Long id_planejamento) {
         repository.deleteById(id_planejamento);
 	}
-	
-	private void atualizar (Planejamento c1, Planejamento planejamento) {
-        c1.setObjetivo_planejamento(planejamento.getObjetivo_planejamento());
-        c1.setData_planejamento(planejamento.getData_planejamento());
-        c1.setValor_planejamento(planejamento.getValor_planejamento());
-    }
 }
