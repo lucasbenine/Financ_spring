@@ -22,7 +22,6 @@ public class Categoria implements Serializable {
     private List<Despesa> despesas = new ArrayList<>();
 
     public Categoria() {
-
     }
 
     public Categoria(Long id, String nomeCategoria) {
