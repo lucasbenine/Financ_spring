@@ -1,49 +1,56 @@
 package com.example.projetospring.model;
 
-import java.io.Serializable;
-import java.util.Collection;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 @Entity
+@Table(name = "usuario")
 public class Usuario {
 
-   @Id
-   private String login;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long usuarioId;
+    private String nome;
+    private String email;
 
-   private String nomeCompleto;
+    @OneToMany(mappedBy = "usuario")
+    private List<Despesa> despesasUsuario = new ArrayList<>();
 
-   private String senha;
-
-   public String getLogin() {
-        return login;
-   }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public Usuario(Long id, String nome, String email) {
+        this.usuarioId = id;
+        this.nome = nome;
+        this.email = email;
     }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
+    public Usuario() {
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
+    public Long getId() {
+        return usuarioId;
     }
 
-    public String getSenha() {
-        return senha;
+    public void setId(Long id) {
+        this.usuarioId = id;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Despesa> getDespesasUsuario() {
+        return despesasUsuario;
     }
 }
