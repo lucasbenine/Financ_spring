@@ -38,5 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("5678"))
                 .roles("USER");
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55035b09d1a1c1e05fd1a3dcee09b8145027e802
 }

@@ -3,14 +3,10 @@ package com.example.projetospring.model;
 import java.io.Serializable;
 import java.time.Instant;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Despesa implements Serializable{
@@ -32,11 +28,15 @@ public class Despesa implements Serializable{
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuario usuario;
+
     public Despesa() {
 
     }
 
-    public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria) {
+    public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria, Usuario usuarioDespesa) {
         super();
         this.id = id;
         this.nome = nome;
@@ -44,6 +44,7 @@ public class Despesa implements Serializable{
         this.data = data;
         this.descricao = descricao;
         this.categoria = categoria;
+        this.usuario = usuarioDespesa;
     }
 
     public Long getId() {
@@ -93,4 +94,8 @@ public class Despesa implements Serializable{
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public Usuario getUsuario() { return usuario; }
+
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 }
