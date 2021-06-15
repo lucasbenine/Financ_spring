@@ -76,5 +76,6 @@ public class Investimentos {
 
 	public void setRealizado(double realizado) {
 		this.realizado = realizado;
-	}	
+	}
+
 }
