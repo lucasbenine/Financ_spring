@@ -1,49 +1,47 @@
 package com.example.projetospring.controller;
 
+
 import com.example.projetospring.model.Usuario;
+import com.example.projetospring.repository.UsuarioRepository;
 import com.example.projetospring.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("usuarios")
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    @Autowired
+    private UsuarioService uServ;
 
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }
+    @Autowired
+    private UsuarioRepository uRep;
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarUsuarios(){
-        return ResponseEntity.ok(usuarioService.listUsuario());
-    }
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable Long id){
-        return ResponseEntity.ok(usuarioService.listByIdOrThrowBadRequestException(id));
+    public List<Usuario> listaUsuarios (){
+        return uServ.findUsuarios();
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody @Valid Usuario usuario){
-        return new ResponseEntity<>(usuarioService.saveUsuario(usuario), HttpStatus.CREATED);
+    public ResponseEntity<Usuario> cadastroUsuario(@RequestBody Usuario usuarios){
+        usuarios = uServ.cadastrarUsuario(usuarios);
+        return ResponseEntity.ok().body(usuarios);
     }
 
-    @DeleteMapping(path ="/{id}")
-    public ResponseEntity<Void> delete (@PathVariable Long id){
-        usuarioService.deleteUsuario(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PutMapping(value = "/{Id}")
+    public ResponseEntity<Usuario> findUsuarioById (@PathVariable Long id, @RequestBody Usuario usuarios){
+        usuarios = uServ.alterarUsuario(id, usuarios);
+        return ResponseEntity.ok().body(usuarios);
     }
 
-    @PutMapping
-    public ResponseEntity<Void> attUsuario(@RequestBody Usuario usuario){
-        usuarioService.replaceUsuario(usuario);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping(value = "/{Id}")
+    public ResponseEntity<Void> deleteUsaurio(@PathVariable Long id){
+        uServ.deletarUsuario(id);
+        return ResponseEntity.noContent().build();
     }
+
+
 }

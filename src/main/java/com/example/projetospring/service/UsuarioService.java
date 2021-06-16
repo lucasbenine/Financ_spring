@@ -1,45 +1,48 @@
 package com.example.projetospring.service;
 
-import com.example.projetospring.mappers.UsuarioMapper;
+
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import javax.ws.rs.BadRequestException;
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class UsuarioService {
-    private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    @Autowired
+    private UsuarioRepository Urep;
+
+    public List<Usuario> findUsuarios() {
+        return Urep.findAll();
     }
 
-    public List<Usuario> listUsuario() {
-        return usuarioRepository.findAll();
+    public Usuario findUsuarioID (Long id){
+        Optional<Usuario> obj = Urep.findById(id);
+        return obj.get();
     }
 
-    public Usuario listByIdOrThrowBadRequestException(Long id) {
-        return usuarioRepository
-                .findById(id)
-                .orElseThrow(() -> new BadRequestException("Usuario não encontrado, tente novamente"));
+    public Usuario cadastrarUsuario (Usuario usuario){
+        return Urep.save(usuario);
     }
 
-    @Transactional
-    public Usuario saveUsuario(Usuario usuario) {
-        return usuarioRepository.save(UsuarioMapper.INSTANCE.toUsuario(usuario));
+    public void deletarUsuario (Long id){
+        Urep.deleteById(id);
     }
 
-    public void deleteUsuario(Long id) {
-        usuarioRepository.delete(listByIdOrThrowBadRequestException(id));
+    public Usuario alterarUsuario (Long id, Usuario obj){
+        Usuario entity = Urep.getOne(id);
+        updateData(entity, obj);
+        return Urep.save(entity);
     }
 
-    public void replaceUsuario(Usuario usuario) {
-        Usuario savedUsuario = listByIdOrThrowBadRequestException(usuario.getId());
-        Usuario usuario1 = UsuarioMapper.INSTANCE.toUsuario(usuario);
-        usuario.setId(savedUsuario.getId());
-        usuarioRepository.save(usuario1);
+    private void updateData(Usuario entity, Usuario obj){
+        entity.setNome(obj.getNome());
+        entity.setEmail(obj.getEmail());
     }
+
+
 }
