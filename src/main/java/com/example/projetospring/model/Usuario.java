@@ -17,6 +17,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Despesa> despesasUsuario = new ArrayList<>();
 
+    @OneToMany (mappedBy = "usuario")
+    private List<Receitas> receitasUsuario = new ArrayList<>();
+
     public Usuario(Long id, String nome, String email) {
         this.usuarioId = id;
         this.nome = nome;

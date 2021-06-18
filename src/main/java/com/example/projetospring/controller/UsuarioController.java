@@ -16,10 +16,7 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService uServ;
-
-    @Autowired
-    private UsuarioRepository uRep;
-
+    
     @GetMapping
     public List<Usuario> listaUsuarios (){
         return uServ.findUsuarios();
@@ -31,9 +28,9 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarios);
     }
 
-    @PutMapping(value = "/{Id}")
+    @GetMapping(value = "/{Id}")
     public ResponseEntity<Usuario> findUsuarioById (@PathVariable Long id, @RequestBody Usuario usuarios){
-        usuarios = uServ.alterarUsuario(id, usuarios);
+        usuarios = uServ.findUsuarioID(id, usuarios);
         return ResponseEntity.ok().body(usuarios);
     }
 
