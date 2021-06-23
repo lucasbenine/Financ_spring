@@ -1,16 +1,27 @@
 package com.example.projetospring.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Investimentos {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_investimento;
 	private String tipo_investimento;
 	private double valor_inicial_aplicado;
 	private double meta_retorno;
 	private double limite_prejuizo;
 	private double realizado;
-	
+
+	public Investimentos() {
+	}
+
 	public Investimentos(Long id_investimento, String tipo_investimento, double valor_inicial_aplicado,
-			double meta_retorno, double limite_prejuizo, double realizado) {
+						 double meta_retorno, double limite_prejuizo, double realizado) {
 		this.id_investimento = id_investimento;
 		this.tipo_investimento = tipo_investimento;
 		this.valor_inicial_aplicado = valor_inicial_aplicado;
@@ -65,5 +76,6 @@ public class Investimentos {
 
 	public void setRealizado(double realizado) {
 		this.realizado = realizado;
-	}	
+	}
+
 }

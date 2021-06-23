@@ -10,16 +10,16 @@ public class PlanejamentoService {
 
 	@Autowired
 	private PlanejamentoRepository repository;
-	
+
 	public Planejamento inserirPlanejamento(Planejamento planejamento) {
 		return repository.save(planejamento);
 	}
-	
+
 	public Planejamento editarPlanejamento(Long id_planejamento, Planejamento planejamento) {
 		Planejamento c1 = repository.findById(id_planejamento).get();
 		atualizar(c1, planejamento);
 		return repository.save(c1);
-		
+
 	}
 
 	private void atualizar (Planejamento c1, Planejamento planejamento) {
@@ -29,6 +29,6 @@ public class PlanejamentoService {
 	}
 
 	public void deletarPlanejamento(Long id_planejamento) {
-        repository.deleteById(id_planejamento);
+		repository.deleteById(id_planejamento);
 	}
 }
