@@ -1,9 +1,14 @@
 package com.example.projetospring.service;
 
+import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Despesa;
+import com.example.projetospring.repository.CategoriaRepository;
 import com.example.projetospring.repository.DespesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +19,19 @@ public class DespesaService {
     @Autowired
     private DespesaRepository repository;
 
-    public List<Despesa> findAll() {
-        return repository.findAll();
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    @Transactional(readOnly = true)
+    public Page<Despesa> findAll(Pageable pageable) {
+        categoriaRepository.findAll();
+        Page<Despesa> result = repository.findAll(pageable);
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoriaSoma> amountGroupedByCategoria() {
+        return repository.amountGroupedByCategoria();
     }
 
     public Despesa findById(Long id) {

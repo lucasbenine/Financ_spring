@@ -6,13 +6,19 @@ import org.springframework.stereotype.Service;
 import com.example.projetospring.model.Investimentos;
 import com.example.projetospring.repository.InvestimentosRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.projetospring.model.Investimentos;
+import com.example.projetospring.repository.InvestimentosRepository;
+
 @Service
 public class InvestimentosService {
-	
-	@Autowired
-	private InvestimentosRepository repository;
 
-	public Investimentos inserirInvestimento(Investimentos investimento) {
+    @Autowired
+    private InvestimentosRepository repository;
+
+    public Investimentos inserirInvestimento(Investimentos investimento) {
         return repository.save(investimento);
     }
 
@@ -30,7 +36,7 @@ public class InvestimentosService {
         c1.setRealizado(investimento.getRealizado());
     }
 
-	public void deletarInvestimento (Long Id) {
+    public void deletarInvestimento (Long Id) {
         repository.deleteById(Id);
     }
 }

@@ -1,11 +1,14 @@
 package com.example.projetospring.controller;
 
 
+import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Despesa;
 import com.example.projetospring.service.DespesaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -21,12 +24,19 @@ public class DespesaController {
     private DespesaService service;
 
     @GetMapping
-    public ResponseEntity<List<Despesa>> findAll() {
+    public ResponseEntity<Page<Despesa>> findAll(Pageable pageable) {
 
-        List<Despesa> list = service.findAll();
+        Page<Despesa> list = service.findAll(pageable);
 
         return ResponseEntity.ok().body(list);
     }
+
+    @GetMapping(value = "/amount-by-categoria")
+    public ResponseEntity<List<CategoriaSoma>> amountGroupedByCategoria() {
+        List<CategoriaSoma> list = service.amountGroupedByCategoria();
+        return ResponseEntity.ok(list);
+    }
+
 
     @ApiOperation(value="Retorna uma lista de despesas")
     @GetMapping(value = "/{id}")

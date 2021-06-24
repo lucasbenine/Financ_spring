@@ -15,13 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic()
-                .and()
+                .and().cors().and()
                 .csrf().disable();
     }
 
@@ -38,8 +38,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("5678"))
                 .roles("USER");
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 55035b09d1a1c1e05fd1a3dcee09b8145027e802
 }

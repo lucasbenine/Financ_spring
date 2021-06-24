@@ -36,8 +36,16 @@ public class Despesa implements Serializable{
 
     }
 
+    public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.data = data;
+        this.descricao = descricao;
+        this.categoria = categoria;
+    }
+
     public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria, Usuario usuarioDespesa) {
-        super();
         this.id = id;
         this.nome = nome;
         this.preco = preco;

@@ -16,10 +16,10 @@ import com.example.projetospring.service.InvestimentosService;
 @RequestMapping("/investimentos")
 @Api(value="API - FinanC")
 public class InvestimentosController {
-	
+
 	@Autowired
 	private InvestimentosService service;
-	
+
 	@Autowired
 	private InvestimentosRepository repository;
 
