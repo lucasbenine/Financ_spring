@@ -1,6 +1,5 @@
 package com.example.projetospring.controller;
 
-
 import com.example.projetospring.model.Planejamento;
 import com.example.projetospring.repository.PlanejamentoRepository;
 import com.example.projetospring.service.PlanejamentoService;

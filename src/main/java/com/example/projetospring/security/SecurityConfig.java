@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .httpBasic()
-                .and()
+                .and().cors().and()
                 .csrf().disable();
     }
 
