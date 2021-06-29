@@ -1,5 +1,7 @@
 package com.example.projetospring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +10,20 @@ import java.util.List;
 @Table(name = "usuario")
 public class Usuario {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long usuarioId;
     private String nome;
     private String email;
 
-    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Despesa> despesasUsuario = new ArrayList<>();
 
-    @OneToMany (mappedBy = "usuario")
+    @JsonIgnore
+    @OneToMany (mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Receitas> receitasUsuario = new ArrayList<>();
 
     public Usuario(Long id, String nome, String email) {

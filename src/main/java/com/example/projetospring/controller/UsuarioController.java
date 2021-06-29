@@ -28,27 +28,26 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> cadastroUsuario(@RequestBody Usuario usuario){
         usuario = uServ.cadastrarUsuario(usuario);
-        return ResponseEntity.ok().body(usuario);
+        return ResponseEntity.ok().body(uServ.cadastrarUsuario(usuario));
     }
 
-    @GetMapping(value = "/{Id}")
-    public ResponseEntity<Usuario> findUsuarioById (@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
-        System.out.println(userDetails);
-        Usuario obj = uServ.findUsuarioID(id);
+    @GetMapping(value = "/{usuarioId}")
+    public ResponseEntity<Usuario> findUsuarioById (@PathVariable Long usuarioId){
+        Usuario obj = uServ.findUsuarioID(usuarioId);
         return ResponseEntity.ok().body(obj);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Usuario> alterarUsuario (@RequestBody Usuario usuarios, @PathVariable Long id){
-        usuarios = uServ.alterarUsuario(id, usuarios);
+    @PutMapping(value = "/{usuarioId}")
+    public ResponseEntity<Usuario> alterarUsuario (@RequestBody Usuario usuarios, @PathVariable Long usuarioId){
+        usuarios = uServ.alterarUsuario(usuarioId, usuarios);
         return ResponseEntity.ok().body(usuarios);
     }
 
 
-    @DeleteMapping(value = "/{Id}")
+    @DeleteMapping(value = "/{usuarioId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteUsaurio(@PathVariable Long id){
-        uServ.deletarUsuario(id);
+    public ResponseEntity<Void> deleteUsaurio(@PathVariable Long usuarioId){
+        uServ.deletarUsuario(usuarioId);
         return ResponseEntity.noContent().build();
     }
 

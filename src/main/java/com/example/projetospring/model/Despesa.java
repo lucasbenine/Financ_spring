@@ -2,11 +2,14 @@ package com.example.projetospring.model;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Despesa implements Serializable{
@@ -20,36 +23,36 @@ public class Despesa implements Serializable{
     private String nome;
     private Double preco;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant data;
+    @CreationTimestamp
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDateTime data;
     private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
+    @JoinColumn(name = "usuarioId")
     private Usuario usuario;
 
     public Despesa() {
 
     }
 
-    public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria) {
+    public Despesa(Long id, String nome, Double preco, String descricao, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.data = data;
         this.descricao = descricao;
         this.categoria = categoria;
     }
 
-    public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria, Usuario usuarioDespesa) {
+    public Despesa(Long id, String nome, Double preco, String descricao, Categoria categoria, Usuario usuarioDespesa) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.data = data;
         this.descricao = descricao;
         this.categoria = categoria;
         this.usuario = usuarioDespesa;
@@ -77,14 +80,6 @@ public class Despesa implements Serializable{
 
     public void setPreco(Double preco) {
         this.preco = preco;
-    }
-
-    public Instant getData() {
-        return data;
-    }
-
-    public void setData(Instant data) {
-        this.data = data;
     }
 
     public String getDescricao() {
