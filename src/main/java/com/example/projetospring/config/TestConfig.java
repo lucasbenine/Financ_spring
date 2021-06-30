@@ -2,9 +2,11 @@ package com.example.projetospring.config;
 
 import com.example.projetospring.model.Categoria;
 import com.example.projetospring.model.Despesa;
+import com.example.projetospring.model.Receitas;
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repository.CategoriaRepository;
 import com.example.projetospring.repository.DespesaRepository;
+import com.example.projetospring.repository.ReceitaRepository;
 import com.example.projetospring.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,6 +27,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ReceitaRepository receitaRepository;
 
 
     @Override
@@ -54,5 +59,11 @@ public class TestConfig implements CommandLineRunner {
         Despesa d9 = new Despesa(null, "pizza2", 35.0, "pizza", c4, u1);
 
         despesaRepository.saveAll(Arrays.asList(d1, d2, d3, d4, d5, d6, d7, d8, d9));
+
+        Receitas r1 = new Receitas(null, "Salário", 1600.00, "Salário do Serviço", u1);
+        Receitas r2 = new Receitas(null, "FreeLance", 500.00, "Freelance pra escola de inglês", u2 );
+        Receitas r3 = new Receitas (null, "Irmão", 50.00, "Dinheiro emprestado pro irmão devolvido", u3);
+
+        receitaRepository.saveAll(Arrays.asList(r1, r2, r3));
     }
 }

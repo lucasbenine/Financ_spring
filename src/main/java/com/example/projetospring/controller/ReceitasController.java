@@ -30,20 +30,19 @@ public class ReceitasController {
         return ResponseEntity.ok().body(receitas);
     }
 
-    @GetMapping(value = "/{Id}" )
-    public ResponseEntity<Receitas> findReceitaById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
-        System.out.println(userDetails);
+    @GetMapping(value = "/{id}" )
+    public ResponseEntity<Receitas> findReceitaById(@PathVariable Long id){
         Receitas obj = rServ.findReceitaById(id);
         return ResponseEntity.ok().body(obj);
     }
 
-    @PutMapping(value = "/{Id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Receitas> alterarReceita(@RequestBody Receitas receitas, @PathVariable Long id){
        receitas = rServ.alterarReceita(id, receitas);
        return ResponseEntity.ok().body(receitas);
     }
 
-    @DeleteMapping(value = "/{Id}")
+    @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteReceita(@PathVariable Long id){
         rServ.deleteReceita(id);
