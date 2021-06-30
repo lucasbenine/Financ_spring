@@ -1,7 +1,10 @@
 package com.example.projetospring.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -25,7 +28,7 @@ public class Despesa implements Serializable{
 
     @CreationTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime data;
+    private Instant data;
     private String descricao;
 
     @ManyToOne
@@ -40,6 +43,20 @@ public class Despesa implements Serializable{
     public Despesa() {
 
     }
+
+//    public Despesa(Long id, String nome, Double preco, String data, String descricao, Categoria categoria) {
+//        this.id = id;
+//        this.nome = nome;
+//        this.preco = preco;
+//        try {
+//            this.data = new SimpleDateFormat("yyyy/MM/dd").parse(data);
+//        } catch(ParseException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        this.descricao = descricao;
+//        this.categoria = categoria;
+//    }
+
 
     public Despesa(Long id, String nome, Double preco, String descricao, Categoria categoria) {
         this.id = id;

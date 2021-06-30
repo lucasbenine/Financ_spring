@@ -40,6 +40,7 @@ public class TestConfig implements CommandLineRunner {
         Categoria c3 = new Categoria(null, "Estudo12");
         Categoria c4 = new Categoria(null, "Bares e restaurantes12");
 
+
         categoriaRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 
         Usuario u1 = new Usuario(null, "Raul Rios", "raulrios0907@email.com");

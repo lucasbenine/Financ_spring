@@ -48,7 +48,7 @@ public class DespesaService {
     }
 
     public Despesa update(Long id, Despesa obj) {
-        Despesa entity = repository.getOne(id);
+        Despesa entity = repository.findById(id).get();
         updateData(entity, obj);
         return repository.save(entity);
     }

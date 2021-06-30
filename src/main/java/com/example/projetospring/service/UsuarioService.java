@@ -34,7 +34,7 @@ public class UsuarioService {
     }
 
     public Usuario alterarUsuario (Long usuarioId, Usuario obj){
-        Usuario entity = Urep.getOne(usuarioId);
+        Usuario entity = Urep.findById(usuarioId).get();
         updateData(entity, obj);
         return Urep.save(entity);
     }
