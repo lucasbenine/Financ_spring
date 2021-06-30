@@ -18,7 +18,7 @@ public class Categoria implements Serializable {
     private String nomeCategoria;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     private List<Despesa> despesas = new ArrayList<>();
 
     public Categoria() {

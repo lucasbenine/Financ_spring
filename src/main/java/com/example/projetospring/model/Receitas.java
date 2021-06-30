@@ -15,7 +15,8 @@ public class Receitas {
     private String descricao;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuarioId")
+    @ManyToOne
     private Usuario usuario;
 
     public Receitas() {

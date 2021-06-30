@@ -56,7 +56,6 @@ public class DespesaService {
     private void updateData(Despesa entity, Despesa obj) {
         entity.setNome(obj.getNome());
         entity.setPreco(obj.getPreco());
-        entity.setData(obj.getData());
         entity.setDescricao(obj.getDescricao());
         entity.setCategoria(obj.getCategoria());
     }
