@@ -1,7 +1,10 @@
 package com.example.projetospring.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -20,8 +23,8 @@ public class Despesa implements Serializable{
     private String nome;
     private Double preco;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant data;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
+    private Date data;
     private String descricao;
 
     @ManyToOne
@@ -36,20 +39,41 @@ public class Despesa implements Serializable{
 
     }
 
-    public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria) {
+//    public Despesa(Long id, String nome, Double preco, String data, String descricao, Categoria categoria) {
+//        this.id = id;
+//        this.nome = nome;
+//        this.preco = preco;
+//        try {
+//            this.data = new SimpleDateFormat("yyyy/MM/dd").parse(data);
+//        } catch(ParseException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        this.descricao = descricao;
+//        this.categoria = categoria;
+//    }
+
+    public Despesa(Long id, String nome, Double preco, String data, String descricao, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.data = data;
+        try {
+            this.data = new SimpleDateFormat("yyyy/MM/dd").parse(data);
+        } catch(ParseException ex) {
+            throw new RuntimeException(ex);
+        }
         this.descricao = descricao;
         this.categoria = categoria;
     }
 
-    public Despesa(Long id, String nome, Double preco, Instant data, String descricao, Categoria categoria, Usuario usuarioDespesa) {
+    public Despesa(Long id, String nome, Double preco, String data, String descricao, Categoria categoria, Usuario usuarioDespesa) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.data = data;
+        try {
+            this.data = new SimpleDateFormat("yyyy/MM/dd").parse(data);
+        } catch(ParseException ex) {
+            throw new RuntimeException(ex);
+        }
         this.descricao = descricao;
         this.categoria = categoria;
         this.usuario = usuarioDespesa;
@@ -79,11 +103,11 @@ public class Despesa implements Serializable{
         this.preco = preco;
     }
 
-    public Instant getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Instant data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
