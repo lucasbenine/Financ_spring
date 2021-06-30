@@ -14,7 +14,6 @@ public class Receitas {
     private Double valor;
     private String descricao;
 
-    @JsonIgnore
     @JoinColumn(name = "usuarioId")
     @ManyToOne
     private Usuario usuario;
@@ -22,11 +21,12 @@ public class Receitas {
     public Receitas() {
     }
 
-    public Receitas(Long id, String nome, Double valor, String descricao) {
+    public Receitas(Long id, String nome, Double valor, String descricao, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
+        this.usuario = usuario;
     }
 
     public Long getId() {
