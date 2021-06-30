@@ -20,8 +20,8 @@ public class UsuarioService {
         return Urep.findAll();
     }
 
-    public Usuario findUsuarioID (Long id){
-        Optional<Usuario> obj = Urep.findById(id);
+    public Usuario findUsuarioID (Long usuarioId){
+        Optional<Usuario> obj = Urep.findById(usuarioId);
         return obj.get();
     }
 
@@ -29,12 +29,12 @@ public class UsuarioService {
         return Urep.save(usuario);
     }
 
-    public void deletarUsuario (Long id){
-        Urep.deleteById(id);
+    public void deletarUsuario (Long usuarioId){
+        Urep.deleteById(usuarioId);
     }
 
-    public Usuario alterarUsuario (Long id, Usuario obj){
-        Usuario entity = Urep.getOne(id);
+    public Usuario alterarUsuario (Long usuarioId, Usuario obj){
+        Usuario entity = Urep.findById(usuarioId).get();
         updateData(entity, obj);
         return Urep.save(entity);
     }
