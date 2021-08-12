@@ -12,17 +12,16 @@ const Nav = styled.div `
     align-items: center;
 
     img {
-        width: 7%;
-        height: 50%;
-        background:#8DB892; 
+        width: 30%;
+        display: absolute; 
     }
 `;
 
 function Navbar() {
     return(
         <Nav>
-            <Link className="link" to="/Home" style={{textDecoration: 'none', margin: '0', padding: '0'}}>
-                <img className="logofinanc" src={Logo} alt="Logo Financ" />
+            <Link className="link" to="/Home">
+                <img className="logofinanc" src={Logo} alt="Logo Financ"/>
             </Link>
         </Nav>
     )
