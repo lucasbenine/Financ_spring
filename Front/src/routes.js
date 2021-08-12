@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Home from './pages/App';
+import Home from './pages/Home';
 import Despesas from './pages/Despesas';
 
 import { Switch, Route } from 'react-router-dom';

@@ -6,12 +6,11 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-    }
-
-    body {
-        width: 100vw;
-        height: 100vh;
         overflow-x: hidden;
         background: #F0F0F7;
+        text-decoration: none;
     }
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
 `;
