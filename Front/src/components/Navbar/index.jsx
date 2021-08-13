@@ -4,25 +4,107 @@ import {Link} from 'react-router-dom';
 
 const Nav = styled.div `
     width: 100%;
-    height: 10vh;
+    height: 8%;
     position: fixed;
     background: #8DB892;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
     img {
-        width: 30%;
-        display: absolute; 
+        width: 100%;
+        padding: auto;
     }
 `;
+
+const Navlist = styled.ul `
+    width: 28%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+`;
+
+const Normalbuttons = styled.button `
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: .4em;
+    font-size: 1.1em;
+    background: transparent;
+    cursor: pointer;
+    color: #04660E;
+    transition: .5s;
+
+
+    :hover {
+        color: #F0F0F7;
+        border-bottom: 2px solid #F0F0F7;
+    }
+`;
+
+const Styledbuttons = styled.button `
+    border: 2px solid #04660E;
+    border-radius: 8px;
+    outline: none;
+    width: 100%;
+    padding: .6em;
+    font-size: 1.1em;
+    background: transparent;
+    cursor: pointer;
+    color: #04660E;
+    transition: .5s;
+
+    :hover {
+        background: #04660E;
+        border: 2px solid #F0F0F7;
+        color: #F0F0F7;
+    }
+`;
+
+ const linkStyle = {
+    color: 'transparent',
+    width: '5%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    marginLeft: '1.8em'
+ };
+
+ const Linkbuttons = {
+    color: 'transparent',
+    width: '30%',
+ }
 
 function Navbar() {
     return(
         <Nav>
-            <Link className="link" to="/Home">
+            <Link className="link" to="/Home" style={linkStyle}>
                 <img className="logofinanc" src={Logo} alt="Logo Financ"/>
             </Link>
+            <Navlist>
+                <li>
+                    <Link to="/Home" style={Linkbuttons}>
+                        <Normalbuttons>Sobre</Normalbuttons>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/Home" style={Linkbuttons}>
+                        <Normalbuttons>Contato</Normalbuttons>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/Home" style={Linkbuttons}>
+                        <Styledbuttons>Login</Styledbuttons>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/Home" style={Linkbuttons}>
+                        <Styledbuttons>Cadastro</Styledbuttons>
+                    </Link>
+                </li>
+            </Navlist>
         </Nav>
     )
 }
