@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import DataTable from '../components/DataTable';
 import DonutChart from '../components/DonutChart';
+import Navbar from '../components/Navbar';
 
 const Container = styled.div`
 
@@ -46,6 +47,7 @@ const DataOptions = styled.div`
 function pages() {
   return (
       <>  
+        <Navbar />
           <Container>
             <div className="content">
               <div className="media">

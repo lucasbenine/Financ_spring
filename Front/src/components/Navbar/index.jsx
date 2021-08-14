@@ -4,12 +4,12 @@ import {Link} from 'react-router-dom';
 
 const Nav = styled.div `
     width: 100%;
-    height: 8%;
-    position: fixed;
+    height: 8vh;
     background: #8DB892;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid white;
 
     img {
         width: 100%;
@@ -27,7 +27,7 @@ const Navlist = styled.ul `
 `;
 
 const Normalbuttons = styled.button `
-    border: none;
+    border: 2px solid transparent;
     outline: none;
     width: 100%;
     padding: .4em;
