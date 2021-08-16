@@ -125,8 +125,8 @@ function Home() {
           </div>
         </div>
         {/* FIM DIV 4 */}
+        <Footer />
       </Parallax>
-      <Footer />
     </>
   );
 }
