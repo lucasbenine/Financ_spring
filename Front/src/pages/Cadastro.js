@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import {Link} from 'react-router-dom';
 
-const LoginBody = styled.div `
+const CadastroBody = styled.div `
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -35,7 +35,7 @@ const DivVerde = styled.div `
     width: 45%;
     height: 100%;
     background: #8DB892;
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 15px 0px 0px 15px;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-evenly;
@@ -81,27 +81,22 @@ const DivBranca = styled.div `
     width: 55%;
     height: 100%;
     background: white;
-    border-radius: 15px 0px 0px 15px; 
+    border-radius: 0px 15px 15px 0px; 
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-around;
     align-items: center;
 
     h2 {
         color: #04660E;
+        margin: 1em;
     }
 
     form {
         width: 100%;
-        height: 20%;
+        height: 100%;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: space-around;
         align-items: center;
-
-        label {
-            margin-left: 4px;
-        }
 
         .input-login {
             padding: 2%;
@@ -121,6 +116,7 @@ const DivBranca = styled.div `
     button {
         width: 100%;
         height: 100%;
+        margin-top: 1em;
         color: white;
         background: #8DB892;
         border: 2px solid transparent;
@@ -143,45 +139,45 @@ const DivBranca = styled.div `
     }
 `;
 
-function Login () {
+function Cadastro () {
     return(
         <>
-        <LoginBody>
-            <div className="img-login">
-                <Link to ="/">
-                    <img src={Logo} alt="Logo Financ" />
-                </Link>
-            </div>
-            <Caixa>
-                <DivBranca>
-                    <h2>Login</h2>
-                    <form>
-                        <input className="input-login" type="text" placeholder="RA ou Email" />
-                        <input className="input-login" type="password" placeholder="Senha" />
-                        <div style={{marginTop: '1em'}}>
-                            <input type="checkbox" id="showPassword" />
-                            <label for="showPassword">Mostrar senha</label> 
-                        </div>   
-                    </form>
-                    <Link to="/">
-                        <button>Logar</button>
-                    </Link>     
-                </DivBranca>
-
-
-                <DivVerde>
-                    <div style={{width: '80%'}}>
-                        <h2>Não possui conta? Cadastre-se!</h2>
-                        <p>Insira seus dados e começe a controlar suas finanças!</p>
-                    </div>
-                    <Link to="/cadastro">
-                        <button>Cadastre-se!</button>
+            <CadastroBody>
+                <div className="img-login">
+                    <Link to ="/">
+                        <img src={Logo} alt="Logo Financ" />
                     </Link>
-                </DivVerde>    
-            </Caixa>
-        </LoginBody>
+                </div>
+                <Caixa>
+                    <DivVerde>
+                        <div style={{width: '80%'}}>
+                            <h2>Já possui uma conta?</h2>
+                            <p>Faça login na nossa plataforma!</p>
+                        </div>
+                        <Link to="/login">
+                            <button>Login</button>
+                        </Link> 
+                    </DivVerde>
+
+
+                    <DivBranca>
+                        <h2>Cadastro</h2>
+                        <form>
+                            <input className="input-login" type="text" placeholder="Nome Completo" />
+                            <input className="input-login" type="text" placeholder="Email" />
+                            <input className="input-login" type="text" placeholder="RA" />
+                            <input className="input-login" type="password" placeholder="Senha" />
+                            <input className="input-login" type="password" placeholder="Confirmar Senha" />
+
+                            <Link to="/">
+                                <button>Cadastrar</button>
+                            </Link>   
+                        </form>
+                    </DivBranca>
+                </Caixa>
+            </CadastroBody>
         </>
     )
 }
 
-export default Login;
+export default Cadastro;

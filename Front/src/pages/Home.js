@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import img1 from '../img/1.jpg';
 import img2 from '../img/2.jpg';
 import img3 from '../img/3.jpg';
-import img4 from '../img/4.jpg';
 import Footer from '../components/Footer/index';
 
 const Parallax = styled.div `
   width: 100vw;
   height: 100vh;
 
-  .pimg1, .pimg2, .pimg3, .pimg4 {
+  .pimg1, .pimg2, .pimg3 {
     opacity: 0.55;
     background-attachment: fixed;
     background-size: cover;
@@ -29,10 +28,6 @@ const Parallax = styled.div `
 
   .pimg3 {
     background-image: url(${img3});
-  }
-
-  .pimg4 {
-    background-image: url(${img4});
   }
 
   .textHome {
@@ -111,20 +106,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="spacer">
-          <p>Qual o seu sonho? Uma viagem, um imóvel, abrir seu próprio negócio? Tendo metas estabelecidas, você fica mais perto de realizar seus sonhos.</p>
-        </div>
         {/* FIM DIV 3 */}
-
-        {/* DIV 4 */}
-        <div className="pimg4">
-          <div className="textHome">
-            <div className="spanHome">
-              <span>ORGANIZE SUAS FINANÇAS</span>
-            </div>
-          </div>
-        </div>
-        {/* FIM DIV 4 */}
         <Footer />
       </Parallax>
     </>
