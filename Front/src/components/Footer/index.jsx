@@ -19,7 +19,7 @@ function Footer() {
             </span>
             <div>
                 <span>Política de Privacidade</span> |
-                <span>Termos de Uso</span>
+                <span> Termos de Uso</span>
             </div>
         </FooterBody>
     )
