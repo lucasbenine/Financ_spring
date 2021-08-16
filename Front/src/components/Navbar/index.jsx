@@ -89,7 +89,7 @@ const Styledbuttons = styled.button `
 
  const linkStyle = {
     color: 'transparent',
-    width: '10%',
+    width: '8%',
     height: '100%',
     display: 'flex',
     alignItems: 'center',
