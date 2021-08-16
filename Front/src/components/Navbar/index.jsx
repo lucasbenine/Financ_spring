@@ -95,7 +95,7 @@ function Navbar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Home" style={Linkbuttons}>
+                    <Link to="/login" style={Linkbuttons}>
                         <Styledbuttons>Login</Styledbuttons>
                     </Link>
                 </li>
