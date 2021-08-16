@@ -24,18 +24,37 @@ const Navlist = styled.ul `
     justify-content: space-around;
     align-items: center;
     list-style: none;
+
+    .link-navbar {
+        color: transparent;
+        width: 30%;
+    }
+
+    @media(max-width: 1440px) {
+        font-size: 1em;
+        margin-right: 2em;
+    }
+
+    @media(max-width: 1024px) {
+        margin-right: 4.5em;
+    }
 `;
 
 const Normalbuttons = styled.button `
     border: 2px solid transparent;
     outline: none;
     width: 100%;
-    padding: .4em;
+    padding: 1%;
     font-size: 1.1em;
     background: transparent;
     cursor: pointer;
     color: #04660E;
     transition: .5s;
+
+    @media(max-width: 1024px) {
+        padding: 1em;
+        font-size: 1em;
+    }
 
 
     :hover {
@@ -56,6 +75,11 @@ const Styledbuttons = styled.button `
     color: #04660E;
     transition: .5s;
 
+    @media(max-width: 1024px) {
+        padding: .2em;
+        font-size: 1em;
+    }
+
     :hover {
         background: #04660E;
         border: 2px solid #F0F0F7;
@@ -65,17 +89,12 @@ const Styledbuttons = styled.button `
 
  const linkStyle = {
     color: 'transparent',
-    width: '5%',
+    width: '10%',
     height: '100%',
     display: 'flex',
     alignItems: 'center',
     marginLeft: '1.8em'
  };
-
- const Linkbuttons = {
-    color: 'transparent',
-    width: '30%',
- }
 
 function Navbar() {
     return(
@@ -85,22 +104,22 @@ function Navbar() {
             </Link>
             <Navlist>
                 <li>
-                    <Link to="/Home" style={Linkbuttons}>
+                    <Link className="link-navbar" to="/Home">
                         <Normalbuttons>Sobre</Normalbuttons>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Home" style={Linkbuttons}>
+                    <Link className="link-navbar" to="/Home">
                         <Normalbuttons>Contato</Normalbuttons>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/login" style={Linkbuttons}>
+                    <Link className="link-navbar" to="/login">
                         <Styledbuttons>Login</Styledbuttons>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Home" style={Linkbuttons}>
+                    <Link className="link-navbar" to="/Home">
                         <Styledbuttons>Cadastro</Styledbuttons>
                     </Link>
                 </li>
