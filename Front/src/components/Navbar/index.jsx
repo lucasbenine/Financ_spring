@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import Logo from '../../img/logofinance.png'
 import {Link} from 'react-router-dom';
+import { IoIosMenu } from 'react-icons/io';
 
 const Nav = styled.div `
     width: 100%;
@@ -18,7 +20,7 @@ const Nav = styled.div `
 `;
 
 const Navlist = styled.ul `
-    width: 28%;
+    width: 30%;
     height: 100%;
     display: flex;
     justify-content: space-around;
@@ -32,11 +34,26 @@ const Navlist = styled.ul `
 
     @media(max-width: 1440px) {
         font-size: 1em;
-        margin-right: 2em;
+        margin-right: 3em;
     }
 
-    @media(max-width: 1024px) {
-        margin-right: 4.5em;
+    @media (max-width: 1024px) {
+        flex-flow: column nowrap;
+        margin-right: 0;
+        background-color: #8DB892;
+        display: ${({open}) => open ? 'block' : 'none'};
+        position: absolute;
+        margin-top: 35%;
+        right: 2em;
+        height: 29vh;
+        border-radius: 10px;
+        border: 2px solid #F0F0F7;
+        text-align: center;
+
+        li {
+            justify-content: space-around;
+            align-items: center;
+        }
     }
 `;
 
@@ -45,15 +62,20 @@ const Normalbuttons = styled.button `
     outline: none;
     width: 100%;
     padding: 1%;
-    font-size: 1.1em;
+    font-size: 1em;
     background: transparent;
     cursor: pointer;
     color: #04660E;
     transition: .5s;
 
-    @media(max-width: 1024px) {
-        padding: 1em;
+    @media(max-width: 1440px) {
+        padding: .4em;
         font-size: 1em;
+    }
+
+    @media(max-width: 1024px) {
+        font-size: 1em;
+        padding: 1em;
     }
 
 
@@ -69,21 +91,58 @@ const Styledbuttons = styled.button `
     outline: none;
     width: 100%;
     padding: .6em;
-    font-size: 1.1em;
+    font-size: 1em;
     background: transparent;
     cursor: pointer;
     color: #04660E;
     transition: .5s;
 
-    @media(max-width: 1024px) {
-        padding: .2em;
+    @media(max-width: 1440px) {
+        padding: .4em;
         font-size: 1em;
+    }
+
+    @media(max-width: 1024px) {
+        padding: 1em;
+        font-size: 1em;
+        width: 60%;
+
+        :first-child {
+            margin-bottom: 1em;
+        }
     }
 
     :hover {
         background: #04660E;
         border: 2px solid #F0F0F7;
         color: #F0F0F7;
+    }
+`;
+
+const Burger = styled.button `
+    width: 5%;
+    height: 45%;
+    background: transparent;
+    outline: none;
+    border: ${({open}) => open ? '2px solid #F0F0F7' : '2px solid #04660E'};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1.8em;
+    border-radius: 6px;
+    transition: .5s;
+
+    :onClick {
+        border: 2px solid #F0F0F7
+    }
+
+    .burger-icon {
+        color: ${({open}) => open ? '#F0F0F7' : '#04660E'};
+        transition: .5s;
+    }
+
+    @media (min-width: 1024px) {
+        display: none;
     }
 `;
 
@@ -97,12 +156,15 @@ const Styledbuttons = styled.button `
  };
 
 function Navbar() {
+
+    const [open, setOpen] = useState(false);
+
     return(
         <Nav>
             <Link className="link" to="/Home" style={linkStyle}>
                 <img className="logofinanc" src={Logo} alt="Logo Financ"/>
             </Link>
-            <Navlist>
+            <Navlist open={open}>
                 <li>
                     <Link className="link-navbar" to="/Home">
                         <Normalbuttons>Sobre</Normalbuttons>
@@ -124,6 +186,9 @@ function Navbar() {
                     </Link>
                 </li>
             </Navlist>
+            <Burger open={open} onClick={() => setOpen(!open)}>
+                <IoIosMenu size={30} className="burger-icon"/>
+            </Burger>
         </Nav>
     )
 }
