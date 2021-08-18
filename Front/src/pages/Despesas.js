@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar';
 const Container = styled.div`
 
   width: 100%;
-  height: 100%;
+  height: 92vh;
   background: #f0f0f7;
   padding: 0 5% 10px 5%;
 
@@ -48,23 +48,23 @@ function pages() {
   return (
       <>  
         <Navbar />
-          <Container>
-            <div className="content">
-              <div className="media">
-                <h1>Média mensal<br/>
-                    R$ 1250,00
-                </h1>
-              </div>
-              <div className="grafico">
-                <DonutChart />
-              </div>
+        <Container>
+          <div className="content">
+            <div className="media">
+              <h1>Média mensal<br/>
+                  R$ 1250,00
+              </h1>
             </div>
-            <DataOptions>
-              {/* <Button setShow={setShow} texto={"Nova transação"} />
-              <Button texto={"26/06/2021"} /> */}
-            </DataOptions>
-            <DataTable />
-          </Container>
+            <div className="grafico">
+              <DonutChart />
+            </div>
+          </div>
+          <DataOptions>
+            {/* <Button setShow={setShow} texto={"Nova transação"} />
+            <Button texto={"26/06/2021"} /> */}
+          </DataOptions>
+          <DataTable />
+        </Container>
       </>
   );
 }
