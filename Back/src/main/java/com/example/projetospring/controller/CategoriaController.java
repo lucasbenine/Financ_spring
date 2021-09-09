@@ -36,8 +36,7 @@ public class CategoriaController {
 
     @ApiOperation(value="Retorna a categoria solicitada")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Categoria> findById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
-        System.out.println(userDetails);
+    public ResponseEntity<Categoria> findById(@PathVariable Long id) {
         Categoria obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
