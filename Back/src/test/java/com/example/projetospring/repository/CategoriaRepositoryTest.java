@@ -38,6 +38,7 @@ class CategoriaRepositoryTest {
         List<Categoria> categorias = categoriaRepository.findAll();
 
         Assertions.assertThat(categorias).isNotNull();
+//        Assertions.assertThat(categorias).isNotNull();
     }
 
     @Test

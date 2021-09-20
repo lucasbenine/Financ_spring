@@ -4,6 +4,7 @@ import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Despesa;
 import com.example.projetospring.repository.CategoriaRepository;
 import com.example.projetospring.repository.DespesaRepository;
+import com.example.projetospring.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,7 +37,9 @@ public class DespesaService {
 
     public Despesa findById(Long id) {
         Optional<Despesa> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(
+                () -> new EntityNotFoundException("Id not found " + id)
+        );
     }
 
     public Despesa insert(Despesa despesa) {

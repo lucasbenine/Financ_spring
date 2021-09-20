@@ -2,6 +2,7 @@ package com.example.projetospring.service;
 
 import com.example.projetospring.model.Categoria;
 import com.example.projetospring.repository.CategoriaRepository;
+import com.example.projetospring.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,9 @@ public class CategoriaService {
 
     public Categoria findById(Long id) {
         Optional<Categoria> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(
+                () -> new EntityNotFoundException("Id not found " + id)
+        );
     }
 
     public Categoria insert(Categoria categoria) {
