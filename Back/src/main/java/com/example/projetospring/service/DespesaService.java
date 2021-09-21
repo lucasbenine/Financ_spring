@@ -4,6 +4,7 @@ import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Despesa;
 import com.example.projetospring.repository.CategoriaRepository;
 import com.example.projetospring.repository.DespesaRepository;
+import com.example.projetospring.service.exceptions.BadRequestException;
 import com.example.projetospring.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +44,11 @@ public class DespesaService {
     }
 
     public Despesa insert(Despesa despesa) {
-        return repository.save(despesa);
+        if(despesa.getPreco() <= 0) {
+            throw new BadRequestException("O campo Preço deve ser maior do que 0");
+        } else {
+            return repository.save(despesa);
+        }
     }
 
     public void delete(Long id) {
