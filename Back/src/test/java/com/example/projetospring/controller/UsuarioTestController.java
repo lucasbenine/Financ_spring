@@ -1,3 +1,4 @@
+package com.example.projetospring.controller;
 
 import com.example.projetospring.controller.UsuarioController;
 import com.example.projetospring.model.Usuario;
