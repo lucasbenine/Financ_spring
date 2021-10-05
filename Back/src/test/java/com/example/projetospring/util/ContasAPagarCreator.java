@@ -1,3 +1,4 @@
+/*
 package com.example.projetospring.util;
 
 import com.example.projetospring.model.ContasAPagar;
@@ -19,3 +20,4 @@ public class ContasAPagarCreator {
         return contasAPagar;
     }
 }
+*/

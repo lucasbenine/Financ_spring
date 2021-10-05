@@ -12,6 +12,10 @@ public class ContasAReceberService {
     @Autowired
     private ContasAReceberRepository repository;
 
+    public List<ContasAReceber> findAll() {
+        return repository.findAll();
+    }
+    
     public ContasAReceber inserir(ContasAReceber contasareceber) {
         return repository.save(contasareceber);
     }

@@ -11,14 +11,16 @@ public class ContasAPagarService {
     @Autowired
     private ContasAPagarRepository repository;
 
+    public List<ContasAPagar> findAll() {
+        return repository.findAll();
+    }
+    
     public ContasAPagar inserir (ContasAPagar contasapagar){
         return repository.save(contasapagar);
     }
 
     public void deletarConta (Long Id) {
-
         repository.deleteById(Id);
-
     }
 
     public ContasAPagar editarConta (Long Id, ContasAPagar contasapagar) {

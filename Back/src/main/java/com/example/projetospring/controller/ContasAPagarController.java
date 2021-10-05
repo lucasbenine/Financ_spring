@@ -25,22 +25,20 @@ public class ContasAPagarController {
 
     @ApiOperation(value="Retorna uma lista de contas a serem pagas")
     @GetMapping
-    public List<ContasAPagar> listaContas(){
+    public List<ContasAPagar> findAll(){
            return repository.findAll();
     }
 
     @ApiOperation(value="Cadastra uma conta a ser paga")
     @PostMapping
-    public ResponseEntity<ContasAPagar> contasapagar (@RequestBody ContasAPagar contasapagar){
-
+    public ResponseEntity<ContasAPagar> inserir (@RequestBody ContasAPagar contasapagar){
            contasapagar = service.inserir(contasapagar);
            return ResponseEntity.ok().body(contasapagar);
     }
 
     @ApiOperation(value="Atualiza uma conta cadastrada para pagamento")
     @PutMapping(value = "/{Id}")
-    public ResponseEntity<ContasAPagar> contasapagar (@PathVariable Long Id, @RequestBody ContasAPagar contasapagar){
-
+    public ResponseEntity<ContasAPagar> findById (@PathVariable Long Id, @RequestBody ContasAPagar contasapagar){
            contasapagar = service.editarConta(Id,contasapagar);
            return ResponseEntity.ok().body(contasapagar);
     }
@@ -48,7 +46,6 @@ public class ContasAPagarController {
     @ApiOperation(value="Deleta uma conta a pagar")
     @DeleteMapping(value = "/{Id}")
         public ResponseEntity<Void> deletarConta(@PathVariable Long Id) {
-
             service.deletarConta(Id);
             return ResponseEntity.noContent().build();
         }

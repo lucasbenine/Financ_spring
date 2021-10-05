@@ -1,3 +1,4 @@
+/*
 package com.example.projetospring.util;
 
 
@@ -22,3 +23,4 @@ public class ContasAReceberCreator {
         }
 
 }
+*/
