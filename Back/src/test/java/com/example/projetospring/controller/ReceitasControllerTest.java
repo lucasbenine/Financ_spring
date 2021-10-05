@@ -22,7 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-class ReceitaControllerTest {
+class ReceitasControllerTest {
 
     @InjectMocks
     private ReceitasController receitasController;
@@ -52,7 +52,7 @@ class ReceitaControllerTest {
     @DisplayName("Lista de receitas - sucesso")
     void list_ReturnListOfReceitas_WhenSucceful(){
         String expectedName = ReceitaCreator.createValidReceita().getNome();
-        List<Receitas> receitasList = receitasController.listaReceitas();
+        List<Receitas> receitasList = (List<Receitas>) receitasController.listaReceitas();
 
         Assertions.assertThat(receitasList).isNotNull();
         Assertions.assertThat(receitasList.get(0).getNome()).isEqualTo(expectedName);
