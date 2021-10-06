@@ -1,3 +1,4 @@
+/*
 package com.example.projetospring.controller;
 
 import com.example.projetospring.model.Receitas;
@@ -98,3 +99,4 @@ class ReceitaControllerTest {
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 }
+*/

@@ -1,4 +1,3 @@
-/*
 package com.example.projetospring.util;
 
 
@@ -8,19 +7,18 @@ public class ContasAReceberCreator {
 
 
         public static ContasAReceber creataContasAReceberToBeSaved() {
-            ContasAReceber contasAReceber = new ContasAReceber(null, "Salário", 1500.00, "Salário");
+            ContasAReceber contasAReceber = new ContasAReceber(null, "Salï¿½rio", 1500.00, "Salï¿½rio");
             return contasAReceber;
         }
 
         public static ContasAReceber createValidContasAReceber() {
-            ContasAReceber contasAReceber = new ContasAReceber(1L, "Salário", 1500.00, "Salário");
+            ContasAReceber contasAReceber = new ContasAReceber(1L, "Salï¿½rio", 1500.00, "Salï¿½rio");
             return contasAReceber;
         }
 
         public static ContasAReceber createValidUpdatedContasAReceber() {
-            ContasAReceber contasAReceber = new ContasAReceber(1L, "Salário", 1900.00, "Salário");
+            ContasAReceber contasAReceber = new ContasAReceber(1L, "Salï¿½rio", 1900.00, "Salï¿½rio");
             return contasAReceber;
         }
 
 }
-*/

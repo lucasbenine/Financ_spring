@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8028e1c6-b426-4b5a-8572-6e3c787befb8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Back/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Back/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/src/main/java/com/example/projetospring/service/ContasAPagarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back/src/main/java/com/example/projetospring/service/ContasAPagarService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/src/main/java/com/example/projetospring/service/ContasAReceberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back/src/main/java/com/example/projetospring/service/ContasAReceberService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +81,7 @@
       <workItem from="1631226829020" duration="3723000" />
       <workItem from="1631230598008" duration="1347000" />
       <workItem from="1633391567837" duration="84000" />
+      <workItem from="1633559856469" duration="370000" />
     </task>
     <servers />
   </component>

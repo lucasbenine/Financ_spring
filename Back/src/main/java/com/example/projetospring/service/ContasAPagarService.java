@@ -1,9 +1,14 @@
 package com.example.projetospring.service;
 
 import com.example.projetospring.model.ContasAPagar;
+import com.example.projetospring.model.ContasAReceber;
+import com.example.projetospring.model.Receitas;
 import com.example.projetospring.repository.ContasAPagarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContasAPagarService {
@@ -11,10 +16,15 @@ public class ContasAPagarService {
     @Autowired
     private ContasAPagarRepository repository;
 
-    public List<ContasAPagar> findAll() {
+    public List<ContasAPagar> findAll (){
         return repository.findAll();
     }
-    
+
+    public ContasAPagar findById(Long id){
+        Optional<ContasAPagar> obj = repository.findById(id);
+        return obj.get();
+    }
+
     public ContasAPagar inserir (ContasAPagar contasapagar){
         return repository.save(contasapagar);
     }

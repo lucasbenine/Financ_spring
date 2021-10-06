@@ -1,5 +1,6 @@
 package com.example.projetospring.controller;
 
+import com.example.projetospring.model.Receitas;
 import com.example.projetospring.service.ContasAPagarService;
 import com.example.projetospring.model.ContasAPagar;
 import com.example.projetospring.repository.ContasAPagarRepository;
@@ -29,16 +30,22 @@ public class ContasAPagarController {
            return repository.findAll();
     }
 
+    @GetMapping(value = "/{id}" )
+    public ResponseEntity<ContasAPagar> findById(@PathVariable Long id){
+        ContasAPagar obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
+    }
+
     @ApiOperation(value="Cadastra uma conta a ser paga")
     @PostMapping
-    public ResponseEntity<ContasAPagar> inserir (@RequestBody ContasAPagar contasapagar){
+    public ResponseEntity<ContasAPagar> inserirConta (@RequestBody ContasAPagar contasapagar){
            contasapagar = service.inserir(contasapagar);
            return ResponseEntity.ok().body(contasapagar);
     }
 
     @ApiOperation(value="Atualiza uma conta cadastrada para pagamento")
     @PutMapping(value = "/{Id}")
-    public ResponseEntity<ContasAPagar> findById (@PathVariable Long Id, @RequestBody ContasAPagar contasapagar){
+    public ResponseEntity<ContasAPagar> editarConta (@PathVariable Long Id, @RequestBody ContasAPagar contasapagar){
            contasapagar = service.editarConta(Id,contasapagar);
            return ResponseEntity.ok().body(contasapagar);
     }

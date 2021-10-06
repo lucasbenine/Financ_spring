@@ -1,6 +1,7 @@
 package com.example.projetospring.controller;
 
 import com.example.projetospring.model.ContasAReceber;
+import com.example.projetospring.model.Receitas;
 import com.example.projetospring.repository.ContasAReceberRepository;
 import com.example.projetospring.service.ContasAReceberService;
 import io.swagger.annotations.Api;
@@ -25,21 +26,26 @@ public class ContasAReceberController {
 
         @ApiOperation(value="Retorna uma lista de contas a serem recebidas")
         @GetMapping
-        public List<ContasAReceber> listaContas(){
+        public List<ContasAReceber> findAll(){
             return repository.findAll();
+        }
+
+        @GetMapping(value = "/{id}" )
+        public ResponseEntity<ContasAReceber> findById(@PathVariable Long id){
+            ContasAReceber obj = service.findById(id);
+            return ResponseEntity.ok().body(obj);
         }
 
         @ApiOperation(value="Cadastra uma conta a ser recebida")
         @PostMapping
-        public ResponseEntity<ContasAReceber> contasareceber (@RequestBody ContasAReceber contasareceber){
+        public ResponseEntity<ContasAReceber> cadastrarConta (@RequestBody ContasAReceber contasareceber){
             contasareceber = service.inserir(contasareceber);
             return ResponseEntity.ok().body(contasareceber);
         }
 
         @ApiOperation(value="Atualiza uma conta cadastrada para recebimento")
         @PutMapping(value = "/{Id}")
-        public ResponseEntity<ContasAReceber> contasareceber (@PathVariable Long Id, @RequestBody ContasAReceber contasareceber){
-
+        public ResponseEntity<ContasAReceber> atualizarConta (@PathVariable Long Id, @RequestBody ContasAReceber contasareceber){
             contasareceber = service.editarConta(Id,contasareceber);
             return ResponseEntity.ok().body(contasareceber);
         }
@@ -47,7 +53,6 @@ public class ContasAReceberController {
         @ApiOperation(value="Deleta uma conta a receber")
         @DeleteMapping(value = "/{Id}")
         public ResponseEntity<Void> deletarConta(@PathVariable Long Id) {
-
             service.deletarConta(Id);
             return ResponseEntity.noContent().build();
         }

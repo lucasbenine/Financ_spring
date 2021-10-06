@@ -1,4 +1,3 @@
-/*
 package com.example.projetospring.controller;
 
 import com.example.projetospring.model.ContasAReceber;
@@ -48,7 +47,7 @@ class ContasAReceberControllerTest {
     @DisplayName("Listagem de contas deve retornar sucesso")
     void listaContasComSucesso() {
         String expectedName = ContasAReceberCreator.createValidContasAReceber().getNomeConta();
-        List<ContasAReceber> listContas = contasAReceberController.listaContas();
+        List<ContasAReceber> listContas = contasAReceberServiceMock.findAll();
         Assertions.assertThat(listContas).isNotNull();
         Assertions.assertThat(listContas.get(0).getNomeConta()).isEqualTo(expectedName);
     }
@@ -65,7 +64,7 @@ class ContasAReceberControllerTest {
     @Test
     @DisplayName("Cadastra uma conta e retorna sucesso")
     void CadastraContaEDeveRetornarSucesso() {
-        ContasAReceber contasAReceber = contasAReceberController.cadastraConta(ContasAReceberCreator.creataContasAReceberToBeSaved()).getBody();
+        ContasAReceber contasAReceber = contasAReceberController.cadastrarConta(ContasAReceberCreator.creataContasAReceberToBeSaved()).getBody();
         Assertions.assertThat(contasAReceber.getNomeConta()).isNotNull().isEqualTo(ContasAReceberCreator.creataContasAReceberToBeSaved().getNomeConta());
     }
 
@@ -79,4 +78,3 @@ class ContasAReceberControllerTest {
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 }
-*/
