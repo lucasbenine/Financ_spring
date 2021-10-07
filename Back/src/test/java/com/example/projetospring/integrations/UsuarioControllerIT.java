@@ -1,47 +1,40 @@
 package com.example.projetospring.integrations;
 
+
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repository.UsuarioRepository;
 import com.example.projetospring.util.UsuarioCreator;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-
-import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureTestDatabase
 public class UsuarioControllerIT {
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
     @LocalServerPort
     private int port;
 
+    @Autowired
+    private TestRestTemplate restemp;
+
+    @Autowired
+    UsuarioRepository urep;
+
+    Usuario usuario = new Usuario(1L, "Usuario Teste", "email@email.com");
+
     @Test
-    @DisplayName("Listagem de usuários deve retornar sucesso")
-    void list_ReturnListOfUsuarios_WhenSuccesful() {
-        Usuario usuarioSaved = usuarioRepository.save(UsuarioCreator.creataUsuarioToBeSaved());
+    public void returnUsuer_whenSucesful() {
+        ResponseEntity<Usuario> response = this.restemp
+                .postForEntity("http://localhost:" + port + "/usuarios", UsuarioCreator.createValidUsuario(), Usuario.class);
 
-        String expectedName = usuarioSaved.getNome();
-
-        List<Usuario> usuarioList = testRestTemplate.exchange("/usuario", HttpMethod.GET, null,
-            new ParameterizedTypeReference<List<Usuario>>(){
-
-            }).getBody();
-
-        Assertions.assertThat(usuarioList).isNotNull().isNotEmpty().hasSize(1);
-
-
-        Assertions.assertThat(usuarioList.get(0).getNome()).isEqualTo(expectedName);
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(response.getBody().getNome()).isEqualTo(UsuarioCreator.createValidUsuario().getNome());
     }
 }
+
+
