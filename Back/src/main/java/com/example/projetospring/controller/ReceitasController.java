@@ -19,13 +19,12 @@ public class ReceitasController {
     private ReceitaService rServ;
 
     @GetMapping
-    public ResponseEntity<List<Receitas>> listaReceitas (){
-        List<Receitas> list = rServ.listReceitas();
-        return ResponseEntity.ok().body(list);
+    public List<Receitas> listaReceitas (){
+        return rServ.listReceitas();
     }
 
     @PostMapping
-    public ResponseEntity<Receitas> cadastrarDespesa(@RequestBody Receitas receitas){
+    public ResponseEntity<Receitas> cadastrarReceita(@RequestBody Receitas receitas){
         receitas = rServ.cadastroReceita(receitas);
         return ResponseEntity.ok().body(receitas);
     }

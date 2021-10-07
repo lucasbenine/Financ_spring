@@ -6,11 +6,13 @@ import com.example.projetospring.repository.UsuarioRepository;
 import com.example.projetospring.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,13 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> cadastroUsuario(@RequestBody Usuario usuario){
         usuario = uServ.cadastrarUsuario(usuario);
+
+        if(usuario.getEmail().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+        } else {
+            JOptionPane.showMessageDialog(null, "Cadastrado!");
+        }
+
         return ResponseEntity.ok().body(uServ.cadastrarUsuario(usuario));
     }
 
