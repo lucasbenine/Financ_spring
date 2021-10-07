@@ -13,4 +13,9 @@ public class DespesaCreator {
         Despesa despesa = new Despesa(15L, "Camiseta", 55.0, "Camiseta polo", CategoriaCreator.createValidCategoria());
         return despesa;
     }
+
+    public static Despesa createInvalidDespesa() {
+        Despesa despesa = new Despesa(1L, "teste", 0.0, "refgerg", CategoriaCreator.createValidCategoria());
+        return despesa;
+    }
 }
