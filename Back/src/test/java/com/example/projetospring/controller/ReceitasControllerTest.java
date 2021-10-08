@@ -23,7 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-class ReceitaControllerTest {
+class ReceitasControllerTest {
 
     @InjectMocks
     private ReceitasController receitasController;
