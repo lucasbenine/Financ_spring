@@ -1,5 +1,7 @@
 package com.example.projetospring;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +12,10 @@ public class ProjetospringApplication {
     	
     	SpringApplication.run(ProjetospringApplication.class, args);
 
-    	
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.comprasparaguai.com.br");
     }
     
 }
