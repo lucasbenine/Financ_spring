@@ -13,7 +13,7 @@ const FooterBody = styled.div `
 
 function Footer() {
     return(
-        <FooterBody>
+        <FooterBody data-testid="footer-test1">
             <span>
                 Copyright &copy; 2020 <strong>FinanC S/A</strong><br/> Todos os direitos reservados<br/>Av. das Cataratas, 1118 – Vila Yolanda, Foz do Iguaçu – PR, 85853-000
             </span>
