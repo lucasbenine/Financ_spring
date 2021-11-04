@@ -5,15 +5,18 @@ import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repository.UsuarioRepository;
 import com.example.projetospring.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("usuarios")
@@ -22,6 +25,15 @@ public class UsuarioController {
     @Autowired
     private UsuarioService uServ;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    private final PasswordEncoder encoder;
+
+    public UsuarioController(PasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
+
     @GetMapping
     public List<Usuario> listaUsuarios (){
         return uServ.findUsuarios();
@@ -29,15 +41,33 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<Usuario> cadastroUsuario(@RequestBody Usuario usuario){
+        usuario.setPassword(encoder.encode(usuario.getPassword()));
         usuario = uServ.cadastrarUsuario(usuario);
 
-        if(usuario.getEmail().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-        } else {
-            JOptionPane.showMessageDialog(null, "Cadastrado!");
-        }
+//        if(usuario.getEmail().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Cadastrado!");
+//        }
 
         return ResponseEntity.ok().body(uServ.cadastrarUsuario(usuario));
+    }
+
+    @GetMapping("/validarsenha")
+    public ResponseEntity<Boolean> validarSenha(@RequestParam String username, @RequestParam String password) {
+
+        Optional<Usuario> optUsuario = usuarioRepository.findByUsername(username);
+
+        if (optUsuario.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+        }
+
+        boolean valid = false;
+
+        valid = encoder.matches(password, optUsuario.get().getPassword());
+
+        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+        return ResponseEntity.status(status).body(valid);
     }
 
     @GetMapping(value = "/{usuarioId}")

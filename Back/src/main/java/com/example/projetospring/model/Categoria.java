@@ -1,5 +1,6 @@
 package com.example.projetospring.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;

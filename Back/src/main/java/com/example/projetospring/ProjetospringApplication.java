@@ -1,21 +1,25 @@
 package com.example.projetospring;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class ProjetospringApplication {
 
     public static void main(String[] args) {       
     	
     	SpringApplication.run(ProjetospringApplication.class, args);
 
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+    }
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.comprasparaguai.com.br");
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
     }
     
 }
