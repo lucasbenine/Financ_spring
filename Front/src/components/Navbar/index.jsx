@@ -171,7 +171,7 @@ function Navbar() {
                     </Link>
                 </li>
                 <li>
-                    <Link className="link-navbar" to="/Home">
+                    <Link className="link-navbar" to="/contato">
                         <Normalbuttons>Contato</Normalbuttons>
                     </Link>
                 </li>

@@ -14,6 +14,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Collections;
+
+import static org.springframework.http.HttpMethod.GET;
+
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
@@ -35,7 +39,9 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
                 .addFilter(new JWTAutenticarFilter(authenticationManager()))
                 .addFilter(new JWTValidarFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.cors();
     }
+
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
@@ -46,5 +52,7 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
 
         return source;
     }
+
+
 }
 

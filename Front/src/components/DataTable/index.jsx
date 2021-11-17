@@ -3,6 +3,8 @@ import api from "../../api";
 import { DespesaPage } from "../../types/despesa";
 import { formatLocalDate } from '../../utils/format';
 import styled from 'styled-components';
+import { MdModeEdit, MdDelete } from "react-icons/md";
+api.defaults.headers.common = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzEwNzczOH0.h8xVihIZLPF1aq1SW3Jcyvc0S0llweYSmm540aYKDVxndr1D_7xW-i_TnZplsQAF0fM628TredMaYq36BiX8jA'};
 
 const Table = styled.table`
 
@@ -49,25 +51,29 @@ const Table = styled.table`
 
 const DataTable = () => {
 
-    const [page, setPage] = useState<DespesaPage>({
-        first: true,
-        last: true,
-        number: 0,
-        totalElements: 0,
-        totalPages: 0
-    });
+    // const [page, setPage] = useState<DespesaPage>({
+    //     first: true,
+    //     last: true,
+    //     number: 0,
+    //     totalElements: 0,
+    //     totalPages: 0
+    // });
+    const [despesa, setDespesa] = useState([]);
 
     useEffect(() => {
 
+        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzE1NTg2Mn0.MY4s7XXj_1v4zs0ku_oyWqomBMPtUXGPt8Z3MqZM4DJH_TL3HPxgCjxCCLmyoXMzwWe8LG42qH_gPNnDJArrFQ';
+
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        };
+
         async function buscarDespesas() {
-            const response = await api.get(`despesas/?page=0&size=5&sort=data,desc`, {
-                auth: {
-                  username: 'lucas',
-                  password: '1234'
-                }
-              });
+            const response = await api.get('despesas/user', config);
             console.log(response);
-            setPage(response.data);
+            setDespesa(response.data);
         
         }
 
@@ -85,16 +91,20 @@ const DataTable = () => {
                         <th>Categoria</th>
                         <th>Data</th>
                         <th>Descrição</th>
+                        <th style={{width: '50px'}}>Editar</th>
+                        <th style={{width: '85px'}}>Apagar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {page.content?.map(item => (
+                    {despesa?.map((item) => (
                         <tr key={item.id}>
                             <td>{item.nome}</td>
                             <td className="preco">R$ {item.preco.toFixed(2)}</td>
                             <td>{item.categoria.nomeCategoria}</td>
                             <td>{formatLocalDate(item.data, "dd/MM/yyyy")}</td>
                             <td>{item.descricao}</td>
+                            <td style={{height: '100%', display:'flex', justifyContent:'center'}}><MdModeEdit /></td>
+                            <td><MdDelete /></td>
                         </tr>
                     ))}
                 </tbody>
