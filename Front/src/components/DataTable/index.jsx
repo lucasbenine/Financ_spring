@@ -3,50 +3,139 @@ import api from "../../api";
 import { DespesaPage } from "../../types/despesa";
 import { formatLocalDate } from '../../utils/format';
 import styled from 'styled-components';
-import { MdModeEdit, MdDelete } from "react-icons/md";
+import { MdModeEdit, MdDelete, MdClose } from "react-icons/md";
 api.defaults.headers.common = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzEwNzczOH0.h8xVihIZLPF1aq1SW3Jcyvc0S0llweYSmm540aYKDVxndr1D_7xW-i_TnZplsQAF0fM628TredMaYq36BiX8jA'};
+
+
+const TableHeader = styled.div`
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #FFF;
+
+
+    button {
+        padding: 15px 20px;
+        background: #ff7e7c;
+        border: none;
+        color: #FFF;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+`;
+
 
 const Table = styled.table`
 
     width: 100%;
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,.4);
     border-spacing: 0 1px;
     text-align: left;
-    border-radius: 10px;
     margin-bottom: 30px;
 
-    th:first-child {
-        border-top-left-radius: 10px;
-    }
-
-    th:last-child {
-        border-top-right-radius: 10px;
-    }
-
-    tr:last-child td:first-child {
-        border-bottom-left-radius: 10px;
-    }
-
-    tr:last-child td:last-child {
-        border-bottom-right-radius: 10px;
-    }
-
     th, td {
-        padding: 20px 15px;
+        padding: 30px 25px;
         background: #FFFFFF;
     }
     
     tbody tr {
-        opacity: 0.8;
+        opacity: 0.7;
 
         &:hover {
             opacity: 1;
         }
     }
-    
-    td.preco {
-        color: red;
+
+`;
+
+const ModalDetails = styled.div`    
+
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    a {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        padding: 20px;
+        cursor: pointer;
+
+        &:hover {
+            color: #ff7e7c;
+        }
     }
+
+    div#modalContainer {
+        
+        width: 100%;
+        z-index: 99;
+        background-color: #FFF;
+        display: flex;
+        justify-content: center;
+        padding: 60px 0;
+
+
+        div#container{
+            width: min(90%, 1000px);
+            display: flex;
+            justify-content: space-between;
+
+            h3 {
+                font-size: 25px;
+                margin-bottom: 10px;
+            }
+
+    
+            .details {
+                margin-bottom: 10px;
+    
+                span {
+                    color: #aaa;
+                }
+    
+                p {
+                    margin-top: 5px;
+                }
+            }
+    
+            button {
+                display: block;
+                padding: 10px;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+    
+                &:hover {
+                    color: #8DB892;
+                }
+            }
+    
+            button#excluir:hover {
+                color: #ff7e7c;
+    
+            }
+        }
+
+        
+    }
+    div#wrapper {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        overflow: hidden;
+        opacity: .5;
+        z-index: 98;
+        top: 0;
+        left: 0;
+        background: rgba(0,0,0,.4);
+    }
+
 `;
 
 const DataTable = () => {
@@ -62,7 +151,7 @@ const DataTable = () => {
 
     useEffect(() => {
 
-        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzE1NTg2Mn0.MY4s7XXj_1v4zs0ku_oyWqomBMPtUXGPt8Z3MqZM4DJH_TL3HPxgCjxCCLmyoXMzwWe8LG42qH_gPNnDJArrFQ';
+        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzI4MDkyM30.7AahkhlIDlqmxaLx8F2vxOlGbYFHehzJMsskAMgzFvfhwD91dSzzdk_juBDZjII9C6EhmGNV8zCXm4-Qu9oOPw';
 
         const config = {
             headers: {
@@ -81,34 +170,82 @@ const DataTable = () => {
 
     }, [])
 
+    const [show, setShow] = useState(false);
+    const close = () => setShow(false);
+
+    const [despesaAtual, setDespesaAtual] = useState([]);
+
+    function handleTeste(item) {
+        setShow(true);
+        setDespesaAtual(item);
+    }
+
     return (
         <>
+            <TableHeader>
+                <h2>Despesas</h2>
+                <span>Novembro 2021</span>
+                <button>Cadastrar Despesa</button>
+            </TableHeader>
             <Table>
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Preço</th>
-                        <th>Categoria</th>
-                        <th>Data</th>
+                        <th style={{textAlign:'center'}}>Categoria</th>
+                        <th style={{textAlign:'end'}}>Preço</th>
+                        {/* <th>Data</th>
                         <th>Descrição</th>
                         <th style={{width: '50px'}}>Editar</th>
-                        <th style={{width: '85px'}}>Apagar</th>
+                        <th style={{width: '85px'}}>Apagar</th> */}
                     </tr>
                 </thead>
                 <tbody>
                     {despesa?.map((item) => (
-                        <tr key={item.id}>
+                        <tr key={item.id} onClick={() => handleTeste(item)}>
                             <td>{item.nome}</td>
-                            <td className="preco">R$ {item.preco.toFixed(2)}</td>
-                            <td>{item.categoria.nomeCategoria}</td>
-                            <td>{formatLocalDate(item.data, "dd/MM/yyyy")}</td>
-                            <td>{item.descricao}</td>
-                            <td style={{height: '100%', display:'flex', justifyContent:'center'}}><MdModeEdit /></td>
-                            <td><MdDelete /></td>
+                            <td style={{textAlign:'center'}}>{item.categoria.nomeCategoria}</td>
+                            <td className="despesa" style={{textAlign:'end'}}>R$ {item.preco.toFixed(2)}</td>
+                            {/* <td>{formatLocalDate(item.data, "dd/MM/yyyy")}</td> */}
+                            {/* <td>{item.descricao}</td> */}
+                            {/* <td style={{height: '100%', display:'flex', justifyContent:'center'}}><MdModeEdit /></td>
+                            <td><MdDelete /></td> */}
                         </tr>
                     ))}
                 </tbody>
             </Table>
+
+            <ModalDetails style={{
+                display: show ? 'flex' : 'none'
+            }}>
+                <a onClick={close}><MdClose /></a>
+                <div id="modalContainer">
+                    <div id="container">
+                        <div>
+                            <h3>{despesaAtual.nome}</h3>
+                            <p className="despesa">R$ {despesaAtual.preco}</p>
+                        </div>
+                        <div>
+                            <div className="details">
+                                <span>Data</span>
+                                <p>{despesaAtual.data}</p>
+                            </div>
+                            <div className="details">
+                                <span>Categoria</span>
+                                {/* <p>{despesaAtual.categoria.nomeCategoria}</p> */}
+                            </div>
+                            <div className="details">
+                                <span>Descrição</span>
+                                <p>{despesaAtual.descricao}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button><MdModeEdit /> Editar</button>
+                            <button id="excluir"><MdDelete /> Excluir</button>
+                        </div>
+                    </div>
+                </div> 
+                <div id="wrapper"></div>
+            </ModalDetails>
         </>
     );
 }

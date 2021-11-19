@@ -15,4 +15,8 @@ export default createGlobalStyle`
         overflow-x: hidden;
         background: #F0F0F7;
     }
+
+    .despesa {
+        color: #ff7e7c;
+    }
 `;
