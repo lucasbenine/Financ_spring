@@ -10,8 +10,8 @@ import java.util.List;
 public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 
     @Query("SELECT new com.example.projetospring.model.CategoriaSoma(obj.categoria, SUM(obj.preco)) " +
-            " FROM Despesa AS obj GROUP BY obj.categoria")
-    List<CategoriaSoma> amountGroupedByCategoria();
+            " FROM Despesa AS obj WHERE obj.usuario.usuarioId = :id GROUP BY obj.categoria")
+    List<CategoriaSoma> amountGroupedByCategoria(Long id);
 
     @Query("SELECT d FROM Despesa d WHERE d.usuario.usuarioId = :id ")
     List<Despesa> despesasbyUsuario(Long id);

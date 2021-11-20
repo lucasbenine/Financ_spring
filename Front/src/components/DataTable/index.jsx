@@ -151,7 +151,7 @@ const DataTable = () => {
 
     useEffect(() => {
 
-        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzI4MDkyM30.7AahkhlIDlqmxaLx8F2vxOlGbYFHehzJMsskAMgzFvfhwD91dSzzdk_juBDZjII9C6EhmGNV8zCXm4-Qu9oOPw';
+        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzQxNjE3Mn0.b0wQ6buxzyu35IM6du-wjp1VLQfIgBSpD2h1dalKi03I_R2i2ykUPPjIOuTB9ZmRy5tJsukagN7ApZZBDesasQ';
 
         const config = {
             headers: {
