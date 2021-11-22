@@ -64,7 +64,9 @@ public class DespesaService {
 
     @Transactional(readOnly = true)
     public List<CategoriaSoma> amountGroupedByCategoria() {
-        return repository.amountGroupedByCategoria();
+        Usuario usuario = getUsuarioLogado();
+        List<CategoriaSoma> categoriaSoma = repository.amountGroupedByCategoria(usuario.getUsuarioId());
+        return categoriaSoma;
     }
 
     public Despesa findById(Long id) {

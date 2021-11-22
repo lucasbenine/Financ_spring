@@ -17,13 +17,17 @@ const DonutChart = () => {
     useEffect( () => {
 
         async function despesaByCategoria() {
-            
-            await api.get('despesas/amount-by-categoria', {
-                auth: {
-                  username: 'lucas',
-                  password: '1234'
+
+            const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzQxNjE3Mn0.b0wQ6buxzyu35IM6du-wjp1VLQfIgBSpD2h1dalKi03I_R2i2ykUPPjIOuTB9ZmRy5tJsukagN7ApZZBDesasQ';
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
-              }).then((response: { data: DespesaSoma[]; }) => {
+            };
+            
+            await api.get('despesas/amount-by-categoria', config)
+                .then((response: { data: DespesaSoma[]; }) => {
                 const data = response.data as DespesaSoma[];
                 const myLabels = data.map(x => x.categoriaNome);
                 const mySeries = data.map(x => x.soma);
