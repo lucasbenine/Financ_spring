@@ -1,11 +1,13 @@
 package com.example.projetospring.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 public class Despesa implements Serializable {
@@ -19,9 +21,12 @@ public class Despesa implements Serializable {
     private String nome;
     private Double preco;
 
-    @CreationTimestamp
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Instant data;
+//    @CreationTimestamp
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    private Instant data;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "GMT+8")
+    private Date data;
+
     private String descricao;
 
     @ManyToOne
@@ -68,6 +73,14 @@ public class Despesa implements Serializable {
         this.usuario = usuarioDespesa;
     }
 
+    public Despesa(String nome, Double preco, Date data, String descricao, Categoria categoria, Usuario usuarioDespesa) {
+        this.nome = nome;
+        this.preco = preco;
+        this.data = data;
+        this.descricao = descricao;
+        this.categoria = categoria;
+    }
+
     public Long getId() {
         return id;
     }
@@ -111,4 +124,12 @@ public class Despesa implements Serializable {
     public Usuario getUsuario() { return usuario; }
 
     public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
 }

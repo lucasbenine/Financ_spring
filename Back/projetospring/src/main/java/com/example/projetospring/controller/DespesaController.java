@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -50,6 +52,8 @@ public class DespesaController {
     @ApiOperation(value="Cadastra uma despesa")
     @PostMapping
     public ResponseEntity<Despesa> insert(@RequestBody Despesa despesa) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        despesa.setDataa(sdf.parse("despesa.getDataa()"));
         despesa = service.insert(despesa);
         return ResponseEntity.ok().body(despesa);
     }

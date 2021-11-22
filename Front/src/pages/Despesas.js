@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 import styled from 'styled-components';
 import DataTable from '../components/DataTable';
 import DonutChart from '../components/DonutChart';
 import Navbar from '../components/Navbar';
+import Modal from '../components/Modal';
 
 const Container = styled.div`
 
@@ -53,15 +54,35 @@ const Container = styled.div`
   }
 `;
 
-const DataOptions = styled.div`
+const TableHeader = styled.div`
 
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #FFF;
+
+
+    button {
+        padding: 15px 20px;
+        background: #ff7e7c;
+        border: none;
+        color: #FFF;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
 `;
 
 function pages() {
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [showModal, setShowModal] = useState(false);
+  const closeModal = () => setShowModal(false);
+
+
+
   return (
       <>  
         <Navbar />
@@ -76,11 +97,14 @@ function pages() {
               <DonutChart />
             </div>
           </div>
-          <DataOptions>
-            {/* <Button setShow={setShow} texto={"Nova transação"} />
-            <Button texto={"26/06/2021"} /> */}
-          </DataOptions>
+
+          <TableHeader>
+              <h2>Despesas</h2>
+              <span>Novembro 2021</span>
+              <button onClick={() => setShowModal(true)}>Cadastrar Despesa</button>
+          </TableHeader>
           <DataTable />
+          <Modal show={showModal} close={closeModal}/>
         </Container>
       </>
   );
