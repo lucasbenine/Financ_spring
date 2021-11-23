@@ -4,29 +4,28 @@ import { DespesaPage } from "../../types/despesa";
 import { formatLocalDate } from '../../utils/format';
 import styled from 'styled-components';
 import { MdModeEdit, MdDelete, MdClose } from "react-icons/md";
-api.defaults.headers.common = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzEwNzczOH0.h8xVihIZLPF1aq1SW3Jcyvc0S0llweYSmm540aYKDVxndr1D_7xW-i_TnZplsQAF0fM628TredMaYq36BiX8jA'};
+import token from '../../token';
+
+// const TableHeader = styled.div`
+
+//     width: 100%;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 20px;
+//     background-color: #FFF;
 
 
-const TableHeader = styled.div`
-
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #FFF;
-
-
-    button {
-        padding: 15px 20px;
-        background: #ff7e7c;
-        border: none;
-        color: #FFF;
-        border-radius: 10px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-`;
+//     button {
+//         padding: 15px 20px;
+//         background: #ff7e7c;
+//         border: none;
+//         color: #FFF;
+//         border-radius: 10px;
+//         font-weight: 600;
+//         cursor: pointer;
+//     }
+// `;
 
 
 const Table = styled.table`
@@ -151,7 +150,7 @@ const DataTable = () => {
 
     useEffect(() => {
 
-        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZXJuYW5kbyIsImV4cCI6MTYzNzQxNjE3Mn0.b0wQ6buxzyu35IM6du-wjp1VLQfIgBSpD2h1dalKi03I_R2i2ykUPPjIOuTB9ZmRy5tJsukagN7ApZZBDesasQ';
+        // const token2 = token;
 
         const config = {
             headers: {
@@ -177,16 +176,17 @@ const DataTable = () => {
 
     function handleTeste(item) {
         setShow(true);
+        console.log(item)
         setDespesaAtual(item);
     }
 
     return (
         <>
-            <TableHeader>
+            {/* <TableHeader>
                 <h2>Despesas</h2>
                 <span>Novembro 2021</span>
                 <button>Cadastrar Despesa</button>
-            </TableHeader>
+            </TableHeader> */}
             <Table>
                 <thead>
                     <tr>
