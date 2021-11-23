@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import api from "../../api";
-import { DespesaPage } from "../../types/despesa";
 import { formatLocalDate } from '../../utils/format';
 import styled from 'styled-components';
 import { MdModeEdit, MdDelete, MdClose } from "react-icons/md";

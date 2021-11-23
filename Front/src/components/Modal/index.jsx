@@ -182,12 +182,8 @@ function Modal({show, close}) {
                     <select defaultValue={'DEFAULT'} name="categoria" onChange={handleChangeCategoria} value={categoria} required="required">
                         <option selected="selected" value="default">Categoria</option>
                         {categorias?.map((item) => (
-                            <option value={item.id}>{item.nomeCategoria}</option>
+                            <option key={item.id} value={item.id}>{item.nomeCategoria}</option>
                         ))}
-                        
-                        {/* <option value="1">Educação</option>
-                        <option value="2">Energia</option>
-                        <option value="3">Outro</option> */}
                     </select>
                 </div>
 

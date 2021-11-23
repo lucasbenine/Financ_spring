@@ -62,6 +62,13 @@ public class DespesaService {
         return despesas;
     }
 
+    public List<Despesa> findDespesasByMonth(int month, int year) {
+        categoriaRepository.findAll();
+        Usuario usuario = getUsuarioLogado();
+        List<Despesa> despesas = repository.despesasByMonth(usuario.getUsuarioId(), month, year);
+        return despesas;
+    }
+
     @Transactional(readOnly = true)
     public List<CategoriaSoma> amountGroupedByCategoria() {
         Usuario usuario = getUsuarioLogado();

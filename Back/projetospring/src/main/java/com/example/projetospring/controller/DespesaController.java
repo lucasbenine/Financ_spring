@@ -2,12 +2,14 @@ package com.example.projetospring.controller;
 
 import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Despesa;
+import com.example.projetospring.repositories.DespesaRepository;
 import com.example.projetospring.services.DespesaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,9 @@ public class DespesaController {
     @Autowired
     private DespesaService service;
 
+    @Autowired
+    private DespesaRepository repository;
+
     @GetMapping
     public ResponseEntity<Page<Despesa>> findAll(Pageable pageable) {
         Page<Despesa> list = service.findAll(pageable);
@@ -31,10 +36,17 @@ public class DespesaController {
     }
 
     @GetMapping(value = "/user")
-    public ResponseEntity<List<Despesa>> findAllByUsuario() {
+    public ResponseEntity<List<Despesa>> findAll() {
         List<Despesa> list = service.findDespesaByUsuario();
         return ResponseEntity.ok().body(list);
     }
+
+    @GetMapping(value = "/month/{month}/{year}")
+    public ResponseEntity<List<Despesa>> findByMonth(@PathVariable int month, @PathVariable int year) {
+        List<Despesa> despesas = service.findDespesasByMonth(month, year);
+        return ResponseEntity.ok().body(despesas);
+    }
+
 
     @GetMapping(value = "/amount-by-categoria")
     public ResponseEntity<List<CategoriaSoma>> amountGroupedByCategoria() {
@@ -52,8 +64,6 @@ public class DespesaController {
     @ApiOperation(value="Cadastra uma despesa")
     @PostMapping
     public ResponseEntity<Despesa> insert(@RequestBody Despesa despesa) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        despesa.setDataa(sdf.parse("despesa.getDataa()"));
         despesa = service.insert(despesa);
         return ResponseEntity.ok().body(despesa);
     }
