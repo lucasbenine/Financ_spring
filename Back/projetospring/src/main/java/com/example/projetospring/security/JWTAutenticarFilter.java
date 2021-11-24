@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.model.UsuarioData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,6 +31,7 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
     public JWTAutenticarFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
@@ -62,8 +64,10 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
                 .withSubject(usuarioData.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACAO))
                 .sign(Algorithm.HMAC512(TOKEN_SENHA));
+        String str = "{\"token\":" + token + "}";
+        JSONObject jsonObject = new JSONObject(str);
         response.setHeader("acces_token", token);
-        response.getWriter().write(token);
+        response.getWriter().write("Token: " + jsonObject);
         response.getWriter().flush();
 
     }

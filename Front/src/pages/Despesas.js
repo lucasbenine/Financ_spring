@@ -101,7 +101,7 @@ function pages() {
           <TableHeader>
               <h2>Despesas</h2>
               <span>Novembro 2021</span>
-              <button onClick={() => setShowModal(true)}>Cadastrar Despesa</button>
+              <button testid="button-test" onClick={() => setShowModal(true)}>Cadastrar Despesa</button>
           </TableHeader>
           <DataTable />
           <Modal show={showModal} close={closeModal}/>

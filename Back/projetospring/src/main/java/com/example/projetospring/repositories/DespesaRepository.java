@@ -15,4 +15,7 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 
     @Query("SELECT d FROM Despesa d WHERE d.usuario.usuarioId = :id ")
     List<Despesa> despesasbyUsuario(Long id);
+
+    @Query("SELECT d from Despesa d WHERE d.usuario.usuarioId = :id AND EXTRACT (month FROM d.data) = :month AND EXTRACT (year FROM d.data) = :year ")
+    List<Despesa> despesasByMonth(Long id, int month, int year);
 }

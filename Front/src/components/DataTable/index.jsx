@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import api from "../../api";
-import { DespesaPage } from "../../types/despesa";
 import { formatLocalDate } from '../../utils/format';
 import styled from 'styled-components';
 import { MdModeEdit, MdDelete, MdClose } from "react-icons/md";
 import token from '../../token';
+import axios from 'axios';
 
 // const TableHeader = styled.div`
 
@@ -123,18 +123,48 @@ const ModalDetails = styled.div`
 
         
     }
-    div#wrapper {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        overflow: hidden;
-        opacity: .5;
-        z-index: 98;
-        top: 0;
-        left: 0;
-        background: rgba(0,0,0,.4);
+    
+
+`;
+
+const ModalConfirm = styled.div`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    
+
+    div#modalConfirm {
+        position: relative;
+        height: fit-content;
+        margin-top: 120px;
+        background: #FFF;
+        padding: 50px 80px;
+        line-height: 1.5;
+        z-index: 100;
+
+        #fechar {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            font-size: 35px;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
     }
 
+    button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        background: #ff7e7c;
+        color: #FFF;
+        font-weight: bolder;
+        cursor: pointer;
+    }
 `;
 
 const DataTable = () => {
@@ -147,16 +177,17 @@ const DataTable = () => {
     //     totalPages: 0
     // });
     const [despesa, setDespesa] = useState([]);
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    };
 
     useEffect(() => {
 
         // const token2 = token;
 
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        };
+        
 
         async function buscarDespesas() {
             const response = await api.get('despesas/user', config);
@@ -176,9 +207,19 @@ const DataTable = () => {
 
     function handleTeste(item) {
         setShow(true);
-        console.log(item)
         setDespesaAtual(item);
     }
+
+    const [showModalConfirm, setShowModalConfirm] = useState(false);
+    const closeModalConfirm = () => setShowModalConfirm(false);
+
+    function apagarDespesa() {
+        console.log(despesaAtual.id);
+        console.log(despesaAtual.nome);
+        axios.delete(`http://localhost:8080/despesas/${despesaAtual.id}`, config)
+        
+    }
+
 
     return (
         <>
@@ -187,7 +228,7 @@ const DataTable = () => {
                 <span>Novembro 2021</span>
                 <button>Cadastrar Despesa</button>
             </TableHeader> */}
-            <Table>
+            <Table data-testid="table-test">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -214,7 +255,7 @@ const DataTable = () => {
                 </tbody>
             </Table>
 
-            <ModalDetails style={{
+            <ModalDetails data-testid="modalDetails" style={{
                 display: show ? 'flex' : 'none'
             }}>
                 <a onClick={close}><MdClose /></a>
@@ -240,12 +281,25 @@ const DataTable = () => {
                         </div>
                         <div>
                             <button><MdModeEdit /> Editar</button>
-                            <button id="excluir"><MdDelete /> Excluir</button>
+                            <button onClick={() => setShowModalConfirm(true)} id="excluir" ><MdDelete /> Excluir</button>
                         </div>
                     </div>
                 </div> 
-                <div id="wrapper"></div>
+                <div className="wrapper"></div>
             </ModalDetails>
+
+            <ModalConfirm style={{
+                display: showModalConfirm ? 'flex' : 'none'
+            }}>
+                <div id="modalConfirm">
+                    <div id="fechar" onClick={closeModalConfirm}>+</div>
+
+                    <p>Você tem certeza que deseja apagar a <br /> despesa "{despesaAtual.nome}"</p>
+                    <button onClick={() => apagarDespesa()}>Sim</button>
+                    <button style={{background:'#aaa', marginTop:'10px'}} onClick={closeModalConfirm}>Não</button>
+                </div>
+                <div className="wrapper" />
+            </ModalConfirm>
         </>
     );
 }

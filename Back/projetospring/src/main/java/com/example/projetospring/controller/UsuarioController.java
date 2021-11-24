@@ -33,7 +33,7 @@ public class UsuarioController {
         return uServ.findUsuarios();
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> cadastroUsuario(@RequestBody Usuario usuario){
         usuario.setPassword(encoder.encode(usuario.getPassword()));
         usuario = uServ.cadastrarUsuario(usuario);
