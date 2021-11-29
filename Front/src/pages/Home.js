@@ -75,33 +75,6 @@ function Home() {
   return (
     <>
       <Navbar />
-      <HomeBody>
-        <ImgDiv>
-        <img className="img-home" src={img1} alt="student1" style={{marginTop: '10%'}}/>
-        <div className="text-1">
-          <h2 className="title">Controle financeiro eficiente</h2>
-          <p className="description">Acreditamos que um controle financeiro pode ser <strong>eficiente</strong> e ao mesmo tempo <strong>simples</strong>. Aqui no FinanC você poderá verificar isso na prática, enquanto equilibra suas contas e melhora substancialmente sua saúde financeira.</p>
-        </div>
-        </ImgDiv>
-        <ImgDiv>
-        <div className="text-1">
-          <h2 className="title">Trace metas</h2>
-          <p className="description">Vamos mais longe quando temos disciplina. Ao controlar suas finanças, você terá a oportunidade de traçar metas mais arrojadas, sejam elas de curto, médio ou longo prazo.</p>
-        </div>
-        <img className="img-home" src={img2} alt="student2" />
-        </ImgDiv>
-        <ImgDiv>
-        <img className="img-home" src={img3} alt="student3" style={{marginTop: '10%'}}/>
-        <div className="text-1">
-          <h2 className="title">Impulsione seus sonhos</h2>
-          <p className="description">Qual o seu sonho? Uma viagem, um imóvel, abrir seu próprio negócio? Tendo metas estabelecidas, você fica mais perto de realizar seus sonhos.</p>
-          <Link to="/cadastro">
-            <button className="button-to-cadastro">Cadastre-se</button>
-          </Link>
-        </div>
-        </ImgDiv>
-      </HomeBody>
-      <Footer />
     </>
   );
 }
