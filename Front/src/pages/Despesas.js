@@ -7,6 +7,8 @@ import DonutChart from '../components/DonutChart';
 import Navbar from '../components/Navbar';
 import Modal from '../components/Modal';
 
+import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
+
 const Container = styled.div`
 
   width: min(85%, 1400px);
@@ -63,6 +65,10 @@ const TableHeader = styled.div`
     padding: 20px;
     background-color: #FFF;
 
+    span {
+      margin: 0 20px;
+    }
+
 
     button {
         padding: 15px 20px;
@@ -81,7 +87,38 @@ function pages() {
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);
 
+  var data = new Date();
+  var mesAtual = data.getMonth();
+  var anoAtual = data.getFullYear();
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [mes, setMes] = useState(mesAtual);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [ano, setAno] = useState(anoAtual);
+
+  var meses = new Array(
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  );
+
+  function DiminuiMes() {
+    if(mes === 0) {
+      setMes(11)
+      setAno(ano-1)
+    }
+    else {
+      setMes(mes-1)
+    }
+  }
+
+  function AumentaMes() {
+    if(mes === 11) {
+      setMes(0)
+      setAno(ano+1)
+    }
+    else {
+      setMes(mes+1)
+    }
+  }
 
   return (
       <>  
@@ -100,11 +137,17 @@ function pages() {
 
           <TableHeader>
               <h2>Despesas</h2>
-              <span>Novembro 2021</span>
+              <div>
+                <button onClick={() => DiminuiMes()} ><BsFillCaretLeftFill /></button>
+                <span>{meses[mes]} - {ano}</span>
+                <button onClick={() => AumentaMes()}><BsFillCaretRightFill /></button>
+              </div>
+              
               <button testid="button-test" onClick={() => setShowModal(true)}>Cadastrar Despesa</button>
           </TableHeader>
-          <DataTable />
+          <DataTable mes={mes} ano={ano} />
           <Modal show={showModal} close={closeModal}/>
+          <p>Hoje é dia {meses[mes]}</p>
         </Container>
       </>
   );

@@ -29,7 +29,7 @@ import ModalEdit from '../ModalEdit';
 // `;
 
 
-const DataTable = () => {
+const DataTable = ({mes, ano}) => {
 
     // const [page, setPage] = useState<DespesaPage>({
     //     first: true,
@@ -38,6 +38,7 @@ const DataTable = () => {
     //     totalElements: 0,
     //     totalPages: 0
     // });
+    console.log('Mes e ano atual' + mes)
     const [despesa, setDespesa] = useState([]);
     const config = {
         headers: {
@@ -45,22 +46,33 @@ const DataTable = () => {
         }
     };
 
-    useEffect(() => {
+    const [mesA, setMesA] = useState(12)
 
-        // const token2 = token;
-
-        
-
+    if(mes !== mesA) {
         async function buscarDespesas() {
-            const response = await api.get('despesas/user', config);
+            const response = await api.get(`despesas/month/${mes+1}/${ano}`, config);
             console.log(response);
             setDespesa(response.data);
+            setMesA(mes)
         
         }
 
         buscarDespesas();
+    }
 
-    }, [])
+    // useEffect(() => {
+
+    //     async function buscarDespesas() {
+    //         const response = await api.get(`despesas/month/${mes+1}/${ano}`, config);
+    //         console.log(response);
+    //         setDespesa(response.data);
+        
+    //     }
+
+    //     buscarDespesas();
+
+    // }, [])
+
 
     const [show, setShow] = useState(false);
     const close = () => setShow(false);
