@@ -83,6 +83,10 @@ const NavContent = styled.div `
             width: 22%;
         }
 
+        .buttons {
+            display: none;
+        }
+
         .close-button{
             display: block;
         }
@@ -92,17 +96,85 @@ const NavContent = styled.div `
             padding: 2%;
         }
 
-        .buttons{
-            display: ${({open}) => open ? 'block' : 'none'};
+        a{
             width: 40%;
-            flex-flow: column nowrap;
-            position: absolute;
-            background-color: #FFFFFF;
-            align-items: start;
-            height: 100%;
-            justify-content: unset;
-            top: .1%;
-            left: 60%;
+            margin-top: 5%;
+        }
+
+        .buttons-button {
+            padding: 2%;
+            margin: 10px;
+        }
+
+        @media(max-width: 426px) {
+            .logo-financ {
+                height: auto;
+                width: 35%;
+            }
+    }
+`;
+
+const MobileNav = styled.div `
+    
+    width: 40%;
+    flex-flow: column nowrap;
+    position: absolute;
+    display: flex;
+    background-color: #FFFFFF;
+    align-items: start;
+    height: 100%;
+    justify-content: unset;
+    top: .1%;
+    left: 60%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    body {
+        opacity: .5 !important;
+    }
+
+    a {
+        width: 20%;
+        height: auto;
+    }
+
+    .buttons-button {
+        width: 100%;
+        height: 100%;
+        padding: 10%;
+        cursor: pointer;
+        color: black;
+        background-color: #00DC88;
+        border: 1.5px solid transparent;
+        outline: none;
+        border-radius: 5px;
+        font-size: 100%;
+        font-weight: 400;
+        transition: .3s;
+    }
+
+    .buttons-button:hover {
+        background-color: #FFFFFF;
+        color: #00346F;
+        border: 1.5px solid #00346F;
+    }
+
+    .burger-menu-button {
+        display: none;
+        border: none;
+        outline: none;
+        background-color: #FFFFFF;
+    }
+
+    @media(max-width: 800px) {
+        .close-button{
+            display: block;
+            margin-top: 10%;
+            margin-left: 10px;
+        }
+
+        .burger-menu-button{
+            display: block;
+            padding: 2%;
         }
 
         a{
@@ -115,19 +187,35 @@ const NavContent = styled.div `
             margin: 10px;
         }
     }
+
+    @media(max-width: 426px) {
+        width: 60%;
+        left: 40%;
+
+        a{
+            width: 70%;
+        }
+
+        .buttons-button {
+            width: 100%;
+        }
+    }
+    }
+}
+
 `;
 
 function Navbar() {
 
     const [open, setOpen] = useState(false);
-    console.log(open);
 
     return(
         <NavBody>
             <NavContent>
                 <img className="logo-financ" src={Logo} alt="Logo FinanC" />
-                <div className="buttons">
-                    <MdClose size={25} className="close-button" open={open} onClick={() => setOpen(open)}/>
+                { open == false ? 
+                
+                <div id="buttons" className="buttons">
                     <Link to="/contato">
                         <button className="buttons-button">Contato</button>
                     </Link>
@@ -138,7 +226,24 @@ function Navbar() {
                         <button className="buttons-button">Login</button>
                     </Link>
                 </div>
-                <button className="burger-menu-button" open={open} onClick={() => setOpen(!open)}>
+                
+                    :
+
+                <MobileNav>
+                    <MdClose size={35} className="close-button" onClick={() => setOpen(!open)}/>
+                    <Link to="/contato">
+                        <button className="buttons-button">Contato</button>
+                    </Link>
+                    <Link>
+                        <button className="buttons-button">Sobre Nós</button>
+                    </Link>
+                    <Link to="/login">
+                        <button className="buttons-button">Login</button>
+                    </Link>
+                </MobileNav>
+                }
+
+                <button className="burger-menu-button" onClick={() => setOpen(!open)}>
                     <GiHamburgerMenu size={25}/>
                 </button>
             </NavContent>
