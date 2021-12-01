@@ -50,7 +50,7 @@ const DonutChart = () => {
 
     return (
 
-        <Chart 
+        <Chart style={{zIndex:1}}
         options={{ ...options, labels: chartData.labels}}
         series={chartData.series}
         type="donut"

@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState, useEffect } from 'react';
+import api from '../api';
+import token from '../token';
 
 
 import styled from 'styled-components';
@@ -11,7 +14,7 @@ import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
 
 const Container = styled.div`
 
-  width: min(85%, 1400px);
+  width: min(80%, 1400px);
   height: 92vh;
   background: #f0f0f7;
   margin: 0 auto;
@@ -64,10 +67,21 @@ const TableHeader = styled.div`
     align-items: center;
     padding: 20px;
     background-color: #FFF;
+    margin-top: 50px;
+    border: 1px solid #ff7e7c;
+    border-bottom: none;
 
-    span {
-      margin: 0 20px;
+    div {
+
+      button {
+        padding: 10px;
+      }
+
+      span {
+        margin: 0 20px;
+      }
     }
+    
 
 
     button {
@@ -83,9 +97,29 @@ const TableHeader = styled.div`
 
 function pages() {
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);
+
+  const [soma, setSoma] = useState(0);
+
+  const config = {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+  };
+
+  useEffect(() => {
+
+      async function buscarSomaDespesas() {
+          const response = await api.get('despesas/soma', config);
+          console.log(response);
+          setSoma(response.data);
+      
+      }
+
+      buscarSomaDespesas();
+
+  }, [])
 
   var data = new Date();
   var mesAtual = data.getMonth();
@@ -124,15 +158,16 @@ function pages() {
       <>  
         <Navbar />
         <Container>
+
           <div className="content">
-            <div className="media">
-              <h1>Média mensal<br/>
-                  R$ 1250,00
-              </h1>
-            </div>
-            <div className="grafico">
-              <DonutChart />
-            </div>
+              <div className="media">
+                <h1>Total de despesas<br/>
+                    R$ {soma}
+                </h1>
+              </div>
+              <div className="grafico">
+                <DonutChart />
+              </div>
           </div>
 
           <TableHeader>
@@ -146,8 +181,8 @@ function pages() {
               <button testid="button-test" onClick={() => setShowModal(true)}>Cadastrar Despesa</button>
           </TableHeader>
           <DataTable mes={mes} ano={ano} />
+
           <Modal show={showModal} close={closeModal}/>
-          <p>Hoje é dia {meses[mes]}</p>
         </Container>
       </>
   );

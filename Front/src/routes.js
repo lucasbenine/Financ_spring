@@ -5,6 +5,7 @@ import Despesas from './pages/Despesas';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Contato from './pages/Contato';
+import Inicio from './pages/Inicio';
 
 import { Switch, Route } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ function Routes() {
             <Route path="/login" component={Login} />
             <Route path="/cadastro" component={Cadastro} />
             <Route path="/contato" component={Contato} />
+            <Route path="/inicio" component={Inicio} />
         </Switch>
     );
 }
