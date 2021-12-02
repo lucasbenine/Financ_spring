@@ -67,7 +67,7 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
         String str = "{\"token\":" + token + "}";
         JSONObject jsonObject = new JSONObject(str);
         response.setHeader("acces_token", token);
-        response.getWriter().write("Token: " + jsonObject);
+        response.getWriter().write(token);
         response.getWriter().flush();
 
     }

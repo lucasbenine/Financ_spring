@@ -89,8 +89,9 @@ public class DespesaService {
         }
         Usuario usuarioLogado = getUsuarioLogado();
         despesa.setUsuario(usuarioLogado);
+        Despesa despesaa = repository.save(despesa);
 
-        return repository.save(despesa);
+        return despesaa;
     }
 
     public void delete(Long id) {

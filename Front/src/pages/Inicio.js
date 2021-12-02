@@ -1,7 +1,11 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../components/Modal';
+import DonutChart from '../components/DonutChart';
+import { FiFileMinus, FiFilePlus } from 'react-icons/fi';
+import { IconContext } from 'react-icons';
 
 const Container = styled.div`
     width: min(85vw, 1400px);
@@ -11,11 +15,11 @@ const Container = styled.div`
     padding: 40px 0;
 
     .border-green {
-        border: 1px solid #00DC88;
+        border: 2px solid #00DC88;
     }
 
     .border-red {
-        border: 1px solid #FE6161;
+        border: 2px solid #FE6161;
     }
 `;
 
@@ -47,7 +51,10 @@ const Top = styled.div`
 
         button {
             width: 100%;
-            padding: 20px 0;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 20px;
             font-weight: 600;
             background: transparent;
@@ -80,6 +87,10 @@ const Contas = styled.div`
     }
 `;
 
+const DonutContainer = styled.div`
+    width: 100%;
+`;
+
 function inicio() {
 
     const [showModal, setShowModal] = useState(false);
@@ -94,8 +105,10 @@ function inicio() {
                 <h1>R$ 2515,00</h1>
             </div>
             <div id="buttons">
-                <button style={{border:'1px solid #00CD88'}}>Adicionar entrada</button>
-                <button style={{border:'1px solid #FE6161'}} onClick={() => setShowModal(true)} >Adicionar despesa</button>
+            <IconContext.Provider value={{size:'1.5em'}}>
+                <button style={{border:'1px solid #00CD88'}}><FiFilePlus style={{marginRight:'10px', color:'#00CD88'}}/> Adicionar entrada</button>
+                <button style={{border:'1px solid #FE6161'}} onClick={() => setShowModal(true)} ><FiFileMinus style={{marginRight:'10px', color:'#FE6161'}}/> Adicionar despesa</button>
+            </IconContext.Provider>
             </div>
           </Top>
           <Contas>
@@ -134,6 +147,9 @@ function inicio() {
                 </tr>
               </div>
           </Contas>
+          <DonutContainer className="border-green">
+            <DonutChart />
+          </DonutContainer>
           <Modal show={showModal} close={closeModal} />
       </Container>
   );
