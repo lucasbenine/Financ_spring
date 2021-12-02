@@ -1,186 +1,192 @@
 import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import {Link} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import axios from 'axios';
+import Carousel1 from '../img/carousel1.png';
+import { useState } from 'react';
 
-const LoginBody = styled.div `
+const LoginWrapper = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
-    flex-flow: column wrap;
     align-items: center;
-    justify-content: space-aroud;
+    justify-content: center;
+`
 
-    .img-login{
-        width: 15%;
-        height: 15%;
-        padding: 2%;
-        margin: 3%;
-    }
+const LoginContainer = styled.div `
+    width: 70%;
+    height: 80%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-    img {
-        width: 100%;
+    .form-wrapper {
+        width: 45%;
         height: 100%;
-    }
-`;
-
-const Caixa = styled.div `
-    width: 55%;
-    height: 55%;
-    border-radius: 15px;
-    display: flex;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-`;
-
-const DivVerde = styled.div `
-    width: 45%;
-    height: 100%;
-    background: #8DB892;
-    border-radius: 0px 15px 15px 0px;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
-
-    h2 {
-        color: white;
-    }
-
-    p {
-        margin-top: 1.2em;
-        color: white;
-        font-size: 1.1em;
-    }
-
-    button {
-        width: 100%;
-        height: 100%;
-        color: #8DB892;
-        background: white;
-        border: 2px solid transparent;
-        font-size: 1.2em;
-        border-radius: 5px;
-        transition: .5s;
-
-        :hover {
-            background: #8DB892;
-            color: white;
-            border: 2px solid white;
-        }
-
-    }
-
-    a {
-        height: 10%;
-        width: 30%;
-        cursor: pointer;
-    }
-`;
-
-const DivBranca = styled.div `
-    width: 55%;
-    height: 100%;
-    background: white;
-    border-radius: 15px 0px 0px 15px; 
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around;
-    align-items: center;
-
-    h2 {
-        color: #04660E;
-    }
-
-    form {
-        width: 100%;
-        height: 20%;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: space-around;
         align-items: center;
+        justify-content: center;
 
-        label {
-            margin-left: 4px;
-        }
-
-        .input-login {
-            padding: 2%;
-            margin: 1em;
+        .logo-financ {
             width: 50%;
-            border: 1px solid transparent;
-            outline: none;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            height: auto;
+        }
 
-            :focus{
-                border: 2px solid #8DB892;
+        .login-form {
+            margin-top: 10%;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            justify-content: center;
+            width: 65%;
+
+            .form-input {
+                width: 100%;
+                padding: 1rem;
+                margin-top: 10%;
+                border-radius: 3px;
+                outline: none;
+                border: 2px solid transparent;
+                font-size: 1rem;
+                background-color: #e6e6e6;
+                color: black;
+                transition: .3s;
             }
+
+            .form-input:focus{
+                border: 2px solid #00DC88;
+            }
+
+            .checkbox {
+                margin-top: 7%;
+                width: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                input {
+                    margin-right: 2%;
+                }
+
+                span {
+                    margin-left: 2%;
+                }
+            }
+
+            .logar-button {
+                margin-top: 10%;
+                width: 70%;
+                padding: 1rem;
+                font-size: 1.4rem;
+                outline: none;
+                border: none;
+                background-color: #00DC88;
+                border-radius: 3px;
+                font-weight: bold;
+                transition: .5s;
+            }
+
+            .logar-button:hover {
+                background-color: #00346F;
+                color: white;
+            }
+
+        }
+
+        .link-cadastro {
+            font-size: 1.2rem;
+            margin-top: 10%;
+            text-align: center;
+        }
+
+    }
+
+    //CAROUSELL 
+
+    .green {
+        width: 55%;
+        background-color: #00DC88;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            min-width: 450px;
+            max-width: 34%;
+            height: auto;
+            position: absolute;
+            bottom: 10%;
         }
     }
 
-    button {
-        width: 100%;
-        height: 100%;
-        color: white;
-        background: #8DB892;
-        border: 2px solid transparent;
-        font-size: 1.2em;
-        border-radius: 5px;
-        transition: .5s;
+    @media(max-width: 1025px) {
+        width: 90%;
+    }
 
-        :hover {
-            background: white;
-            color: #8DB892;
-            border: 2px solid #8DB892;
+    @media (max-width: 767px) {
+        .green {
+            display: none;
         }
 
+        .form-wrapper {
+            width: 100%;
+        }
     }
 
-    a {
-        height: 10%;
-        width: 30%;
-        cursor: pointer;
+    @media(max-width: 451px) {
+        
+        .logo-financ {
+            width: 70%;
+        }
     }
+
 `;
 
 function Login () {
+
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const history = useHistory();
+
+    function handleSubmit(e) {
+        const usuario = {
+            username: userName,
+            password: password
+        }
+        e.preventDefault()
+
+        console.log(usuario);
+
+        axios.post('http://localhost:8080/login', usuario)
+
+        .then(res => {
+            localStorage.setItem('token', res.usuario);
+            history.push('/inicio');
+        })
+    }
+
     return(
-        <>
-        <LoginBody>
-            <div className="img-login">
-                <Link to ="/">
-                    <img src={Logo} alt="Logo Financ" />
-                </Link>
-            </div>
-            <Caixa>
-                <DivBranca>
-                    <h2>Login</h2>
-                    <form>
-                        <input className="input-login" type="text" placeholder="RA ou Email" />
-                        <input className="input-login" type="password" placeholder="Senha" />
-                        <div style={{marginTop: '1em'}}>
-                            <input type="checkbox" id="showPassword" />
-                            <label for="showPassword">Mostrar senha</label> 
-                        </div>   
+        <LoginWrapper>
+            <LoginContainer>
+                <div className="form-wrapper">
+                    <img src={Logo} className="logo-financ" alt="Logo Financ" />
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <input className="form-input" required="required" type="text" placeholder="Nome de usuario" value={userName} onChange={(e) => setUserName(e.target.value)} name="email"/>
+                        <input className="form-input" required="required" type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} name="senha"/>
+                        <div className="checkbox">
+                            <input type="checkbox" />
+                            <span>Mostrar senha?</span>
+                        </div>
+                        <button className="logar-button" type="submit">Entrar</button>
+                        <p className="link-cadastro">Não fez seu cadastro ainda? <Link to="/cadastro"> Cadastre-se!</Link></p>
                     </form>
-                    <Link to="/">
-                        <button>Logar</button>
-                    </Link>     
-                </DivBranca>
-
-
-                <DivVerde>
-                    <div style={{width: '80%'}}>
-                        <h2>Não possui conta? Cadastre-se!</h2>
-                        <p>Insira seus dados e começe a controlar suas finanças!</p>
-                    </div>
-                    <Link to="/cadastro">
-                        <button>Cadastre-se!</button>
-                    </Link>
-                </DivVerde>    
-            </Caixa>
-        </LoginBody>
-        </>
+                </div>
+                <div className="green">
+                    <img src={Carousel1} alt="Moça com um pote de dinheiro" />
+                </div>
+            </LoginContainer>
+        </LoginWrapper>
     )
 }
 

@@ -1,0 +1,12 @@
+create table categoria (id  bigserial not null, nome_categoria varchar(255), primary key (id));
+create table contasapagar (id  bigserial not null, categoria varchar(255), nome_conta varchar(255), valor_conta float8, primary key (id));
+create table contasareceber (id  bigserial not null, categoria varchar(255), nome_conta varchar(255), valor_conta float8, primary key (id));
+create table despesa (id  bigserial not null, data timestamp, descricao varchar(255), nome varchar(255), preco float8, categoria_id int8, usuario_id int8, primary key (id));
+create table investimentos (id_investimento  bigserial not null, limite_prejuizo float8 not null, meta_retorno float8 not null, realizado float8 not null, tipo_investimento varchar(255), valor_inicial_aplicado float8 not null, primary key (id_investimento));
+create table planejamento (id_planejamento  bigserial not null, data_planejamento timestamp, objetivo_planejamento varchar(255), valor_planejamento float8 not null, primary key (id_planejamento));
+create table receitas (id  bigserial not null, descricao varchar(255), nome varchar(255), valor float8, usuario_id int8, primary key (id));
+create table usuario (usuario_id  bigserial not null, email varchar(255), nome varchar(255), password varchar(255), username varchar(255), primary key (usuario_id));
+alter table if exists usuario add constraint UK_863n1y3x0jalatoir4325ehal unique (username);
+alter table if exists despesa add constraint FKhhqg5jva3eym0n1hp2gedxsq1 foreign key (categoria_id) references categoria;
+alter table if exists despesa add constraint FKpd22ej1eellqho1wi3gt6noha foreign key (usuario_id) references usuario;
+alter table if exists receitas add constraint FKgkqw47fda88pj5uqpxc9b5kok foreign key (usuario_id) references usuario;
