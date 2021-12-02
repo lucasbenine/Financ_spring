@@ -35,6 +35,12 @@ public class DespesaController {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping(value = "/soma")
+    public ResponseEntity<Double> soma() {
+        Double soma = repository.soma();
+        return ResponseEntity.ok().body(soma);
+    }
+
     @GetMapping(value = "/user")
     public ResponseEntity<List<Despesa>> findAll() {
         List<Despesa> list = service.findDespesaByUsuario();

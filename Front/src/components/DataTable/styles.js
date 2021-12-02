@@ -6,6 +6,8 @@ export const Table = styled.table`
     border-spacing: 0 1px;
     text-align: left;
     margin-bottom: 30px;
+    border: 1px solid #ff7e7c;
+    border-top: none;
 
     th, td {
         padding: 30px 25px;
@@ -28,6 +30,7 @@ export const ModalDetails = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
+    overflow: hidden;
 
     a {
         position: absolute;
@@ -50,6 +53,7 @@ export const ModalDetails = styled.div`
         display: flex;
         justify-content: center;
         padding: 60px 0;
+        overflow: hidden;
 
 
         div#container{
