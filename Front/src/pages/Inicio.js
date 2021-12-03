@@ -60,6 +60,16 @@ const Top = styled.div`
             background: transparent;
             border: none;
             cursor: pointer;
+
+            &:first-child:hover {
+                opacity: 0.8;
+                background-color: rgba(0, 220, 136, .1);
+            }
+
+            :last-child:hover {
+                opacity: 0.8;
+                background-color: #FE6161;
+            }
         }
     }
 `;

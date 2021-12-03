@@ -1,19 +1,13 @@
 import Chart from 'react-apexcharts';
 import React, { useEffect, useState } from 'react';
 import api from '../../api';
-import { DespesaSoma } from '../../types/despesa';
 import token from '../../token';
 
-type ChartData = {
-    labels: string[];
-    series: number[];
-}
+
+const DonutChart = ({rota}) => {
 
 
-const DonutChart = () => {
-
-
-    const [chartData, setChartData] = useState<ChartData>({ labels: [], series: []});
+    const [chartData, setChartData] = useState({ labels: [], series: []});
 
     useEffect( () => {
 
@@ -27,12 +21,12 @@ const DonutChart = () => {
                 }
             };
             
-            await api.get('despesas/amount-by-categoria', config)
-                .then((response: { data: DespesaSoma[]; }) => {
-                const data = response.data as DespesaSoma[];
+            await api.get(rota + '/amount-by-categoria', config)
+                .then(response => {
+                const data = response.data
                 const myLabels = data.map(x => x.categoriaNome);
                 const mySeries = data.map(x => x.soma);
-
+                console.log(rota)
                 setChartData({ labels: myLabels, series: mySeries})
             });
         

@@ -1,9 +1,12 @@
 package com.example.projetospring.services;
 
+import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Receitas;
+import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repositories.ReceitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +17,15 @@ public class ReceitaService {
     @Autowired
     private ReceitaRepository rRep;
 
+
     public List<Receitas> listReceitas (){
         return rRep.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoriaSoma> amountGroupedByCategoria() {
+        List<CategoriaSoma> categoriaSoma = rRep.amountGroupedByCategoria();
+        return categoriaSoma;
     }
 
     public Receitas findReceitaById(Long id){
@@ -40,7 +50,7 @@ public class ReceitaService {
     public void updateData (Receitas entity, Receitas obj){
         entity.setNome(obj.getNome());
         entity.setDescricao(obj.getDescricao());
-        entity.setValor(obj.getValor());
+        entity.setPreco(obj.getPreco());
     }
 }
 

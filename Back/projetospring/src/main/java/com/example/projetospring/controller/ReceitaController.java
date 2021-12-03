@@ -1,6 +1,8 @@
 package com.example.projetospring.controller;
 
+import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Receitas;
+import com.example.projetospring.repositories.ReceitaRepository;
 import com.example.projetospring.services.ReceitaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/receitas")
 public class ReceitaController {
@@ -16,9 +19,24 @@ public class ReceitaController {
     @Autowired
     private ReceitaService rServ;
 
+    @Autowired
+    private ReceitaRepository repository;
+
     @GetMapping
     public List<Receitas> listaReceitas() {
         return rServ.listReceitas();
+    }
+
+    @GetMapping(value = "/amount-by-categoria")
+    public ResponseEntity<List<CategoriaSoma>> amountGroupedByCategoria() {
+        List<CategoriaSoma> list = rServ.amountGroupedByCategoria();
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/soma")
+    public ResponseEntity<Double> soma() {
+        Double soma = repository.soma();
+        return ResponseEntity.ok().body(soma);
     }
 
     @PostMapping

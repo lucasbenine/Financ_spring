@@ -2,6 +2,7 @@ import React from 'react';
 
 import Home from './pages/Home';
 import Despesas from './pages/Despesas';
+import Receitas from './pages/Receitas';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Contato from './pages/Contato';
@@ -15,6 +16,7 @@ function Routes() {
         <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/despesas" component={Despesas} />
+            <Route path="/receitas" component={Receitas} />
             <Route path="/login" component={Login} />
             <Route path="/cadastro" component={Cadastro} />
             <Route path="/contato" component={Contato} />
