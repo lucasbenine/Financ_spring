@@ -1,6 +1,7 @@
 package com.example.projetospring.controller;
 
 import com.example.projetospring.model.CategoriaSoma;
+import com.example.projetospring.model.Despesa;
 import com.example.projetospring.model.Receitas;
 import com.example.projetospring.repositories.ReceitaRepository;
 import com.example.projetospring.services.ReceitaService;
@@ -27,16 +28,22 @@ public class ReceitaController {
         return rServ.listReceitas();
     }
 
-    @GetMapping(value = "/amount-by-categoria")
-    public ResponseEntity<List<CategoriaSoma>> amountGroupedByCategoria() {
-        List<CategoriaSoma> list = rServ.amountGroupedByCategoria();
-        return ResponseEntity.ok(list);
-    }
-
     @GetMapping(value = "/soma")
     public ResponseEntity<Double> soma() {
         Double soma = repository.soma();
         return ResponseEntity.ok().body(soma);
+    }
+
+    @GetMapping(value = "/month/{month}/{year}")
+    public ResponseEntity<List<Receitas>> findByMonth(@PathVariable int month, @PathVariable int year) {
+        List<Receitas> receitas = rServ.findReceitasByMonth(month, year);
+        return ResponseEntity.ok().body(receitas);
+    }
+
+    @GetMapping(value = "/amount-by-categoria")
+    public ResponseEntity<List<CategoriaSoma>> amountGroupedByCategoria() {
+        List<CategoriaSoma> list = rServ.amountGroupedByCategoria();
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping
@@ -58,7 +65,6 @@ public class ReceitaController {
     }
 
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteReceita(@PathVariable Long id){
         rServ.deleteReceita(id);
         return ResponseEntity.noContent().build();

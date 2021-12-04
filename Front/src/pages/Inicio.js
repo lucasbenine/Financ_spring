@@ -68,7 +68,7 @@ const Top = styled.div`
 
             :last-child:hover {
                 opacity: 0.8;
-                background-color: #FE6161;
+                background-color: rgb(254, 97, 97);
             }
         }
     }
@@ -158,7 +158,7 @@ function inicio() {
               </div>
           </Contas>
           <DonutContainer className="border-green">
-            <DonutChart />
+            <DonutChart rota="despesas" />
           </DonutContainer>
           <Modal show={showModal} close={closeModal} />
       </Container>

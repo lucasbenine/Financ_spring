@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import api from "../../api";
 import { formatLocalDate } from '../../utils/format';
 import { MdModeEdit, MdDelete, MdClose } from "react-icons/md";
-import token from '../../token';
 import axios from 'axios';
 import * as C from './styles';
 import ModalEdit from '../ModalEdit';
@@ -40,6 +39,8 @@ const DataTable = ({mes, ano}) => {
     // });
     console.log('Mes e ano atual' + mes)
     const [despesa, setDespesa] = useState([]);
+
+    const token = localStorage.getItem('token')
     const config = {
         headers: {
             'Authorization': `Bearer ${token}`

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../../api';
-import token from "../../token";
 import { ca } from 'date-fns/locale';
 import * as C from './styles';
 
@@ -14,6 +13,7 @@ function Modal({show, close}) {
     const [descricao, setDescricao] = useState("");
     const [categorias, setCategorias] = useState([]);
 
+    const token = localStorage.getItem('token')
     const config = {
         headers: {
             'Authorization': `Bearer ${token}`

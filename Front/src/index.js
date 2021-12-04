@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import Routes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './styles/global';
+import axios from 'axios';
+
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 ReactDOM.render(
   <BrowserRouter>

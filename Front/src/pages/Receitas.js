@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import token from '../token';
 
 import * as C from '../styles/despesas-style'
 import Navbar from '../components/Navbar'
@@ -15,6 +14,7 @@ function receitas() {
 
     const [soma, setSoma] = useState();
 
+    const token = localStorage.getItem('token')
     const config = {
         headers: {
             'Authorization': `Bearer ${token}`

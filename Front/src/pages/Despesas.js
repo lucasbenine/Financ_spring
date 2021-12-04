@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import token from '../token';
 import * as C from '../styles/despesas-style'
 
 
@@ -20,6 +19,7 @@ function pages() {
 
   const [soma, setSoma] = useState(0);
 
+  const token = localStorage.getItem('token')
   const config = {
     headers: {
         'Authorization': `Bearer ${token}`

@@ -164,7 +164,7 @@ function Login () {
         axios.post('http://localhost:8080/login', usuario)
 
         .then(res => {
-            localStorage.setItem('token', res.usuario);
+            localStorage.setItem('token', res.data);
             history.push('/inicio');
         })
     }

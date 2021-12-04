@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../../api';
-import token from '../../token';
 import * as C from '../Modal/styles';
 import { id } from 'date-fns/locale';
 
 function ModalEdit({show, close, despesa}) {
 
+    const token = localStorage.getItem('token')
     const config = {
         headers: {
             'Authorization': `Bearer ${token}`
