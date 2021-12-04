@@ -144,6 +144,8 @@ const LoginContainer = styled.div `
 `;
 
 function Login () {
+    
+    const [senha, setSenha] = useState(false);   
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -157,6 +159,7 @@ function Login () {
         e.preventDefault()
 
         console.log(usuario);
+        console.log(senha);
 
         axios.post('http://localhost:8080/login', usuario)
 
@@ -173,9 +176,9 @@ function Login () {
                     <img src={Logo} className="logo-financ" alt="Logo Financ" />
                     <form className="login-form" onSubmit={handleSubmit}>
                         <input className="form-input" required="required" type="text" placeholder="Nome de usuario" value={userName} onChange={(e) => setUserName(e.target.value)} name="email"/>
-                        <input className="form-input" required="required" type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} name="senha"/>
+                        <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} name="senha"/>
                         <div className="checkbox">
-                            <input type="checkbox" />
+                            <input type="checkbox" onChange={() => setSenha(!senha)}/>
                             <span>Mostrar senha?</span>
                         </div>
                         <button className="logar-button" type="submit">Entrar</button>
