@@ -5,6 +5,9 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Carousel1 from '../img/carousel1.png';
 import { useState } from 'react';
+import { useContext } from 'react';
+
+import { Context } from '../Context/AuthContext';
 
 const LoginWrapper = styled.div`
     width: 100vw;
@@ -144,6 +147,9 @@ const LoginContainer = styled.div `
 `;
 
 function Login () {
+
+    const { authenticated, handleLogin } = useContext(Context);
+    console.log('Login: ' + authenticated)
     
     const [senha, setSenha] = useState(false);   
 
@@ -164,7 +170,7 @@ function Login () {
         axios.post('http://localhost:8080/login', usuario)
 
         .then(res => {
-            localStorage.setItem('token', res.usuario);
+            localStorage.setItem('token', res.data);
             history.push('/inicio');
         })
     }
@@ -174,14 +180,14 @@ function Login () {
             <LoginContainer>
                 <div className="form-wrapper">
                     <img src={Logo} className="logo-financ" alt="Logo Financ" />
-                    <form className="login-form" onSubmit={handleSubmit}>
+                    <form className="login-form" onSubmit={() => handleLogin(userName, password)}>
                         <input className="form-input" required="required" type="text" placeholder="Nome de usuario" value={userName} onChange={(e) => setUserName(e.target.value)} name="email"/>
                         <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} name="senha"/>
                         <div className="checkbox">
                             <input type="checkbox" onChange={() => setSenha(!senha)}/>
                             <span>Mostrar senha?</span>
                         </div>
-                        <button className="logar-button" type="submit">Entrar</button>
+                        <button type="submit" className="logar-button">Entrar</button>
                         <p className="link-cadastro">Não fez seu cadastro ainda? <Link to="/cadastro"> Cadastre-se!</Link></p>
                     </form>
                 </div>

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Categoria implements Serializable {
+public class CategoriaReceita implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,16 +19,12 @@ public class Categoria implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-    private List<Despesa> despesas = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     private List<Receitas> receitas = new ArrayList<>();
 
-    public Categoria() {
+    public CategoriaReceita() {
     }
 
-    public Categoria(Long id, String nomeCategoria) {
+    public CategoriaReceita(Long id, String nomeCategoria) {
         super();
         this.id = id;
         this.nomeCategoria = nomeCategoria;
@@ -51,10 +47,5 @@ public class Categoria implements Serializable {
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
     }
-
-    public List<Despesa> getDespesas() {
-        return despesas;
-    }
-
 
 }

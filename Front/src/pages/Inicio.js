@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Modal from '../components/Modal';
 import DonutChart from '../components/DonutChart';
 import { FiFileMinus, FiFilePlus } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
+
+import { Context } from '../Context/AuthContext';
 
 const Container = styled.div`
     width: min(85vw, 1400px);
@@ -60,6 +62,16 @@ const Top = styled.div`
             background: transparent;
             border: none;
             cursor: pointer;
+
+            &:first-child:hover {
+                opacity: 0.8;
+                background-color: rgba(0, 220, 136, .1);
+            }
+
+            :last-child:hover {
+                opacity: 0.8;
+                background-color: rgb(254, 97, 97);
+            }
         }
     }
 `;
@@ -96,6 +108,8 @@ function inicio() {
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => setShowModal(false);
 
+    const { handleLogout } = useContext(Context);
+
 
   return (
       <Container>
@@ -106,7 +120,7 @@ function inicio() {
             </div>
             <div id="buttons">
             <IconContext.Provider value={{size:'1.5em'}}>
-                <button style={{border:'1px solid #00CD88'}}><FiFilePlus style={{marginRight:'10px', color:'#00CD88'}}/> Adicionar entrada</button>
+                <button style={{border:'1px solid #00CD88'}} onClick={handleLogout} ><FiFilePlus style={{marginRight:'10px', color:'#00CD88'}}/> Adicionar entrada</button>
                 <button style={{border:'1px solid #FE6161'}} onClick={() => setShowModal(true)} ><FiFileMinus style={{marginRight:'10px', color:'#FE6161'}}/> Adicionar despesa</button>
             </IconContext.Provider>
             </div>
@@ -148,7 +162,7 @@ function inicio() {
               </div>
           </Contas>
           <DonutContainer className="border-green">
-            <DonutChart />
+            <DonutChart rota="despesas" />
           </DonutContainer>
           <Modal show={showModal} close={closeModal} />
       </Container>

@@ -17,6 +17,11 @@ public class CategoriaSoma implements Serializable {
         this.soma = soma;
     }
 
+    public CategoriaSoma(CategoriaReceita categoria, Double soma) {
+        this.categoriaNome = categoria.getNomeCategoria();
+        this.soma = soma;
+    }
+
     public String getCategoriaNome() {
         return categoriaNome;
     }
