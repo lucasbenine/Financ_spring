@@ -5,13 +5,17 @@ import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './styles/global';
 import axios from 'axios';
 
+import { AuthProvider } from './Context/AuthContext';
+
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Routes />
-    <GlobalStyle />
-  </BrowserRouter>,
+  <AuthProvider>
+    <BrowserRouter>
+      <Routes />
+      <GlobalStyle />
+    </BrowserRouter>
+  </AuthProvider>,
   document.getElementById('root')
 );
 
