@@ -1,0 +1,114 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.name_project{
+  width: 100%;
+  height: 100px;
+  background-color: #00DC88;
+  position: absolute;
+  padding-top: 0px;
+  margin-top: -20px;
+  margin-left: -8px;
+  border: 0px;
+  color: rgb(8, 8, 59);
+  font-size: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+  background: #E5E5E5; 
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+
+div{
+  display: inline-block;
+}
+
+
+.balanco_mensal{
+  position: relative;
+  margin-top: 10px;
+  width: 600px;
+  height: 300px;
+  color: #00DC88;
+  text-align: left;
+  background-color: #E5E5E5;
+  border-color: #00DC88;
+  border: 5px solid;
+}
+
+.balanco_mensal h1{
+  color: #000000;
+  font-size: 22px;
+}
+
+.balanco_mensal h2{
+  color: #000000;
+  font-size: 18px;
+}
+
+.relatorio_contas{
+  margin-top: 10px;
+  width: 400px;
+  height: 200px;
+  color: #000000;
+  text-align: right;
+}
+
+.relatorio_contas button{
+  display: block;
+  width: 350px;
+  height: 100px;
+  padding: 2px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  width: 100%;
+  border-radius: 15px;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.green{
+  background-color: #00DC88;
+}
+
+.red{
+  background-color: red;
+}
+
+.lancamentos{
+  width: 1006px;
+  height: 455px;
+  display: block;
+  position: relative;
+  bottom: 0;
+  background-color: #c8d6d1;
+  border-color: #00DC88;
+  color: #00DC88;
+  border: 5px solid;
+}
+
+.lancamentos h1{
+  color: #000000;
+}
+
+.lancamentos li {
+  color: #000000;
+  list-style-type: none;
+}
+
+.border_one{
+  width: 100%;
+  border-color: #00DC88;
+  border: 3px solid;
+}
+
+.two_divs{
+  display: flex;
+}
