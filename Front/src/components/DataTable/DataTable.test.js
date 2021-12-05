@@ -16,6 +16,5 @@ test("Não deve renderizar o modal", () => {
 
     const modal = screen.getByTestId('modalDetails');
 
-    console.log(modal);
-    // expect(modal).toBeInTheDocument();
+    expect(modal).toBeInTheDocument();
 })

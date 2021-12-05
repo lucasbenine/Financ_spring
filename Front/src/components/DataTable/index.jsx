@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import api from "../../api";
 import { formatLocalDate } from '../../utils/format';
-import styled from 'styled-components';
 import { MdModeEdit, MdDelete, MdClose } from "react-icons/md";
-import token from '../../token';
 import axios from 'axios';
+import * as C from './styles';
+import ModalEdit from '../ModalEdit';
 
 // const TableHeader = styled.div`
 
@@ -28,146 +28,7 @@ import axios from 'axios';
 // `;
 
 
-const Table = styled.table`
-
-    width: 100%;
-    border-spacing: 0 1px;
-    text-align: left;
-    margin-bottom: 30px;
-
-    th, td {
-        padding: 30px 25px;
-        background: #FFFFFF;
-    }
-    
-    tbody tr {
-        opacity: 0.7;
-
-        &:hover {
-            opacity: 1;
-        }
-    }
-
-`;
-
-const ModalDetails = styled.div`    
-
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-
-    a {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 100;
-        padding: 20px;
-        cursor: pointer;
-
-        &:hover {
-            color: #ff7e7c;
-        }
-    }
-
-    div#modalContainer {
-        
-        width: 100%;
-        z-index: 99;
-        background-color: #FFF;
-        display: flex;
-        justify-content: center;
-        padding: 60px 0;
-
-
-        div#container{
-            width: min(90%, 1000px);
-            display: flex;
-            justify-content: space-between;
-
-            h3 {
-                font-size: 25px;
-                margin-bottom: 10px;
-            }
-
-    
-            .details {
-                margin-bottom: 10px;
-    
-                span {
-                    color: #aaa;
-                }
-    
-                p {
-                    margin-top: 5px;
-                }
-            }
-    
-            button {
-                display: block;
-                padding: 10px;
-                border: none;
-                background: transparent;
-                cursor: pointer;
-    
-                &:hover {
-                    color: #8DB892;
-                }
-            }
-    
-            button#excluir:hover {
-                color: #ff7e7c;
-    
-            }
-        }
-
-        
-    }
-    
-
-`;
-
-const ModalConfirm = styled.div`
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    justify-content: center;
-    
-
-    div#modalConfirm {
-        position: relative;
-        height: fit-content;
-        margin-top: 120px;
-        background: #FFF;
-        padding: 50px 80px;
-        line-height: 1.5;
-        z-index: 100;
-
-        #fechar {
-            position: absolute;
-            top: 0;
-            right: 15px;
-            font-size: 35px;
-            transform: rotate(45deg);
-            cursor: pointer;
-        }
-    }
-
-    button {
-        width: 100%;
-        margin-top: 20px;
-        padding: 10px;
-        border: none;
-        background: #ff7e7c;
-        color: #FFF;
-        font-weight: bolder;
-        cursor: pointer;
-    }
-`;
-
-const DataTable = () => {
+const DataTable = ({mes, ano}) => {
 
     // const [page, setPage] = useState<DespesaPage>({
     //     first: true,
@@ -176,29 +37,43 @@ const DataTable = () => {
     //     totalElements: 0,
     //     totalPages: 0
     // });
+    console.log('Mes e ano atual' + mes)
     const [despesa, setDespesa] = useState([]);
+
+    const token = localStorage.getItem('token')
     const config = {
         headers: {
             'Authorization': `Bearer ${token}`
         }
     };
 
-    useEffect(() => {
+    const [mesA, setMesA] = useState(12)
 
-        // const token2 = token;
-
-        
-
+    if(mes !== mesA) {
         async function buscarDespesas() {
-            const response = await api.get('despesas/user', config);
+            const response = await api.get(`despesas/month/${mes+1}/${ano}`, config);
             console.log(response);
             setDespesa(response.data);
+            setMesA(mes)
         
         }
 
         buscarDespesas();
+    }
 
-    }, [])
+    // useEffect(() => {
+
+    //     async function buscarDespesas() {
+    //         const response = await api.get(`despesas/month/${mes+1}/${ano}`, config);
+    //         console.log(response);
+    //         setDespesa(response.data);
+        
+    //     }
+
+    //     buscarDespesas();
+
+    // }, [])
+
 
     const [show, setShow] = useState(false);
     const close = () => setShow(false);
@@ -214,11 +89,13 @@ const DataTable = () => {
     const closeModalConfirm = () => setShowModalConfirm(false);
 
     function apagarDespesa() {
-        console.log(despesaAtual.id);
-        console.log(despesaAtual.nome);
         axios.delete(`http://localhost:8080/despesas/${despesaAtual.id}`, config)
+            .then(window.location.reload())
         
     }
+
+    const [showModalEdit, setShowModalEdit] = useState(false)
+    const closeModalEdit = () => setShowModalEdit(false)
 
 
     return (
@@ -228,7 +105,7 @@ const DataTable = () => {
                 <span>Novembro 2021</span>
                 <button>Cadastrar Despesa</button>
             </TableHeader> */}
-            <Table data-testid="table-test">
+            <C.Table data-testid="table-test">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -253,9 +130,9 @@ const DataTable = () => {
                         </tr>
                     ))}
                 </tbody>
-            </Table>
+            </C.Table>
 
-            <ModalDetails data-testid="modalDetails" style={{
+            <C.ModalDetails data-testid="modalDetails" style={{
                 display: show ? 'flex' : 'none'
             }}>
                 <a onClick={close}><MdClose /></a>
@@ -280,15 +157,15 @@ const DataTable = () => {
                             </div>
                         </div>
                         <div>
-                            <button><MdModeEdit /> Editar</button>
+                            <button onClick={() => setShowModalEdit(true)} ><MdModeEdit /> Editar</button>
                             <button onClick={() => setShowModalConfirm(true)} id="excluir" ><MdDelete /> Excluir</button>
                         </div>
                     </div>
                 </div> 
                 <div className="wrapper"></div>
-            </ModalDetails>
+            </C.ModalDetails>
 
-            <ModalConfirm style={{
+            <C.ModalConfirm style={{
                 display: showModalConfirm ? 'flex' : 'none'
             }}>
                 <div id="modalConfirm">
@@ -299,7 +176,8 @@ const DataTable = () => {
                     <button style={{background:'#aaa', marginTop:'10px'}} onClick={closeModalConfirm}>Não</button>
                 </div>
                 <div className="wrapper" />
-            </ModalConfirm>
+            </C.ModalConfirm>
+            <ModalEdit show={showModalEdit} close={closeModalEdit} despesa={despesaAtual} />
         </>
     );
 }

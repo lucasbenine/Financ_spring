@@ -41,12 +41,17 @@ public class DespesaController {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping(value = "/soma")
+    public ResponseEntity<Double> soma() {
+        Double soma = repository.soma();
+        return ResponseEntity.ok().body(soma);
+    }
+
     @GetMapping(value = "/month/{month}/{year}")
     public ResponseEntity<List<Despesa>> findByMonth(@PathVariable int month, @PathVariable int year) {
         List<Despesa> despesas = service.findDespesasByMonth(month, year);
         return ResponseEntity.ok().body(despesas);
     }
-
 
     @GetMapping(value = "/amount-by-categoria")
     public ResponseEntity<List<CategoriaSoma>> amountGroupedByCategoria() {

@@ -21,6 +21,10 @@ public class Categoria implements Serializable {
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     private List<Despesa> despesas = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private List<Receitas> receitas = new ArrayList<>();
+
     public Categoria() {
     }
 
