@@ -3,9 +3,6 @@ import Logo from '../img/logo.png';
 import {Link} from 'react-router-dom';
 import { useState } from 'react';
 import Carousel1 from '../img/carousel3.png';
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import api from '../api';
 
 const CadastroWrapper = styled.div`
@@ -138,18 +135,7 @@ const CadastroContainer = styled.div `
 
 `;
 
-const validationPost = yup.object().shape({
-    name: yup.string().required("O nome é obrigatório"),
-    username: yup.string().required("O nome de usuário é obrigatório"),
-    password: yup.string().required("a senha é obrigatória"),
-    email: yup.string().required("o email é obrigatório")
-})
-
 function Cadastro () {
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(validationPost)
-    })
 
     const [senha, setSenha] = useState(false);
 
@@ -165,15 +151,11 @@ function Cadastro () {
             <CadastroContainer>
                 <div className="form-wrapper">
                     <img src={Logo} className="logo-financ" alt="Logo Financ" />
-                    <form className="cadastro-form" onSubmit={handleSubmit(criaContato)}>
-                        <input className="form-input" required="required" type="text" placeholder="Nome Completo" name="name" {...register("name")}/>
-                        <p className="error-message">{errors.name?.message}</p>
-                        <input className="form-input" required="required" type="text" placeholder="Nome de Usuario" name="username" {...register("username")}/>
-                        <p className="error-message">{errors.username?.message}</p>
-                        <input className="form-input" required="required" type="text" placeholder="Email" name="email" {...register("email")}/>
-                        <p className="error-message">{errors.email?.message}</p>
-                        <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Senha" name="password" {...register("password")}/>
-                        <p className="error-message">{errors.password?.message}</p>
+                    <form className="cadastro-form" onSubmit={criaContato}>
+                        <input className="form-input" required="required" type="text" placeholder="Nome Completo" name="name"/>
+                        <input className="form-input" required="required" type="text" placeholder="Nome de Usuario" name="username"/>
+                        <input className="form-input" required="required" type="text" placeholder="Email" name="email"/>
+                        <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Senha" name="password"/>
                         <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Confirmar senha"/>
                         <div className="checkbox">
                             <input type="checkbox" onChange={() => setSenha(!senha)}/>

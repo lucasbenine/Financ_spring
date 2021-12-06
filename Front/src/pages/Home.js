@@ -6,12 +6,10 @@ import img2 from '../img/financ2.jpeg';
 import img3 from '../img/financ3.jpeg';
 import { Link } from 'react-router-dom';
 
-const HomeBody = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: white;
+const HomeWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-flow: column wrap;
   align-items: center;
   justify-content: center;
 `;
