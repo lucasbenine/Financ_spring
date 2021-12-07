@@ -1,9 +1,9 @@
 import Navbar from '../components/Navbar/index';
 import styled from 'styled-components';
 import Footer from '../components/Footer/index';
-import img1 from '../img/financ1.jpeg';
-import img2 from '../img/financ2.jpeg';
-import img3 from '../img/financ3.jpeg';
+// import img1 from '../img/financ1.jpeg';
+// import img2 from '../img/financ2.jpeg';
+// import img3 from '../img/financ3.jpeg';
 import { Link } from 'react-router-dom';
 
 const HomeWrapper = styled.div`
