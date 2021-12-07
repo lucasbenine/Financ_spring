@@ -1,6 +1,6 @@
-function ContasAReceber(){
+import styles from '../Contas.css'
 
-    const green = "green";
+function ContasAReceber(){
 
     return(
         <div>
@@ -9,10 +9,10 @@ function ContasAReceber(){
                     <h1>Balanço mensal - Contas Fixas:</h1>
                 </div>
                 <div className="relatorio_contas">
-                    <button className={green}>Relatório de Recebimentos</button>
-                    <button className={green}>Adicionar Recebimento</button>
-                    <button className={green}>Editar Recebimento</button>
-                    <button className={green}>Remover Recebimento</button>
+                    <button className="green">Relatório de Recebimentos</button>
+                    <button className="green">Adicionar Recebimento</button>
+                    <button className="green">Editar Recebimento</button>
+                    <button className="green">Remover Recebimento</button>
                 </div>
             </div>    
                 <div className="lancamentos">

@@ -10,6 +10,8 @@ import Cadastro from './pages/Cadastro';
 import Contato from './pages/Contato';
 import Inicio from './pages/Inicio';
 import Movimentacao from './pages/Movimentacao'
+import ContasAPagar from './pages/ContasAPagar';
+import ContasAReceber from './pages/ContasAReceber';
 import TokenTeste from './pages/TokenTeste';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -36,7 +38,10 @@ function Routes() {
             <Route path="/contato" component={Contato} />
             <CustomRoute isPrivate path="/inicio" component={Inicio} />
             <CustomRoute isPrivate path="/movimentacao" component={Movimentacao} /> 
+            <CustomRoute path="/contasapagar" component={ContasAPagar} />
+            <CustomRoute path="/contasareceber" component={ContasAReceber} />
             <CustomRoute path="/cu" component={TokenTeste} />
+
         </Switch>
     );
 }
