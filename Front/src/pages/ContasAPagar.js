@@ -2,12 +2,16 @@ import styles from '../Contas.css'
 import {useState, useEffect} from 'react'
 import api from '../api';
 import ModalContas from '../components/ModalContas';
+import ModalContasEdit from '../components/ModalContas/edit';
+
 
 function ContasAPagar(){
 
     const [contasAPagar, setContasAPagar] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => setShowModal(false);
+    const [showModalEdit, setShowModalEdit] = useState(false);
+    const closeModalEdit = () => setShowModalEdit(false);
 
     useEffect (() => {
         async function buscarContas(){
@@ -20,7 +24,7 @@ function ContasAPagar(){
     },[])
 
     return(
-        <div>
+        <div className="main"> 
             <div className="two_divs">
                 <div className="balanco_mensal">
                     <h1>Balanço mensal - Contas Fixas:</h1>
@@ -29,7 +33,7 @@ function ContasAPagar(){
                 <div className="relatorio_contas">
                     <button className="green">Relatório de Contas</button>
                     <button className="green" onClick={() => setShowModal(true)}>Adicionar Saída</button>
-                    <button className="green">Editar Saída</button>
+                    <button className="green" onClick={() => setShowModalEdit(true)}>Editar Saída</button>
                     <button className="green">Remover Saída</button>
                 </div>
             </div>    
@@ -57,6 +61,7 @@ function ContasAPagar(){
                     </table>
                </div>
                <ModalContas show={showModal} close={closeModal}/>  
+               <ModalContasEdit show={showModalEdit} close={closeModalEdit}/>
         </div> 
     )
 }
