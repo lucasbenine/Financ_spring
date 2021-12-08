@@ -4,7 +4,7 @@ import api from '../../api';
 import { ca } from 'date-fns/locale';
 import * as C from './styles';
 
-function Modal({show, close}) {
+function Modal({show, close, type}) {
 
     const [nome, setNome] = useState("");
     const [preco, setPreco] = useState("");
@@ -12,13 +12,6 @@ function Modal({show, close}) {
     const [data, setData] = useState("");
     const [descricao, setDescricao] = useState("");
     const [categorias, setCategorias] = useState([]);
-
-    const token = localStorage.getItem('token')
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    };
 
     function handleSubmit(event) {
         const novaDespesa = {
@@ -35,7 +28,7 @@ function Modal({show, close}) {
 
         console.log(novaDespesa)
 
-        axios.post('http://localhost:8080/despesas', novaDespesa, config)
+        axios.post(`http://localhost:8080/${type}`, novaDespesa)
             .then(
                 window.location.reload()
             )
@@ -67,8 +60,14 @@ function Modal({show, close}) {
 
     useEffect(() => {
 
+        var url = 'categorias'
+
+        if(type === 'receitas') {
+            url = 'receita-categorias';
+        }
+
         async function buscarCategorias() {
-            const response = await api.get('categorias', config);
+            const response = await api.get(url);
             console.log(response); 
             setCategorias(response.data);       
         }
@@ -81,9 +80,9 @@ function Modal({show, close}) {
       <C.Container style={{
           display: show ? 'flex' : 'none'
       }}>
-            <div id="modal-container">
+            <div id="modal-container" style={{borderColor: type === 'despesas' ? '#ff7e7c' : '#00DC88'}}>
                 <div id="fechar" onClick={close}>+</div>
-                <div id="headerModal"><h3>Despesas</h3></div>
+                <div id="headerModal"><h3>{type}</h3></div>
 
                 <form onSubmit={handleSubmit}>
 
@@ -117,7 +116,7 @@ function Modal({show, close}) {
                         <textarea name="descricao" onChange={handleChangeDescricao} value={descricao} id="descricao" placeholder="Descrição"></textarea>
                     </div>
 
-                    <button type="submit" id="enviarDespesa">Adicionar</button>
+                    <button type="submit" id="enviarDespesa" style={{background: type === 'despesas' ? '#ff7e7c' : '#00DC88'}}>Adicionar</button>
 
 
                 </form>

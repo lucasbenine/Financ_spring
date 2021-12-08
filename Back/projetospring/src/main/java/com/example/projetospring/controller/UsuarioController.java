@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("usuarios")
 public class UsuarioController {
@@ -31,6 +32,11 @@ public class UsuarioController {
     @GetMapping
     public List<Usuario> listaUsuarios (){
         return uServ.findUsuarios();
+    }
+
+    @GetMapping(value = "/saldo")
+    public Double getSaldo() {
+        return uServ.getUsuarioLogado().getSaldo();
     }
 
     @PostMapping("/cadastrar")

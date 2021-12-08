@@ -34,6 +34,10 @@ export const Container = styled.div`
             margin-bottom: 70px;
             padding: 5px !important;
             font-size: 30px;
+
+            h3 {
+                text-transform: capitalize;
+            }
         }
 
         form {

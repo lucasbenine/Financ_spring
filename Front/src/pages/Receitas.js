@@ -8,10 +8,13 @@ import DonutChart from '../components/DonutChart'
 import DataTableReceita from '../components/DataTableReceita'
 
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
+import Modal from '../components/Modal';
 
 
 function receitas() {
 
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => setShowModal(false);
     const [soma, setSoma] = useState();
 
     const token = localStorage.getItem('token')
@@ -72,9 +75,8 @@ function receitas() {
         <C.Container>
             <div className="content">
                 <div className="media">
-                    <h1>Total de receitas<br/>
-                        R$ {soma}
-                    </h1>
+                    <h2>Total de receitas</h2>
+                    <h1>R$ {soma}</h1>
                 </div>
                 <div className="grafico">
                     <DonutChart rota="receitas" />
@@ -89,9 +91,10 @@ function receitas() {
                 <button style={{backgroundColor:'#00DC88'}} onClick={() => AumentaMes()}><BsFillCaretRightFill /></button>
                 </div>
                 
-                <button style={{backgroundColor:'#00DC88'}} testid="button-test">Cadastrar Receita</button>
+                <button style={{backgroundColor:'#00DC88'}} onClick={() => setShowModal(true)} testid="button-test">Cadastrar Receita</button>
             </C.TableHeader>
             <DataTableReceita style={{borderColor:'#00DC88'}} />
+            <Modal show={showModal} close={closeModal} type="receitas" style={{borderColor: '#00DC88'}} />
         </C.Container>
       </>
   );

@@ -30,20 +30,23 @@ function AuthProvider({ children }) {
         return <Redirect to="/inicio" />
     }
 
-    async function handleLogin(userName, password) {
+    async function handleLogin(userName, password, event) {
         const usuario = {
             username: userName,
             password: password
         }
         console.log("usuario: " + userName)
         console.log("senha: " + password)
+
+        // event.preventDefault();
+
         await axios.post('http://localhost:8080/login', usuario)
             .then(res => {
-                setAuthenticated(true);
                 const token = res.data;
                 console.log(token)
-                localStorage.setItem('token', token);
+                localStorage.setItem('token', res.data);
                 api.defaults.headers.Authorization = `Bearer ${token}`;
+                setAuthenticated(true);
                 window.location.href = '/inicio';
             })
     }

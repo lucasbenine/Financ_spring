@@ -79,9 +79,8 @@ function pages() {
 
           <div className="content">
               <div className="media">
-                <h1>Total de despesas<br/>
-                    R$ {soma}
-                </h1>
+                <h2>Total de despesas</h2>
+                <h1>R$ {soma.toFixed(2)}</h1>
               </div>
               <div className="grafico">
                 <DonutChart rota="despesas" />
@@ -101,7 +100,7 @@ function pages() {
           
           <DataTable mes={mes} ano={ano} />
 
-          <Modal show={showModal} close={closeModal}/>
+          <Modal show={showModal} close={closeModal} type="despesas" />
         </C.Container>
       </>
   );

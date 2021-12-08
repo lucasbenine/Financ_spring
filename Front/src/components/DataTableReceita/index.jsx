@@ -125,7 +125,7 @@ const DataTableReceita = ({mes, ano}) => {
                 </div>
                 <div className="wrapper" />
             </C.ModalConfirm>
-            <ModalEdit show={showModalEdit} close={closeModalEdit} despesa={receitaAtual} />
+            <ModalEdit show={showModalEdit} close={closeModalEdit} despesa={receitaAtual} type="receitas" />
         </>
     );
 }
