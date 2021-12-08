@@ -1,0 +1,35 @@
+.div_main{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_main .modal{
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    position: relative;
+    z-index: 99;
+    padding: 30px;
+}
+
+input{
+    width: 100%;
+    padding: 10px 5px;
+    margin-top: 10px;
+}
+
+#fechar{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 35px;
+    transform: rotate(45deg); 
+    cursor: pointer;
+}
+

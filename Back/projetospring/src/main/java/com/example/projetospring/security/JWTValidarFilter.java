@@ -1,3 +1,4 @@
+/*
 package com.example.projetospring.security;
 
 import com.auth0.jwt.JWT;
@@ -61,4 +62,4 @@ public class JWTValidarFilter extends BasicAuthenticationFilter {
         return new UsernamePasswordAuthenticationToken(usuario, null, new ArrayList<>());
     }
 }
-
+*/

@@ -1,3 +1,4 @@
+/*
 package com.example.projetospring.security;
 
 import com.auth0.jwt.JWT;
@@ -72,3 +73,5 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
 
     }
 }
+
+ */
