@@ -2,18 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../../api';
 import * as C from '../Modal/styles';
-import { id } from 'date-fns/locale';
 
-function ModalEdit({show, close, despesa}) {
-
-    const token = localStorage.getItem('token')
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    };
-
-    
+function ModalEdit({show, close, despesa, type}) {
     
     const [id, setId] = useState(500);
     const [nome, setNome] = useState("");
@@ -23,10 +13,21 @@ function ModalEdit({show, close, despesa}) {
     const [descricao, setDescricao] = useState("");
     const [categorias, setCategorias] = useState([]);
 
+    var url = "";
+
+    useEffect(() => {
+        if(type === "receitas") {
+            url = "receita-categorias"
+        }
+        else {
+            url = "categorias"
+        }
+    }, [])
+
     if(despesa.id && despesa.id !== id) {
         async function buscarDespesa(id) {
 
-            const response = await api.get(`despesas/${despesa.id}`, config);
+            const response = await api.get(`${type}/${despesa.id}`);
                 console.log("Resposta meu ovo " + response); 
                 setId(response.data.id);
                 setNome(response.data.nome);    
@@ -71,7 +72,7 @@ function ModalEdit({show, close, despesa}) {
 
         // console.log(novaDespesa)
 
-        axios.put(`http://localhost:8080/despesas/${id}`, novaDespesa, config)
+        axios.put(`http://localhost:8080/${type}/${id}`, novaDespesa)
             .then(
                 window.location.reload()
             )
@@ -103,7 +104,7 @@ function ModalEdit({show, close, despesa}) {
     useEffect(() => {
 
         async function buscarCategorias() {
-            const response = await api.get('categorias', config);
+            const response = await api.get(url);
             console.log(response); 
             setCategorias(response.data);       
         }
@@ -116,7 +117,7 @@ function ModalEdit({show, close, despesa}) {
     <C.Container style={{
         display: show ? 'flex' : 'none'
     }}>
-          <div id="modal-container">
+          <div id="modal-container" style={{borderColor: type === 'despesas' ? '#ff7e7c' : '#00DC88'}}>
               <div id="fechar" onClick={close}>+</div>
               <div id="headerModal"><h3>Despesas</h3></div>
 
@@ -152,7 +153,7 @@ function ModalEdit({show, close, despesa}) {
                       <textarea name="descricao" onChange={handleChangeDescricao} value={descricao} id="descricao" placeholder="Descrição"></textarea>
                   </div>
 
-                  <button type="submit" id="enviarDespesa">Editar</button>
+                  <button type="submit" id="enviarDespesa" style={{background: type === 'despesas' ? '#ff7e7c' : '#00DC88'}}>Editar</button>
 
 
               </form>

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+/* @import url(https://fonts.googleapis.com/css?family=Roboto:300); */
 
 .name_project{
   width: 100%;
@@ -14,7 +14,7 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-body {
+/* body {
   background: #E5E5E5; 
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -23,7 +23,7 @@ body {
 
 div{
   display: inline-block;
-}
+} */
 
 
 .balanco_mensal{
@@ -98,9 +98,9 @@ div{
   color: #000000;
 }
 
-table{
+/* table{
   text-align: left;
-}
+} */
 
 .lancamentos li {
   color: #000000;

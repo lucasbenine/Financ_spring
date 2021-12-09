@@ -88,18 +88,28 @@ public class DespesaService {
             throw new BadRequestException("O campo preço deve ser maior do que zero");
         }
         Usuario usuarioLogado = getUsuarioLogado();
+        usuarioLogado.setSaldo(usuarioLogado.getSaldo() - despesa.getPreco());
         despesa.setUsuario(usuarioLogado);
         Despesa despesaa = repository.save(despesa);
-
+        usuarioRepository.save(usuarioLogado);
         return despesaa;
     }
 
     public void delete(Long id) {
+        Usuario usuarioLogado = getUsuarioLogado();
+        Despesa despesa = findById(id);
+        usuarioLogado.setSaldo(usuarioLogado.getSaldo() + despesa.getPreco());
         repository.deleteById(id);
+        usuarioRepository.save(usuarioLogado);
     }
 
     public Despesa update(Long id, Despesa obj) {
         Despesa entity = repository.findById(id).get();
+        if(entity.getPreco() != obj.getPreco()) {
+            Double valor = entity.getPreco() - obj.getPreco();
+            Usuario usuarioLogado = getUsuarioLogado();
+            usuarioLogado.setSaldo(usuarioLogado.getSaldo() + valor);
+        }
         updateData(entity, obj);
         return repository.save(entity);
     }

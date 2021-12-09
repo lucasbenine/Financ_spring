@@ -11,8 +11,17 @@ export default createGlobalStyle`
         font-family: 'Roboto', sans-serif;
     }
 
+    .apexcharts-legend {
+        flex-wrap: wrap;
+        width: 300px
+    }
+
     body {
         overflow-x: hidden;
+    }
+
+    button {
+        cursor: pointer;
     }
 
     .despesa {

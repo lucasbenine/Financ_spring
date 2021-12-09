@@ -7,7 +7,7 @@ import * as C from '../styles/despesas-style'
 import styled from 'styled-components';
 import DataTable from '../components/DataTable';
 import DonutChart from '../components/DonutChart';
-import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 import Modal from '../components/Modal';
 
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
@@ -74,14 +74,13 @@ function pages() {
 
   return (
       <>  
-        <Navbar />
+        <Header />
         <C.Container>
 
           <div className="content">
               <div className="media">
-                <h1>Total de despesas<br/>
-                    R$ {soma}
-                </h1>
+                <h2>Total de despesas</h2>
+                <h1>R$ {soma.toFixed(2)}</h1>
               </div>
               <div className="grafico">
                 <DonutChart rota="despesas" />
@@ -101,7 +100,7 @@ function pages() {
           
           <DataTable mes={mes} ano={ano} />
 
-          <Modal show={showModal} close={closeModal}/>
+          <Modal show={showModal} close={closeModal} type="despesas" />
         </C.Container>
       </>
   );

@@ -8,10 +8,11 @@ export const Table = styled.table`
     margin-bottom: 30px;
     border: 1px solid #ff7e7c;
     border-top: none;
+    background-color: #f0f0f7;
 
     th, td {
         padding: 30px 25px;
-        background: #FFFFFF;
+        background: #FFF;
     }
     
     tbody tr {

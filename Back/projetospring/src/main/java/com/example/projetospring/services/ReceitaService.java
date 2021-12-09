@@ -1,9 +1,6 @@
 package com.example.projetospring.services;
 
-import com.example.projetospring.model.CategoriaReceita;
-import com.example.projetospring.model.CategoriaSoma;
-import com.example.projetospring.model.Receitas;
-import com.example.projetospring.model.Usuario;
+import com.example.projetospring.model.*;
 import com.example.projetospring.repositories.CategoriaReceitaRepository;
 import com.example.projetospring.repositories.ReceitaRepository;
 import com.example.projetospring.repositories.UsuarioRepository;
@@ -77,25 +74,37 @@ public class ReceitaService {
             throw new BadRequestException("O campo preço deve ser maior do que zero");
         }
         Usuario usuarioLogado = getUsuarioLogado();
+        usuarioLogado.setSaldo(usuarioLogado.getSaldo() + receita.getPreco());
         receita.setUsuario(usuarioLogado);
         Receitas receitaa = rRep.save(receita);
+        usuarioRepository.save(usuarioLogado);
         return receitaa;
     }
 
     public void deleteReceita (Long id){
+        Usuario usuarioLogado = getUsuarioLogado();
+        Receitas receita = findReceitaById(id);
+        usuarioLogado.setSaldo(usuarioLogado.getSaldo() - receita.getPreco());
         rRep.deleteById(id);
+        usuarioRepository.save(usuarioLogado);
     }
 
     public Receitas alterarReceita (Long id, Receitas receita){
         Receitas entity = rRep.getOne(id);
+        if(entity.getPreco() != receita.getPreco()) {
+            Double valor = entity.getPreco() - receita.getPreco();
+            Usuario usuarioLogado = getUsuarioLogado();
+            usuarioLogado.setSaldo(usuarioLogado.getSaldo() - valor);
+        }
         updateData(entity, receita);
         return rRep.save(entity);
     }
 
     public void updateData (Receitas entity, Receitas obj){
         entity.setNome(obj.getNome());
-        entity.setDescricao(obj.getDescricao());
         entity.setPreco(obj.getPreco());
+        entity.setDescricao(obj.getDescricao());
+        entity.setCategoria(obj.getCategoria());
     }
 }
 

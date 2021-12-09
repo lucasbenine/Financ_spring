@@ -1,4 +1,3 @@
-/*
 package com.example.projetospring.security;
 
 import com.example.projetospring.services.UsuarioDetailsService;
@@ -79,5 +78,4 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
 
 
 }
-*/
 

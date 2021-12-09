@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Modal from '../components/Modal';
 import DonutChart from '../components/DonutChart';
@@ -8,6 +8,7 @@ import { FiFileMinus, FiFilePlus } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
 
 import { Context } from '../Context/AuthContext';
+import api from '../api';
 
 const Container = styled.div`
     width: min(85vw, 1400px);
@@ -70,7 +71,7 @@ const Top = styled.div`
 
             :last-child:hover {
                 opacity: 0.8;
-                background-color: rgb(254, 97, 97);
+                background-color: rgb(254, 97, 97, .1);
             }
         }
     }
@@ -101,6 +102,10 @@ const Contas = styled.div`
 
 const DonutContainer = styled.div`
     width: 100%;
+    height: 200px;
+    padding-right: 15%;
+    /* display: flex; */
+    /* justify-content: center; */
 `;
 
 function inicio() {
@@ -108,15 +113,29 @@ function inicio() {
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => setShowModal(false);
 
+    const [saldo, setSaldo] = useState(0);
+
     const { handleLogout } = useContext(Context);
 
+    useEffect(() => {
+
+        async function getSaldo() {
+            await api.get("/usuarios/saldo")
+                .then(res => {
+                    console.log(res.data)
+                    setSaldo(res.data);
+                })
+        }
+
+        getSaldo();
+    }, [])
 
   return (
       <Container>
           <Top>
-            <div id="saldo">
+            <div id="saldo" style={{background: saldo>0 ? '#00DC88' : 'rgb(254, 97, 97, .8)'}}>
                 <h3>Saldo estimado em conta:</h3>
-                <h1>R$ 2515,00</h1>
+                <h1>R$ {saldo.toFixed(2)}</h1>
             </div>
             <div id="buttons">
             <IconContext.Provider value={{size:'1.5em'}}>
@@ -164,7 +183,7 @@ function inicio() {
           <DonutContainer className="border-green">
             <DonutChart rota="despesas" />
           </DonutContainer>
-          <Modal show={showModal} close={closeModal} />
+          <Modal show={showModal} close={closeModal} type="despesas" />
       </Container>
   );
 }

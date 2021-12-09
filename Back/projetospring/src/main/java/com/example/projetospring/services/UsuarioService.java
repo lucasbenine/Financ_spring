@@ -3,6 +3,8 @@ package com.example.projetospring.services;
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,22 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository Urep;
+
+    public Usuario getUsuarioLogado() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String nome;
+
+        if (principal instanceof UserDetails) {
+            nome = ((UserDetails)principal).getUsername();
+        } else {
+            nome = principal.toString();
+        }
+
+        Optional<Usuario> usuario = Urep.findByUsername(nome);
+
+        return usuario.get();
+    }
 
     public List<Usuario> findUsuarios() {
         return Urep.findAll();

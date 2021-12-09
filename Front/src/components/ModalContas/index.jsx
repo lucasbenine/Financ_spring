@@ -33,7 +33,7 @@ function ModalContas({show, close}){
         axios.post("http://localhost:8080/contasapagar", novaConta)
             .then(
                 console.log(novaConta),
-                // window.location.reload()
+                window.location.reload()
             )
     }
 
@@ -43,7 +43,7 @@ function ModalContas({show, close}){
         }}>
             <div className="modal">
                 <div id="fechar" onClick={close}>+</div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input type="text" placeholder="Nome" value={nome} onChange={handleChangeNome}/>
                     <input type="number" placeholder="Valor" value={valor} onChange={handleChangeValor}/>
                     <input type="text" placeholder="Categoria" value={categoria} onChange={handleChangeCategoria}/>

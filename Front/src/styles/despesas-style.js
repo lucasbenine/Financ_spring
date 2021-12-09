@@ -20,6 +20,14 @@ export const Container = styled.div`
       border-radius: 20px;
       box-shadow: 0 1px 4px 0 rgba(0,0,0,.4);
       padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h2 {
+        margin-bottom: 10px;
+      }
     }
 
     div.grafico {
