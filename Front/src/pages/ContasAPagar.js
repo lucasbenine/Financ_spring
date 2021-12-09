@@ -17,6 +17,8 @@ function ContasAPagar(){
                     setContasAPagar(res.data)
                 })
         }
+
+        buscarContas();
     },[])
 
     return(
@@ -47,7 +49,7 @@ function ContasAPagar(){
                             </thead> 
                             <tbody>
                                 {contasAPagar?.map((item) => (
-                                    <tr>
+                                    <tr key={item.id}>
                                         <td>{item.nomeConta}</td>
                                         <td>{item.valorConta}</td>
                                         <td>{item.categoria}</td>

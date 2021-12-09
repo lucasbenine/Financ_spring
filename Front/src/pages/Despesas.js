@@ -7,7 +7,7 @@ import * as C from '../styles/despesas-style'
 import styled from 'styled-components';
 import DataTable from '../components/DataTable';
 import DonutChart from '../components/DonutChart';
-import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 import Modal from '../components/Modal';
 
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
@@ -74,7 +74,7 @@ function pages() {
 
   return (
       <>  
-        <Navbar />
+        <Header />
         <C.Container>
 
           <div className="content">
