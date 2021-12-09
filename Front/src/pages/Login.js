@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import {Link} from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import axios from 'axios';
 import Carousel1 from '../img/carousel1.png';
 import { useState } from 'react';
 import { useContext } from 'react';
@@ -155,25 +153,6 @@ function Login () {
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory();
-
-    function handleSubmit(e) {
-        const usuario = {
-            username: userName,
-            password: password
-        }
-        e.preventDefault()
-
-        console.log(usuario);
-        console.log(senha);
-
-        axios.post('http://localhost:8080/login', usuario)
-
-        .then(res => {
-            localStorage.setItem('token', res.data);
-            history.push('/inicio');
-        })
-    }
 
     return(
         <LoginWrapper>
