@@ -3,22 +3,11 @@ import styled from 'styled-components';
 import HomeImg from '../img/home-img.png';
 import logo from '../img/logo.png';
 import Footer from '../components/Footer/index';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 
 const HomeBody = styled.div`
   width: 100%;
   height: 100%;
-=======
-// import img1 from '../img/financ1.jpeg';
-// import img2 from '../img/financ2.jpeg';
-// import img3 from '../img/financ3.jpeg';
-import { Link } from 'react-router-dom';
-
-const HomeWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
->>>>>>> f73d6e29d8b7cf3912c44f10abc1b8b6b7eb7d99
   display: flex;
   align-items: center;
   justify-content: center;
