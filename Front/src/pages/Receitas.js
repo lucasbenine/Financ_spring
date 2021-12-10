@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../api';
 
 import * as C from '../styles/despesas-style'
-import Navbar from '../components/Navbar'
+import Header from '../components/Header'
 import DonutChart from '../components/DonutChart'
 import DataTableReceita from '../components/DataTableReceita'
 
@@ -71,7 +71,7 @@ function receitas() {
 
   return (
       <>
-        <Navbar />
+        <Header />
         <C.Container>
             <div className="content">
                 <div className="media">
@@ -93,7 +93,7 @@ function receitas() {
                 
                 <button style={{backgroundColor:'#00DC88'}} onClick={() => setShowModal(true)} testid="button-test">Cadastrar Receita</button>
             </C.TableHeader>
-            <DataTableReceita style={{borderColor:'#00DC88'}} />
+            <DataTableReceita style={{borderColor:'#00DC88'}} mes={mes} ano={ano} />
             <Modal show={showModal} close={closeModal} type="receitas" style={{borderColor: '#00DC88'}} />
         </C.Container>
       </>

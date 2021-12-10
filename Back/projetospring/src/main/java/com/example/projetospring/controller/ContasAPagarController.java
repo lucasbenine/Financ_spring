@@ -1,6 +1,7 @@
 package com.example.projetospring.controller;
 
 
+import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.ContasAPagar;
 import com.example.projetospring.repositories.ContasAPagarRepository;
 import com.example.projetospring.services.ContasAPagarService;
@@ -34,6 +35,12 @@ public class ContasAPagarController {
     public ResponseEntity<ContasAPagar> findById(@PathVariable Long id){
         ContasAPagar obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping(value = "/amount-by-categoria")
+    public ResponseEntity<List<CategoriaSoma>> amountGroupedByCategoria() {
+        List<CategoriaSoma> list = service.amountGroupedByCategoria();
+        return ResponseEntity.ok(list);
     }
 
     @ApiOperation(value="Cadastra uma conta a ser paga")

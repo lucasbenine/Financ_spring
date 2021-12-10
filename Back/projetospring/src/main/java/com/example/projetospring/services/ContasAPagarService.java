@@ -1,10 +1,13 @@
 package com.example.projetospring.services;
 
 
+import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.ContasAPagar;
+import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repositories.ContasAPagarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +25,12 @@ public class ContasAPagarService {
     public ContasAPagar findById(Long id){
         Optional<ContasAPagar> obj = repository.findById(id);
         return obj.get();
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoriaSoma> amountGroupedByCategoria() {
+        List<CategoriaSoma> categoriaSoma = repository.amountGroupedByCategoria();
+        return categoriaSoma;
     }
 
     public ContasAPagar inserir (ContasAPagar contasapagar){

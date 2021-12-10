@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Header from '../components/Header';
 import Modal from '../components/Modal';
 import DonutChart from '../components/DonutChart';
 import { FiFileMinus, FiFilePlus } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
 
-import { Context } from '../Context/AuthContext';
 import api from '../api';
 
 const Container = styled.div`
-    width: min(85vw, 1400px);
+    width: min(80vw, 1400px);
     margin: 0 auto;
     height: 100vh;
     font-size: 18px;
@@ -51,7 +51,6 @@ const Top = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
         button {
             width: 100%;
             padding: 15px 0;
@@ -63,18 +62,17 @@ const Top = styled.div`
             background: transparent;
             border: none;
             cursor: pointer;
-
             &:first-child:hover {
                 opacity: 0.8;
                 background-color: rgba(0, 220, 136, .1);
             }
-
             :last-child:hover {
                 opacity: 0.8;
                 background-color: rgb(254, 97, 97, .1);
             }
         }
     }
+
 `;
 
 const Contas = styled.div`
@@ -113,9 +111,13 @@ function inicio() {
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => setShowModal(false);
 
+    const [showModalReceitas, setShowModalReceitas] = useState(false);
+    const closeModalReceitas = () => setShowModalReceitas(false)
+
     const [saldo, setSaldo] = useState(0);
 
-    const { handleLogout } = useContext(Context);
+    const [contasAPagar, setContasAPagar] = useState([]);
+    const [contasAReceber, setContasAReceber] = useState([]);
 
     useEffect(() => {
 
@@ -129,62 +131,81 @@ function inicio() {
 
         getSaldo();
     }, [])
+    
+    useEffect(() => {
+
+        async function getContasAReceber() {
+            await api.get("/contasareceber")
+                .then(res => {
+                    console.log("Contas a Receber: ", res.data)
+                    setContasAReceber(res.data);
+                })
+        }
+
+        getContasAReceber();
+    }, [])
+
+    useEffect(() => {
+
+        async function getContasAPagar() {
+            await api.get("/contasapagar")
+                .then(res => {
+                    console.log("Contas a Rec: ", res.data)
+                    setContasAPagar(res.data);
+                })
+        }
+
+        getContasAPagar();
+    }, [])
 
   return (
-      <Container>
-          <Top>
-            <div id="saldo" style={{background: saldo>0 ? '#00DC88' : 'rgb(254, 97, 97, .8)'}}>
-                <h3>Saldo estimado em conta:</h3>
-                <h1>R$ {saldo.toFixed(2)}</h1>
-            </div>
-            <div id="buttons">
-            <IconContext.Provider value={{size:'1.5em'}}>
-                <button style={{border:'1px solid #00CD88'}} onClick={handleLogout} ><FiFilePlus style={{marginRight:'10px', color:'#00CD88'}}/> Adicionar entrada</button>
-                <button style={{border:'1px solid #FE6161'}} onClick={() => setShowModal(true)} ><FiFileMinus style={{marginRight:'10px', color:'#FE6161'}}/> Adicionar despesa</button>
-            </IconContext.Provider>
-            </div>
-          </Top>
-          <Contas>
-              <div  className="border-green">
-                <h3>Contas a receber</h3>
-                <tr>
-                    <td>Salário</td>
-                    <td>R$ 2200,00</td>
-                </tr>
-                <tr>
-                    <td>Salário</td>
-                    <td>R$ 2200,00</td>
-                </tr>
-                <tr>
-                    <td>Salário</td>
-                    <td>R$ 2200,00</td>
-                </tr>
-              </div>
-              <div className="border-red">
-                <h3>Contas a pagar</h3>
-                <tr>
-                    <td>Salário</td>
-                    <td>R$ 2200,00</td>
-                </tr>
-                <tr>
-                    <td>Salário</td>
-                    <td>R$ 2200,00</td>
-                </tr>
-                <tr>
-                    <td>Salário</td>
-                    <td>R$ 2200,00</td>
-                </tr>
-                <tr>
-                    <td>Salário</td>
-                    <td>R$ 2200,00</td>
-                </tr>
-              </div>
-          </Contas>
-          <DonutContainer className="border-green">
-            <DonutChart rota="despesas" />
-          </DonutContainer>
-          <Modal show={showModal} close={closeModal} type="despesas" />
-      </Container>
+      <>
+        <Header />
+        <Container>
+            <Top>
+                <div id="saldo" style={{background: saldo>0 ? '#00DC88' : 'rgb(254, 97, 97, .8)'}}>
+                    <h3>Saldo estimado em conta:</h3>
+                    <h1>R$ {saldo.toFixed(2)}</h1>
+                </div>
+                <div id="buttons">
+                <IconContext.Provider value={{size:'1.5em'}}>
+                    <button
+                        style={{border:'1px solid #00CD88'}}
+                        onClick={() => setShowModalReceitas(true)}
+                    >
+                        <FiFilePlus style={{marginRight:'10px', color:'#00CD88'}}/>Adicionar entrada
+                    </button>
+                    <button style={{border:'1px solid #FE6161'}} onClick={() => setShowModal(true)} ><FiFileMinus style={{marginRight:'10px', color:'#FE6161'}}/> Adicionar despesa</button>
+                </IconContext.Provider>
+                </div>
+            </Top>
+            <Contas>
+                <div  className="border-green">
+                    <h3>Contas a receber</h3>
+                    {contasAReceber?.map((item) => (
+                        <tr key={item.id}>
+                            <td>{item.nomeConta}</td>
+                            <td>{item.categoria}</td>
+                        </tr>
+                    ))}
+                </div>
+                <div className="border-red">
+                    <h3>Contas a pagar</h3>
+                    {contasAPagar?.map((item) => (
+                        <tr key={item.id}>
+                            <td>{item.nomeConta}</td>
+                            <td>{item.categoria.nomeCategoria}</td>
+                        </tr>
+                    ))}
+                </div>
+            </Contas>
+            <DonutContainer className="border-green">
+                <DonutChart rota="despesas" />
+            </DonutContainer>
+            <Modal show={showModal} close={closeModal} type="despesas" />
+            <Modal show={showModalReceitas} close={closeModalReceitas} type="receitas" />
+        </Container>
+      </>
   );
 }
 

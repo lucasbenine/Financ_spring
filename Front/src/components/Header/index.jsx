@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FiFileMinus, FiFilePlus, FiHome, FiDollarSign, FiSettings, FiLogOut } from 'react-icons/fi';
+import { FiFileMinus, FiFilePlus, FiHome, FiDollarSign, FiSettings, FiLogOut, FiBarChart2 } from 'react-icons/fi';
 import { MdClose } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
@@ -22,6 +22,7 @@ const HeaderContainer = styled.header`
         display: flex;
         align-items: center;
         margin-left: 10vw;
+        cursor: pointer;
 
         span {
             padding: 10px;
@@ -76,9 +77,14 @@ const HeaderContainer = styled.header`
                 list-style: none;
                 margin: 10px 0;
                 padding: 10px;
+                cursor: pointer;
                 display: flex;
                 align-items: center;
-                cursor: pointer;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                }
 
                 span {
                     margin-left: 5px;
@@ -122,7 +128,7 @@ function Header() {
                 <ul>
                     
                     <li>
-                        <Link to="/">
+                        <Link to="/inicio">
                             <FiHome />
                             <span>Home</span>
                         </Link>
@@ -141,7 +147,7 @@ function Header() {
                     </li>
                     <li>
                         <Link to="/movimentacao">
-                            <MdClose />
+                            <FiBarChart2 />
                             <span>Movimentação</span>
                         </Link>
                     </li>

@@ -40,18 +40,11 @@ const DataTable = ({mes, ano}) => {
     console.log('Mes e ano atual' + mes)
     const [despesa, setDespesa] = useState([]);
 
-    const token = localStorage.getItem('token')
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    };
-
     const [mesA, setMesA] = useState(12)
 
     if(mes !== mesA) {
         async function buscarDespesas() {
-            const response = await api.get(`despesas/month/${mes+1}/${ano}`, config);
+            const response = await api.get(`despesas/month/${mes+1}/${ano}`);
             console.log(response);
             setDespesa(response.data);
             setMesA(mes)
@@ -89,7 +82,7 @@ const DataTable = ({mes, ano}) => {
     const closeModalConfirm = () => setShowModalConfirm(false);
 
     function apagarDespesa() {
-        axios.delete(`http://localhost:8080/despesas/${despesaAtual.id}`, config)
+        axios.delete(`http://localhost:8080/despesas/${despesaAtual.id}`)
             .then(window.location.reload())
         
     }
@@ -140,7 +133,7 @@ const DataTable = ({mes, ano}) => {
                     <div id="container">
                         <div>
                             <h3>{despesaAtual.nome}</h3>
-                            <p className="despesa">R$ {despesaAtual.preco}</p>
+                            <p className="despesa">R$ {despesaAtual.preco?.toFixed(2)}</p>
                         </div>
                         <div>
                             <div className="details">
@@ -149,7 +142,7 @@ const DataTable = ({mes, ano}) => {
                             </div>
                             <div className="details">
                                 <span>Categoria</span>
-                                {/* <p>{despesaAtual.categoria.nomeCategoria}</p> */}
+                                <p>{despesaAtual.categoria?.nomeCategoria}</p>
                             </div>
                             <div className="details">
                                 <span>Descrição</span>
