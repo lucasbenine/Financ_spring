@@ -119,7 +119,7 @@ function ContasAPagar(){
                     <div id="buttons">
                     <IconContext.Provider value={{size:'1.5em'}}>
                         <button style={{border:'1px solid #00CD88'}}><FiFilePlus style={{marginRight:'10px', color:'#00CD88'}}/> Adicionar entrada</button>
-                        <button style={{border:'1px solid #FE6161'}}><FiFileMinus style={{marginRight:'10px', color:'#FE6161'}}/> Adicionar despesa</button>
+                        <button style={{border:'1px solid #FE6161'}} onClick={setShowModal}><FiFileMinus style={{marginRight:'10px', color:'#FE6161'}}/> Adicionar despesa</button>
                     </IconContext.Provider>
                     </div>
                 </Top>    

@@ -2,154 +2,58 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
+import { FiUser,  } from 'react-icons/fi'
+import { AiOutlineMail } from 'react-icons/ai'
+import { FaUserGraduate } from 'react-icons/fa'
+import image from '../img/background-dollar.png';
 
 const Container = styled.div`
-    width: 100vw;
-    height: 92vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    .mb {
-        margin-bottom: clamp(60px, 90px, 25%);
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+
+    div#left {
+        width: 50%;
     }
 
+    div#right {
+        width: 50%;
+        background: url(${image});
+        background-position: center; 
+        background-repeat: no-repeat;
+        background-size: cover;
 
-    @media(max-width: 700px) {
+        form {
+            background-color: #FFF;
+            margin: 0 auto;
+            margin-top: 30px;
+            width: min(80%, 350px);
 
-        .mb {
-            /* margin-bottom: clamp(25px, 45px, 60%); */
-            margin-bottom: clamp(15%, 20%, 25%);
-        }
-
-        .box {
-            flex-direction: column;
-            height: 80%;
-
-            div#esquerda {
-                width: 100%;
-                height: 70%;
-                padding: 10%;
-                border-right: none;
-
-                form {
-                    margin-bottom: 5px;
-                }
+            div {
+                position: relative;
+                margin: 15px 0;
             }
 
-            div#direita {
+
+
+            input, textarea {
                 width: 100%;
-                height: 30%;
-                padding-top: 0;
+                padding: 15px 5px;
+                padding-left: 40px;
+                background: rgba(0,0,0,.1);
+                border: none
+            }
 
-                textarea {
-                    height: 80%;
-                    padding: 0 10%;
-                }
-
-                button {
-                    height: 20%;
-                }
+            button {
+                padding: 15px 40px;
+                margin: 0 auto;
+                background: #00DC88;
+                border: none;
+                border-radius: 5px
+                font-weight: bold;
             }
         }
-    }
-`;
-
-const Box = styled.div`
-    width: min(80%, 1200px);
-    height: 60%;
-    display: flex;
-    background-color: #FFF;
-
-    div#esquerda {
-        width: 45%;
-        height: 100%;
-        padding: 5%;
-        border-right: 1px solid rgba(0,0,0,.2);
-
-        h1 {
-            margin-bottom: 15px;
-            font-size: clamp(1em, 1.8em, 2.2em);
-        }
-
-        hr {
-            width: 40%;
-            height: 3px;
-            background: #04660E;
-            border: none;
-            border-radius: 5px;
-            /* margin-bottom: clamp(60px, 90px, 25%); */
-        }
-
-        input#checkbox {
-            margin-right: 15px;
-        }
-    }
-
-    div#direita {
-        width: 55%;
-        height: 100%;
-        padding-top: 5%;
-
-        textarea {
-            width: 100%;
-            height: 90%;
-            padding: 0 5%;
-            border: none;
-            font-size: 18px;
-            resize: none;
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            height: 10%;
-            background: #000;
-            color: #FFF;
-            border: none;
-            margin-top: -5px;
-            font-weight: bold;
-        }
-
-    }
-
-`;
-
-const Input = styled.div`
-
-    position: relative;
-    animation-delay: 300ms;
-    /* margin-bottom: clamp(60px, 90px, 25%); */
-
-    input {
-        position: relative;
-        width: 100%;
-        height: 25px;
-        border: none;
-        border-bottom: 2px solid rgba(0,0,0,.6);
-        outline: none;
-        border-radius: 0;
-    }
-
-    label {
-        color: rgba(0,0,0,.6);
-        position: absolute;
-        left: 0;
-        display: inline-block;
-        pointer-events: none;
-        transition: 0.5s;
-    }
-
-    input:focus ~ label,
-    input:valid ~ label {
-        transform: translateY(-24px);
-        color: #04660E;
-        font-size: 10pt;
-    }
-
-    input:focus,
-    input:valid {
-        border-bottom: 2px solid #04660E;
     }
 `;
 
@@ -158,33 +62,36 @@ function Contato() {
       <>
         <Navbar />
         <Container>
-            <Box className="box">
-                <div id="esquerda">
-                    <h1>Contate-nos</h1>
-                    <hr className="mb" />
+            <div id="left">
+                <h1>Entre em contato</h1>
+                <p>(45) 2105.9001</p>
+                <p>(45) 99860.5675</p>
+                <p>secretaria@uniamerica.br</p>
+                <p>Endereço: Av. das Cataratas, 1118 - Vila Yolanda, Foz do Iguaçu - PR, 85853-000</p>
+            </div>
+            <div id="right">
+                <form>
+                    <h1>Deixe uma mensagem</h1>
+                    <div>
+                        <FiUser style={{position:'absolute', top:'14px', left:'8px', color:'rgba(0,0,0,.6)'}} />
+                        <input type="text" placeholder="Nome" />
+                    </div>
+                    <div>
+                        <AiOutlineMail style={{position:'absolute', top:'14px', left:'8px', color:'rgba(0,0,0,.6)'}} />
+                        <input type="text" placeholder="E-mail" />
+                    </div>
+                    <div>
+                        <FaUserGraduate style={{position:'absolute', top:'14px', left:'8px', color:'rgba(0,0,0,.6)'}} />
+                        <input type="text" placeholder="RA" />
+                    </div>
+                    <div>
+                        <AiOutlineMail style={{position:'absolute', top:'14px', left:'8px', color:'rgba(0,0,0,.6)'}} />
+                        <textarea placeholder="Mensagem" />
+                    </div>
 
-                    <form>
-                        <Input className="mb">
-                            <input type="text" required="require" />
-                            <label>Nome</label>
-                        </Input>
-                        <Input className="mb">
-                            <input type="text" required="require" />
-                            <label>E-mail</label>
-                        </Input>
-
-                        <div >
-                            <input type="checkbox" id="checkbox"/>
-                            <label>Não sou um robô</label>
-                        </div>
-                    </form>
-                </div>
-                <div id="direita">
-                    <textarea placeholder="Mensagem" />
-
-                    <button>Enviar mensagem</button>
-                </div>
-            </Box>
+                    <button>Enviar</button>
+                </form>
+            </div>
         </Container>
       </>
   );

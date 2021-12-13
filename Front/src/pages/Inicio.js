@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
 import DonutChart from '../components/DonutChart';
 import { FiFileMinus, FiFilePlus } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
+import { Context } from '../Context/AuthContext';
 
 import api from '../api';
 

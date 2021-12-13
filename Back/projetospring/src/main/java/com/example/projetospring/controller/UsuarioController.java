@@ -29,6 +29,11 @@ public class UsuarioController {
         this.encoder = encoder;
     }
 
+    @GetMapping(value = "/logado")
+    public Usuario getUsuarioLogado() {
+        return uServ.getUsuarioLogado();
+    }
+
     @GetMapping
     public List<Usuario> listaUsuarios (){
         return uServ.findUsuarios();

@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiFileMinus, FiFilePlus, FiHome, FiDollarSign, FiSettings, FiLogOut, FiBarChart2 } from 'react-icons/fi';
 import { MdClose } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import api from '../../api';
 
 import { Context } from '../../Context/AuthContext';
 
@@ -109,6 +110,21 @@ function Header() {
 
     const { handleLogout } = useContext(Context);
 
+    const [usuario, setUsuario] = useState();
+
+    useEffect(() => {
+
+        async function getUsuario() {
+            await api.get('usuarios/logado')
+                .then(res => {
+                    console.log("Usuario logado: " + res.data)
+                    setUsuario(res.data)
+                })
+        }
+
+        getUsuario();
+    },[])
+    
 
   return (
       <HeaderContainer>
@@ -122,7 +138,7 @@ function Header() {
                     <div id="image">
                         {/* <img src={} /> */}
                     </div>
-                    <h2>Luisa Ghellere</h2>
+                    <h2>{usuario?.nome}</h2>
                     <p>RA: 501792</p>
                 </div>
                 <ul>
