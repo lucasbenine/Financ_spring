@@ -65,14 +65,6 @@ const LoginContainer = styled.div `
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
-                input {
-                    margin-right: 2%;
-                }
-
-                span {
-                    margin-left: 2%;
-                }
             }
 
             .logar-button {
@@ -163,7 +155,7 @@ function Login () {
                         <input className="form-input" required="required" type="text" placeholder="Nome de usuario" value={userName} onChange={(e) => setUserName(e.target.value)} name="email"/>
                         <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} name="senha"/>
                         <div className="checkbox">
-                            <input type="checkbox" onChange={() => setSenha(!senha)}/>
+                            <input type="checkbox-input" type="checkbox" onChange={() => setSenha(!senha)}/>
                             <span>Mostrar senha?</span>
                         </div>
                         <button type="submit" className="logar-button">Entrar</button>

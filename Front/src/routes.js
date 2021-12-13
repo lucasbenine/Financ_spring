@@ -37,11 +37,10 @@ function Routes() {
             <Route path="/cadastro" component={Cadastro} />
             <Route path="/contato" component={Contato} />
             <CustomRoute isPrivate path="/inicio" component={Inicio} />
-            <CustomRoute isPrivate path="/movimentacao" component={Movimentacao} /> 
+            <CustomRoute path="/movimentacao" component={Movimentacao} /> 
             <CustomRoute path="/contasapagar" component={ContasAPagar} />
             <CustomRoute path="/contasareceber" component={ContasAReceber} />
             <CustomRoute path="/cu" component={TokenTeste} />
-
         </Switch>
     );
 }

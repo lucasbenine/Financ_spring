@@ -44,9 +44,9 @@ function ModalContas({show, close}){
             <div className="modal">
                 <div id="fechar" onClick={close}>+</div>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Nome" value={nome} onChange={handleChangeNome}/>
-                    <input type="number" placeholder="Valor" value={valor} onChange={handleChangeValor}/>
-                    <input type="text" placeholder="Categoria" value={categoria} onChange={handleChangeCategoria}/>
+                    <input className="input-modal" type="text" placeholder="Nome" value={nome} onChange={handleChangeNome}/>
+                    <input className="input-modal" type="number" placeholder="Valor" value={valor} onChange={handleChangeValor}/>
+                    <input className="input-modal" type="text" placeholder="Categoria" value={categoria} onChange={handleChangeCategoria}/>
                     <button type="submit">Cadastrar</button>
                 </form>
             </div>

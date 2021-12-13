@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import {Link} from 'react-router-dom';
+import history from '../history'
 import { useState } from 'react';
 import Carousel1 from '../img/carousel3.png';
 import api from '../api';
@@ -63,14 +64,6 @@ const CadastroContainer = styled.div `
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
-                input {
-                    margin-right: 2%;
-                }
-
-                span {
-                    margin-left: 2%;
-                }
             }
 
             .cadastro-button {
@@ -138,24 +131,37 @@ const CadastroContainer = styled.div `
 function Cadastro () {
 
     const [senha, setSenha] = useState(false);
+    const [nome, setNome] = useState('');
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
 
-    const criaContato = data => api.post('contatos', data)
-    .then(() => {
-        alert("Contato cadastrado com sucesso!")
-    }).catch(() => {
-        alert("Falha ao cadastrar este usuario. Por favor, preencha os campos novamente")
-    })
+    function HandleCadastro(){
+        const data = { 
+            nome: nome,
+            username: userName,
+            password: password,
+            email: email
+        }
 
+        api.post('contatos', data)
+        .then(() => {
+            alert("Contato cadastrado com sucesso!")
+            history.push('/login');
+        }).catch(() => {
+            alert("Falha ao cadastrar este usuario. Por favor, preencha os campos novamente")
+        })
+    }
     return(
         <CadastroWrapper>
             <CadastroContainer>
                 <div className="form-wrapper">
                     <img src={Logo} className="logo-financ" alt="Logo Financ" />
-                    <form className="cadastro-form" onSubmit={criaContato}>
-                        <input className="form-input" required="required" type="text" placeholder="Nome Completo" name="name"/>
-                        <input className="form-input" required="required" type="text" placeholder="Nome de Usuario" name="username"/>
-                        <input className="form-input" required="required" type="text" placeholder="Email" name="email"/>
-                        <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Senha" name="password"/>
+                    <form className="cadastro-form" onSubmit={HandleCadastro}>
+                        <input className="form-input" required="required" type="text" placeholder="Nome Completo" name="name" onChange={(e) => setNome(e.target.value)}/>
+                        <input className="form-input" required="required" type="text" placeholder="Nome de Usuario" name="username" onChange={(e) => setUserName(e.target.value)}/>
+                        <input className="form-input" required="required" type="text" placeholder="Email" name="email" onChange={(e) => setEmail(e.target.value)}/>
+                        <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Senha" name="password" onChange={(e) => setPassword(e.target.value)}/>
                         <input className="form-input" required="required" type={senha ? "text" : "password"} placeholder="Confirmar senha"/>
                         <div className="checkbox">
                             <input type="checkbox" onChange={() => setSenha(!senha)}/>
