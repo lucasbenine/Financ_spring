@@ -43,7 +43,7 @@ public class DespesaController {
 
     @GetMapping(value = "/soma")
     public ResponseEntity<Double> soma() {
-        Double soma = repository.soma();
+        Double soma = service.soma();
         return ResponseEntity.ok().body(soma);
     }
 

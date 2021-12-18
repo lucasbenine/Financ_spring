@@ -1,6 +1,7 @@
 package com.example.projetospring.services;
 
 import com.example.projetospring.model.ContasAReceber;
+import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repositories.ContasAReceberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ public class ContasAReceberService {
     @Autowired
     private ContasAReceberRepository repository;
 
+    @Autowired
+    private ContasAPagarService contasAPagarService;
+
     public List<ContasAReceber> findAll (){
-        return repository.findAll();
+        Usuario usuario = contasAPagarService.getUsuarioLogado();
+        return repository.contasByUsuario(usuario.getUsuarioId());
     }
 
     public ContasAReceber findById(Long id){
@@ -24,6 +29,8 @@ public class ContasAReceberService {
     }
 
     public ContasAReceber inserir(ContasAReceber contasareceber) {
+        Usuario usuario = contasAPagarService.getUsuarioLogado();
+        contasareceber.setUsuario(usuario);
         return repository.save(contasareceber);
     }
 

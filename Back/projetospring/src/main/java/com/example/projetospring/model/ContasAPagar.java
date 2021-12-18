@@ -17,6 +17,10 @@ public class ContasAPagar {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "usuarioId")
+    private Usuario usuario;
+
     public ContasAPagar() {
 
     }
@@ -25,6 +29,13 @@ public class ContasAPagar {
         this.nomeConta = nomeConta;
         this.valorConta = valorConta;
         this.categoria = categoria;
+    }
+
+    public ContasAPagar(String nomeConta, Double valorConta, Categoria categoria, Usuario usuario) {
+        this.nomeConta = nomeConta;
+        this.valorConta = valorConta;
+        this.categoria = categoria;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -57,5 +68,13 @@ public class ContasAPagar {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

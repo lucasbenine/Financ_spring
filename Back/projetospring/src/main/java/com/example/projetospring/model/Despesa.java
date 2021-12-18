@@ -73,7 +73,7 @@ public class Despesa implements Serializable {
         this.usuario = usuarioDespesa;
     }
 
-    public Despesa(String nome, Double preco, Date data, String descricao, Categoria categoria, Usuario usuarioDespesa) {
+    public Despesa(String nome, Double preco, Date data, String descricao, Categoria categoria) {
         this.nome = nome;
         this.preco = preco;
         this.data = data;

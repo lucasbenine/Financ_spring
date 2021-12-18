@@ -80,7 +80,7 @@ function pages() {
           <div className="content">
               <div className="media">
                 <h2>Total de despesas</h2>
-                <h1>R$ {soma.toFixed(2)}</h1>
+                <h1>R$ {soma ? soma.toFixed(2) : 0.0}</h1>
               </div>
               <div className="grafico">
                 <DonutChart rota="despesas" />

@@ -1,9 +1,6 @@
 package com.example.projetospring.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class ContasAReceber {
@@ -15,6 +12,10 @@ public class ContasAReceber {
     private Double valorConta;
     private String categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "usuarioId")
+    private Usuario usuario;
+
     public ContasAReceber(){
     }
 
@@ -22,6 +23,13 @@ public class ContasAReceber {
         this.nomeConta = nomeConta;
         this.valorConta = valorConta;
         this.categoria = categoria;
+    }
+
+    public ContasAReceber(String nomeConta, Double valorConta, String categoria, Usuario usuario) {
+        this.nomeConta = nomeConta;
+        this.valorConta = valorConta;
+        this.categoria = categoria;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -54,5 +62,13 @@ public class ContasAReceber {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -28,7 +28,7 @@ public class ContasAPagarController {
     @ApiOperation(value="Retorna uma lista de contas a serem pagas")
     @GetMapping
     public List<ContasAPagar> findAll(){
-        return repository.findAll();
+        return service.findAll();
     }
 
     @GetMapping(value = "/{id}" )

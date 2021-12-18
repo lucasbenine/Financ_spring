@@ -57,6 +57,11 @@ public class ReceitaService {
         return receitas;
     }
 
+    public Double soma() {
+        Usuario usuario = getUsuarioLogado();
+        return rRep.soma(usuario.getUsuarioId());
+    }
+
     @Transactional(readOnly = true)
     public List<CategoriaSoma> amountGroupedByCategoria() {
         Usuario usuario = getUsuarioLogado();

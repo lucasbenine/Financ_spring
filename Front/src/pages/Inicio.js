@@ -10,6 +10,7 @@ import { IconContext } from 'react-icons';
 import { Context } from '../Context/AuthContext';
 
 import api from '../api';
+import BarChart from '../components/BarChart';
 
 const Container = styled.div`
     width: min(80vw, 1400px);
@@ -99,10 +100,29 @@ const Contas = styled.div`
     }
 `;
 
-const DonutContainer = styled.div`
+const ChartsWrapper = styled.div`
     width: 100%;
     height: 200px;
-    padding-right: 15%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    div#barContainer {
+        flex-grow: 1;
+        border: 1px solid #00CD88;
+        padding: 20px;
+    }
+`;
+
+const DonutContainer = styled.div`
+    flex-grow: 1;
+    margin-right: 2%;
+    padding: 20px;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+    /* padding-right: 15%; */
     /* display: flex; */
     /* justify-content: center; */
 `;
@@ -115,7 +135,7 @@ function inicio() {
     const [showModalReceitas, setShowModalReceitas] = useState(false);
     const closeModalReceitas = () => setShowModalReceitas(false)
 
-    const [saldo, setSaldo] = useState(0);
+    const [saldo, setSaldo] = useState(0.0);
 
     const [contasAPagar, setContasAPagar] = useState([]);
     const [contasAReceber, setContasAReceber] = useState([]);
@@ -166,7 +186,7 @@ function inicio() {
             <Top>
                 <div id="saldo" style={{background: saldo>0 ? '#00DC88' : 'rgb(254, 97, 97, .8)'}}>
                     <h3>Saldo estimado em conta:</h3>
-                    <h1>R$ {saldo.toFixed(2)}</h1>
+                    <h1>R$ {saldo?.toFixed(2)}</h1>
                 </div>
                 <div id="buttons">
                 <IconContext.Provider value={{size:'1.5em'}}>
@@ -200,9 +220,17 @@ function inicio() {
                     ))}
                 </div>
             </Contas>
-            <DonutContainer className="border-green">
-                <DonutChart rota="despesas" />
-            </DonutContainer>
+            <ChartsWrapper>
+
+                <DonutContainer className="border-green">
+                    {/* <h2>Despesas por categorias</h2>  */}
+                    <DonutChart rota="despesas" />
+                </DonutContainer>
+                <div id="barContainer">
+                    {/* <h2>Balanço do mês</h2>  */}
+                    <BarChart />
+                </div>
+            </ChartsWrapper>
             <Modal show={showModal} close={closeModal} type="despesas" />
             <Modal show={showModalReceitas} close={closeModalReceitas} type="receitas" />
         </Container>

@@ -20,9 +20,13 @@ const NavContent = styled.div `
     justify-content: space-between;
     border-bottom: 2px solid #00DC88;
 
+    a {
+        width: 15%;
+    } 
+
     .logo-financ {
         height: auto;
-        width: 15%;
+        width: 100%;
         padding: .8rem;
     }
 
@@ -212,7 +216,9 @@ function Navbar() {
     return(
         <NavBody>
             <NavContent>
-                <img className="logo-financ" src={Logo} alt="Logo FinanC" />
+                <Link to="/">
+                    <img className="logo-financ" src={Logo} alt="Logo FinanC" />
+                </Link>
                 { open == false ? 
                 
                 <div id="buttons" className="buttons">

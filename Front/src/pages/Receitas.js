@@ -76,7 +76,7 @@ function receitas() {
             <div className="content">
                 <div className="media">
                     <h2>Total de receitas</h2>
-                    <h1>R$ {soma}</h1>
+                    <h1>R$ {soma ? soma.toFixed(2) : 0}</h1>
                 </div>
                 <div className="grafico">
                     <DonutChart rota="receitas" />

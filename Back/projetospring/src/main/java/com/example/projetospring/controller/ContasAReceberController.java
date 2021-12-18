@@ -26,7 +26,7 @@ public class ContasAReceberController {
     @ApiOperation(value="Retorna uma lista de contas a serem recebidas")
     @GetMapping
     public List<ContasAReceber> findAll(){
-        return repository.findAll();
+        return service.findAll();
     }
 
     @GetMapping(value = "/{id}" )

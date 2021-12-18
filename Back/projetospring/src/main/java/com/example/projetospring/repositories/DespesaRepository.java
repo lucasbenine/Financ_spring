@@ -22,6 +22,6 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
             "AND EXTRACT (year FROM d.data) = :year ")
     List<Despesa> despesasByMonth(Long id, int month, int year);
 
-    @Query("SELECT SUM(d.preco) FROM Despesa d WHERE d.usuario.usuarioId = 2 ")
-    Double soma();
+    @Query("SELECT SUM(d.preco) FROM Despesa d WHERE d.usuario.usuarioId = :id ")
+    Double soma(Long id);
 }
