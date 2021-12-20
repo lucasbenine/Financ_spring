@@ -11,18 +11,11 @@ const DataTableReceita = ({mes, ano}) => {
 
     const [receita, setReceita] = useState([]);
 
-    const token = localStorage.getItem('token')
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    };
-
     const [mesA, setMesA] = useState(12)
 
     if(mes !== mesA) {
         async function buscarReceitas() {
-            const response = await api.get('receitas', config);
+            const response = await api.get(`receitas/month/${mes+1}/${ano}`);
             console.log(response);
             setReceita(response.data);
             setMesA(mes)
@@ -46,7 +39,7 @@ const DataTableReceita = ({mes, ano}) => {
     const closeModalConfirm = () => setShowModalConfirm(false);
 
     function apagarReceita() {
-        axios.delete(`http://localhost:8080/receitas/${receitaAtual.id}`, config)
+        axios.delete(`http://localhost:8080/receitas/${receitaAtual.id}`)
             .then(window.location.reload())
         
     }
@@ -88,7 +81,7 @@ const DataTableReceita = ({mes, ano}) => {
                     <div id="container">
                         <div>
                             <h3>{receitaAtual.nome}</h3>
-                            <p>R$ {receitaAtual.preco}</p>
+                            <p style={{color:'#00DC88'}}>R$ {receitaAtual.preco?.toFixed(2)}</p>
                         </div>
                         <div>
                             <div className="details">
@@ -97,7 +90,7 @@ const DataTableReceita = ({mes, ano}) => {
                             </div>
                             <div className="details">
                                 <span>Categoria</span>
-                                {/* <p>{despesaAtual.categoria.nomeCategoria}</p> */}
+                                <p>{receitaAtual.categoria?.nomeCategoria}</p>
                             </div>
                             <div className="details">
                                 <span>Descrição</span>

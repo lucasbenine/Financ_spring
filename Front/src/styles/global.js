@@ -13,7 +13,8 @@ export default createGlobalStyle`
 
     .apexcharts-legend {
         flex-wrap: wrap;
-        width: 300px
+        height: auto;
+        /* width: 300px */
     }
 
     body {

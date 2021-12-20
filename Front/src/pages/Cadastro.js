@@ -144,9 +144,9 @@ function Cadastro () {
             email: email
         }
 
-        api.post('contatos', data)
+        api.post('usuarios/cadastrar', data)
         .then(() => {
-            alert("Contato cadastrado com sucesso!")
+            alert("Usuario cadastrado com sucesso!")
             history.push('/login');
         }).catch(() => {
             alert("Falha ao cadastrar este usuario. Por favor, preencha os campos novamente")

@@ -23,7 +23,7 @@ public class Categoria implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-    private List<Receitas> receitas = new ArrayList<>();
+    private List<ContasAPagar> contas = new ArrayList<>();
 
     public Categoria() {
     }

@@ -13,8 +13,8 @@ public interface ReceitaRepository extends JpaRepository<Receitas, Long> {
             " FROM Receitas AS obj WHERE obj.usuario2.usuarioId = :id GROUP BY obj.categoria")
     List<CategoriaSoma> amountGroupedByCategoria(Long id);
 
-    @Query("SELECT SUM(r.preco) FROM Receitas r WHERE r.usuario2.usuarioId = 2 ")
-    Double soma();
+    @Query("SELECT SUM(r.preco) FROM Receitas r WHERE r.usuario2.usuarioId = :id ")
+    Double soma(Long id);
 
     @Query("SELECT r FROM Receitas r WHERE r.usuario2.usuarioId = :id ")
     List<Receitas> receitasByUsuario(Long id);

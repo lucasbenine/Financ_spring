@@ -30,7 +30,7 @@ public class ReceitaController {
 
     @GetMapping(value = "/soma")
     public ResponseEntity<Double> soma() {
-        Double soma = repository.soma();
+        Double soma = rServ.soma();
         return ResponseEntity.ok().body(soma);
     }
 

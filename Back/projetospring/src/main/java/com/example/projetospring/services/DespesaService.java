@@ -69,6 +69,11 @@ public class DespesaService {
         return despesas;
     }
 
+    public Double soma() {
+        Usuario usuario = getUsuarioLogado();
+        return repository.soma(usuario.getUsuarioId());
+    }
+
     @Transactional(readOnly = true)
     public List<CategoriaSoma> amountGroupedByCategoria() {
         Usuario usuario = getUsuarioLogado();

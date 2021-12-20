@@ -62,6 +62,8 @@ function AuthProvider({ children }) {
         return <h1>Loading</h1>
     }
 
+    
+
     return (
         <Context.Provider value={{ authenticated, handleLogin, handleLogout }}>
             {children}

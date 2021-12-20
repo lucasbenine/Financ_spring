@@ -40,7 +40,10 @@ const DonutChart = ({rota}) => {
     const options = {
         legend: {
             show: true
-        }
+        },
+        // title: {
+        //     text: `${rota} por categorias`
+        // },
     }
 
     return (

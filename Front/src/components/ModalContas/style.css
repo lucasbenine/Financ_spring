@@ -11,17 +11,32 @@
 
 .div_main .modal{
     width: 500px;
-    height: 500px;
+    height: 410px;
     background-color: white;
     position: relative;
     z-index: 99;
     padding: 30px;
 }
 
-.input-modal{
+.modal form {
+    margin-top: 20px;
+}
+
+.modal input, select{
     width: 100%;
-    padding: 10px 5px;
-    margin-top: 10px;
+    padding: 15px 5px;
+    margin-top: 25px;
+}
+
+.modal button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    background-color: #00Dc88;
+    border: none;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 #fechar{
