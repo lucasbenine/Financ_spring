@@ -19,7 +19,8 @@ const BarChart = () => {
                     horizontal: true,
                 }
             },
-            colors: ['#00DC88', '#FE6161'],
+            colors: ["#00DC88", "#FE6161"],
+            
             dataLabels: {
                 enabled: false
             },

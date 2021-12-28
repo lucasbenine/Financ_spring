@@ -17,12 +17,12 @@ const HeaderContainer = styled.header`
     background-color: #00346F;
     font-size: 16px;
 
-    div#burguer {
+    .burguer-menu {
 
         height: 100%;
         display: flex;
         align-items: center;
-        margin-left: 10vw;
+        margin-left: max(10vw, calc((100vw - 1400px)/2));
         cursor: pointer;
 
         span {
@@ -96,6 +96,11 @@ const HeaderContainer = styled.header`
 
     }
 
+    .burguer-menu.active {
+        margin-left: 0;
+        transition: 150ms;
+    }
+
     .nav-menu.active {
         left: 0;
         transition: 350ms;
@@ -129,7 +134,7 @@ function Header() {
   return (
       <HeaderContainer>
           <IconContext.Provider value={{ color: '#00DC88', size:'1.5rem' }}>
-            <div id="burguer" onClick={showSidebar}>
+            <div className={sidebar ? 'burguer-menu active' : 'burguer-menu'} onClick={showSidebar} >
                 <GiHamburgerMenu />
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

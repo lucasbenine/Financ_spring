@@ -144,6 +144,8 @@ function Cadastro () {
             email: email
         }
 
+
+
         api.post('usuarios/cadastrar', data)
         .then(() => {
             alert("Usuario cadastrado com sucesso!")
@@ -156,8 +158,8 @@ function Cadastro () {
         <CadastroWrapper>
             <CadastroContainer>
                 <div className="form-wrapper">
-                    <img src={Logo} className="logo-financ" alt="Logo Financ" />
-                    <form className="cadastro-form" onSubmit={HandleCadastro}>
+                    <img src={Logo} className="logo-financ" alt="Logo Financ"  />
+                    <form className="cadastro-form" onSubmit={HandleCadastro} enctype="multipart/form-data">
                         <input className="form-input" required="required" type="text" placeholder="Nome Completo" name="name" onChange={(e) => setNome(e.target.value)}/>
                         <input className="form-input" required="required" type="text" placeholder="Nome de Usuario" name="username" onChange={(e) => setUserName(e.target.value)}/>
                         <input className="form-input" required="required" type="text" placeholder="Email" name="email" onChange={(e) => setEmail(e.target.value)}/>

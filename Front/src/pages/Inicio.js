@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
 import DonutChart from '../components/DonutChart';
+import AreaChart from '../components/AreaChart';
 import { FiFileMinus, FiFilePlus } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
 import { Context } from '../Context/AuthContext';
@@ -102,22 +103,26 @@ const Contas = styled.div`
 
 const ChartsWrapper = styled.div`
     width: 100%;
-    height: 200px;
+    min-height: 237px;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    margin-bottom: 40px;
+
+    .wrapper-chart {
+        /* width: 49%; */
+        height: 100%;
+        padding: 20px;
+        padding-bottom: 0;
+        border-radius: 10px;
+    }
 
     div#barContainer {
-        flex-grow: 1;
         border: 1px solid #00CD88;
-        padding: 20px;
     }
 `;
 
 const DonutContainer = styled.div`
-    flex-grow: 1;
     margin-right: 2%;
-    padding: 20px;
 
     h2 {
         margin-bottom: 10px;
@@ -222,15 +227,16 @@ function inicio() {
             </Contas>
             <ChartsWrapper>
 
-                <DonutContainer className="border-green">
+                <div className="border-green wrapper-chart" style={{width:'49%', height:'237px'}}>
                     {/* <h2>Despesas por categorias</h2>  */}
-                    <DonutChart rota="despesas" />
-                </DonutContainer>
-                <div id="barContainer">
+                    <DonutChart rota="despesas" style={{width:'100%', height:'100%'}} />
+                </div>
+                <div id="barContainer" className='wrapper-chart' style={{borderColor: saldo > 0 ? '#00DC88' : '#FE6161', width:'49%', height:'100%'}}>
                     {/* <h2>Balanço do mês</h2>  */}
                     <BarChart />
                 </div>
             </ChartsWrapper>
+            <AreaChart style={{marginTop:'30px'}} />
             <Modal show={showModal} close={closeModal} type="despesas" />
             <Modal show={showModalReceitas} close={closeModalReceitas} type="receitas" />
         </Container>
