@@ -1,5 +1,6 @@
 package com.example.projetospring.repositories;
 
+import com.example.projetospring.model.Balanco;
 import com.example.projetospring.model.CategoriaSoma;
 import com.example.projetospring.model.Despesa;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +25,10 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 
     @Query("SELECT SUM(d.preco) FROM Despesa d WHERE d.usuario.usuarioId = :id ")
     Double soma(Long id);
+
+    @Query("SELECT SUM(d.preco) FROM Despesa d " +
+            "WHERE d.usuario.usuarioId = :id " +
+            "AND EXTRACT (month FROM d.data) = :month " +
+            "AND EXTRACT (year FROM d.data) = :year")
+    Double somaMensal(Long id, int month, int year);
 }

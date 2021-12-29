@@ -1,5 +1,6 @@
 package com.example.projetospring.controller;
 
+import com.example.projetospring.model.Balanco;
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repositories.UsuarioRepository;
 import com.example.projetospring.services.UsuarioService;
@@ -44,6 +45,11 @@ public class UsuarioController {
     @GetMapping
     public List<Usuario> listaUsuarios (){
         return uServ.findUsuarios();
+    }
+
+    @GetMapping(value = "/balanco-mensal")
+    public Balanco getBalancoMensal() {
+        return uServ.getBalancoMensal();
     }
 
     @GetMapping(value = "/saldo")

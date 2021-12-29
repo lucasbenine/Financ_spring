@@ -47,6 +47,18 @@ public class DespesaController {
         return ResponseEntity.ok().body(soma);
     }
 
+    @GetMapping(value = "/soma-mensal")
+    public ResponseEntity<Double> somaMensal() {
+        Double soma = service.somaMensal();
+        return ResponseEntity.ok().body(soma);
+    }
+
+    @GetMapping(value = "/anual")
+    public ResponseEntity<List<Double>> anual() {
+        List<Double> somas = service.despesasAnual();
+        return ResponseEntity.ok().body(somas);
+    }
+
     @GetMapping(value = "/month/{month}/{year}")
     public ResponseEntity<List<Despesa>> findByMonth(@PathVariable int month, @PathVariable int year) {
         List<Despesa> despesas = service.findDespesasByMonth(month, year);

@@ -1,5 +1,6 @@
 package com.example.projetospring.services;
 
+import com.example.projetospring.model.Balanco;
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository Urep;
 
+    @Autowired
+    private DespesaService despesaService;
+    @Autowired
+    private ReceitaService receitaService;
+
     public Usuario getUsuarioLogado() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -30,6 +36,13 @@ public class UsuarioService {
         Optional<Usuario> usuario = Urep.findByUsername(nome);
 
         return usuario.get();
+    }
+
+    public Balanco getBalancoMensal() {
+        Balanco balanco = new Balanco();
+        balanco.setSomaDespesas(despesaService.somaMensal());
+        balanco.setSomaReceitas(receitaService.somaMensal());
+        return balanco;
     }
 
     public List<Usuario> findUsuarios() {
