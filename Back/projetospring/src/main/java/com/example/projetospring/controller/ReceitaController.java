@@ -34,6 +34,12 @@ public class ReceitaController {
         return ResponseEntity.ok().body(soma);
     }
 
+    @GetMapping(value = "/anual")
+    public ResponseEntity<List<Double>> anual() {
+        List<Double> somas = rServ.receitasAnual();
+        return ResponseEntity.ok().body(somas);
+    }
+
     @GetMapping(value = "/soma-mensal")
     public ResponseEntity<Double> somaMensal() {
         Double soma = rServ.somaMensal();

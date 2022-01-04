@@ -88,10 +88,16 @@ public class DespesaService {
         Usuario usuario = getUsuarioLogado();
         List<Double> somas = new ArrayList<Double>();
         Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-        for(int i=1; i<=month; i++) {
-            somas.add(repository.somaMensal(usuario.getUsuarioId(), i, year));
+        int year = cal.get(Calendar.YEAR) -1;
+        int month = cal.get(Calendar.MONTH) + 2;
+        for(int i=0; i<12; i++) {
+            somas.add(repository.somaMensal(usuario.getUsuarioId(), month, year));
+            if(month == 12) {
+                month = 1;
+                year += 1;
+            } else {
+                month ++;
+            }
         }
 //        somas.add(repository.somaMensal(usuario.getUsuarioId(), 1, year));
         return somas;

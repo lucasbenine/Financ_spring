@@ -20,7 +20,18 @@ function AreaChart() {
           })
       }
 
+      async function getReceitasAnual() {
+
+        await api.get('/receitas/anual')
+          .then(response => {
+            const data = response.data;
+            setSomaReceitas(data);
+            console.log("soma das receitas " + data);
+          })
+      }
+
       getDespesasAnual();
+      getReceitasAnual();
 
       resetSoma();
 
@@ -41,9 +52,10 @@ function AreaChart() {
         data: somaDespesas,
         color: '#FE6161'
       },
+      // [11, 32, 45, 32, 34, 52, 41, 125, 65, 98, 166, 39]
       {
         name: 'Receitas',
-        data: [11, 32, 45, 32, 34, 52, 41, 125, 65, 98, 166, 39],
+        data: somaReceitas,
         color: '#00DC88'
 
       }]
@@ -54,14 +66,14 @@ function AreaChart() {
           type: 'area'
         },
         dataLabels: {
-          enabled: false
+          enabled: true
         },
         stroke: {
           curve: 'smooth'
         },
         xaxis: {
           type: 'text',
-          categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+          categories: ["Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez", "Jan"]
         },
         title: {
             text: 'Despesas e Receitas anual'

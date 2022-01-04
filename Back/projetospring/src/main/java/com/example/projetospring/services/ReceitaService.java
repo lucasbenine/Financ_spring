@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +62,25 @@ public class ReceitaService {
     public Double soma() {
         Usuario usuario = getUsuarioLogado();
         return rRep.soma(usuario.getUsuarioId());
+    }
+
+    public List<Double> receitasAnual() {
+        Usuario usuario = getUsuarioLogado();
+        List<Double> somas = new ArrayList<Double>();
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR) -1;
+        int month = cal.get(Calendar.MONTH) + 2;
+        for(int i=0; i<12; i++) {
+            somas.add(rRep.somaMensal(usuario.getUsuarioId(), month, year));
+            if(month == 12) {
+                month = 1;
+                year += 1;
+            } else {
+                month ++;
+            }
+        }
+//        somas.add(repository.somaMensal(usuario.getUsuarioId(), 1, year));
+        return somas;
     }
 
     public Double somaMensal() {
