@@ -24,4 +24,10 @@ public interface ReceitaRepository extends JpaRepository<Receitas, Long> {
             "AND EXTRACT (month FROM r.data) = :month " +
             "AND EXTRACT (year FROM r.data) = :year")
     List<Receitas> receitasByMonth(Long id, int month, int year);
+
+    @Query("SELECT SUM(r.preco) FROM Receitas r " +
+            "WHERE r.usuario2.usuarioId = :id " +
+            "AND EXTRACT (month FROM r.data) = :month " +
+            "AND EXTRACT (year FROM r.data) = :year")
+    Double somaMensal(Long id, int month, int year);
 }

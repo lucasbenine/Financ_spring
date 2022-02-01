@@ -1,5 +1,6 @@
 package com.example.projetospring.controller;
 
+import com.example.projetospring.model.Balanco;
 import com.example.projetospring.model.Usuario;
 import com.example.projetospring.repositories.UsuarioRepository;
 import com.example.projetospring.services.UsuarioService;
@@ -8,7 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +22,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("usuarios")
 public class UsuarioController {
+
+    private static String caminhoImagens = "C:\\Users\\ferna\\Documents\\imagens\\";
 
     @Autowired
     private UsuarioService uServ;
@@ -39,15 +47,22 @@ public class UsuarioController {
         return uServ.findUsuarios();
     }
 
+    @GetMapping(value = "/balanco-mensal")
+    public Balanco getBalancoMensal() {
+        return uServ.getBalancoMensal();
+    }
+
     @GetMapping(value = "/saldo")
     public Double getSaldo() {
         return uServ.getUsuarioLogado().getSaldo();
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping(value = "/cadastrar")
     public ResponseEntity<Usuario> cadastroUsuario(@RequestBody Usuario usuario){
         usuario.setPassword(encoder.encode(usuario.getPassword()));
+
         usuario = uServ.cadastrarUsuario(usuario);
+
         return ResponseEntity.ok().body(uServ.cadastrarUsuario(usuario));
     }
 

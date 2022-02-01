@@ -27,8 +27,8 @@ public class Usuario {
     private Long usuarioId;
     private String nome;
     private String email;
-
     private Double saldo = 0.0;
+    private String nomeImagem;
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
